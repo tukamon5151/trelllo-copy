@@ -7,22 +7,24 @@ import {
   ModalHeader,
   ModalCloseButton,
   ModalBody,
-  ModalProps,
   Text,
-  Button,
 } from '@chakra-ui/react'
 import { GoogleLoginButton } from '../../molecules/GoogleLoginButton'
 
 // ===
 // @interface
+interface Props {
+  isOpen: boolean
+  onClose: () => void
+}
 
 // ===
 // @view
-export const LoginModal: React.FC<ModalProps> = (props) => {
+export const LoginModal: React.FC<Props> = (props) => {
   return (
-    <Modal {...props}>
+    <Modal {...props} isCentered>
       <ModalOverlay />
-      <ModalContent textAlign="center" p={5}>
+      <ModalContent p={5} textAlign="center">
         <ModalHeader>Trello</ModalHeader>
         <ModalCloseButton />
         <ModalBody>

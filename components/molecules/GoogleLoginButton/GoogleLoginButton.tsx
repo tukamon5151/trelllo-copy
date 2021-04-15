@@ -8,13 +8,12 @@ import { FcGoogle } from 'react-icons/fc'
 
 // ===
 // @view
-export const GoogleLoginButton: React.FC<ButtonProps> = ({
-  left,
-  ...other
-}) => {
-  return <Button leftIcon={<FcGoogle />} {...other}>
-    Login with Google
-  </Button>
+export const GoogleLoginButton: React.FC<ButtonProps> = (props) => {
+  return (
+    <Button {...props} leftIcon={<FcGoogle />}>
+      Login with Google
+    </Button>
+  )
 }
 
 // ===

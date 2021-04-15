@@ -9,7 +9,7 @@ import {
   Text,
   useDisclosure,
 } from '@chakra-ui/react'
-import { Link } from '../../atoms/Link'
+import { LoginModal } from '../../organizations/LoginModal/LoginModal'
 
 // ===
 // @interface
@@ -17,8 +17,10 @@ import { Link } from '../../atoms/Link'
 // ===
 // @view
 export const Top: React.FC = () => {
+  const { isOpen, onClose, onOpen } = useDisclosure()
   return (
     <Box bgGradient="linear(purple.100, white)">
+      <LoginModal onClose={onClose} isOpen={isOpen} />
       <Center py={150} w={700} mx="auto">
         <VStack spacing={5}>
           <Heading as="h1" mb={5}>
@@ -27,9 +29,9 @@ export const Top: React.FC = () => {
           <Text mb={5}>
             コラボレーション、プロジェクト管理、生産性の向上。高層ビルでも自宅のオフィスでも、Trelloならチームの仕事の進め方に合わせて全てを達成出来ます。
           </Text>
-          <Link as={Button} colorScheme="blue" d="block" w={300} href="/">
+          <Button colorScheme="blue" d="block" w={300} onClick={onOpen}>
             ログイン
-          </Link>
+          </Button>
         </VStack>
       </Center>
     </Box>

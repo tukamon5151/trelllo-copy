@@ -4,7 +4,6 @@ services:
     build: .
     volumes:
       - .:/app:cached
-      - node_modules:/app/node_modules
     ports:
       - 3000:3000
     command: yarn dev
@@ -30,4 +29,3 @@ services:
       - mysql
 volumes:
   mysql:
-  node_modules:

@@ -1,17 +1,24 @@
 import Head from 'next/head'
 import { Top } from '../components/templates/Top'
 import { useSession, signOut } from 'next-auth/client'
-import { Spinner, Box, Button } from '@chakra-ui/react'
+import { Spinner, Box, Button, List, ListItem, Avatar } from '@chakra-ui/react'
 
 const Home: React.FC = () => {
   const [session, loading] = useSession()
-  console.log(session);
 
   if (session) {
+    const { user } = session
     return (
       <Box>
         <Box mb={10}>ログインしてますねあなた</Box>
-        <Box mb={10}>{String(session)}</Box>
+        <List mb={10}>
+          <ListItem>userId: {user.id}</ListItem>
+          <ListItem>email: {user.email}</ListItem>
+          <ListItem>name: {user.name}</ListItem>
+          <ListItem>
+            <Avatar src={user.image} name={user.name} />
+          </ListItem>
+        </List>
         <Button onClick={() => signOut()}>ログアウト</Button>
       </Box>
     )

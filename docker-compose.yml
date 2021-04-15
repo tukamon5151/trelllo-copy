@@ -3,8 +3,31 @@ services:
   app:
     build: .
     volumes:
-      - ./app
-      - /app/node_modules
+      - .:/app:cached
+      - node_modules:/app/node_modules
     ports:
       - 3000:3000
     command: yarn dev
+    depends_on:
+      - mysql
+  mysql:
+    image: mysql:5.7
+    volumes:
+      - mysql:/var/lib/mysql
+    ports:
+      - 3306:3306
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: trello_development
+  prisma:
+    build: .
+    volumes:
+      - ./prisma:/app/prisma
+    ports:
+      - 5555:5555
+    command: yarn prisma studio
+    depends_on:
+      - mysql
+volumes:
+  mysql:
+  node_modules:

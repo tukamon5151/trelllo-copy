@@ -1,9 +1,14 @@
 import Head from 'next/head'
+import { Top } from '../components/templates/Top'
 
 const Home: React.FC = () => {
   return (
-    <div>
-    </div>
+    <>
+      <Head>
+        <meta title="top" />
+      </Head>
+      <Top />
+    </>
   )
 }
 

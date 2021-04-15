@@ -3,8 +3,8 @@ services:
   app:
     build: .
     volumes:
-      - .:/app
-      - /app/node_modules/
+      - .:/app:cached
+      - node_modules:/app/node_modules
     ports:
       - 3000:3000
     command: yarn dev
@@ -22,8 +22,7 @@ services:
   prisma:
     build: .
     volumes:
-      - .:/app
-      - /app/node_modules
+      - ./prisma:/app/prisma
     ports:
       - 5555:5555
     command: yarn prisma studio
@@ -31,3 +30,4 @@ services:
       - mysql
 volumes:
   mysql:
+  node_modules:

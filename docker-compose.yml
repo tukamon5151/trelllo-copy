@@ -27,5 +27,12 @@ services:
     command: yarn prisma studio
     depends_on:
       - mysql
+  storybook:
+    build: .
+    volumes:
+      - .:/app
+    ports:
+      - 6006:6006
+    command: yarn storybook
 volumes:
   mysql:

@@ -9,8 +9,8 @@ import {
   ModalBody,
   Text,
 } from '@chakra-ui/react'
-import { GoogleLoginButton } from '../../molecules/GoogleLoginButton'
 import { signIn } from 'next-auth/client'
+import { GoogleLoginButton } from '../../molecules/GoogleLoginButton'
 
 // ===
 // @interface

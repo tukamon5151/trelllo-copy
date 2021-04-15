@@ -4,6 +4,7 @@
 import { useSession } from 'next-auth/client'
 import { useEffect } from 'react'
 import { useRouter } from 'next/router'
+import { Login as LoginTemplate } from '../components/templates/Login'
 
 // ===
 // @Types
@@ -15,12 +16,13 @@ import { useRouter } from 'next/router'
 
 const Login: React.FC = () => {
   const [session, loading] = useSession()
+  const router = useRouter()
 
   useEffect(() => {
-    if (session) useRouter().push('/')
+    if (session) router.push('/')
   }, [session, loading])
 
-  return <div>ログインページだよ</div>
+  return <LoginTemplate />
 }
 
 // ===

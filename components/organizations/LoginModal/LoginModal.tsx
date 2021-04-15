@@ -32,7 +32,7 @@ export const LoginModal: React.FC<Props> = (props) => {
           <Text mb={15} d="block">
             Trelloはコラボレーション型タスク管理ツールです。ぜひ使ってみてください。
           </Text>
-          <GoogleLoginButton onClick={() => signIn('google')} />
+          <GoogleLoginButton />
         </ModalBody>
       </ModalContent>
     </Modal>

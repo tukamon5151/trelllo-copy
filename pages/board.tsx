@@ -1,10 +1,10 @@
 // ===
 // @modules
 // ===
-import { GetStaticProps } from 'next';
-import { prisma } from "../lib/prisma";
-import { Board as BoardType } from '@prisma/client';
-import { Box } from '@chakra-ui/react';
+import { GetStaticProps } from 'next'
+import { Board as BoardType } from '@prisma/client'
+import { Box } from '@chakra-ui/react'
+import { prisma } from '../lib/prisma'
 
 // ===
 // @Types
@@ -19,10 +19,15 @@ interface Props {
 
 const Board: React.FC<Props> = ({ boards }) => {
   return (
-    <div>{boards.map(board => <Box border="2px solid blue" p={5}>
-      id: {board.id}<br />
-      name: {board.name}
-    </Box>)}</div>
+    <div>
+      {boards.map((board) => (
+        <Box border="2px solid blue" p={5} key={board.id}>
+          id: {board.id}
+          <br />
+          name: {board.name}
+        </Box>
+      ))}
+    </div>
   )
 }
 
@@ -34,13 +39,13 @@ const Board: React.FC<Props> = ({ boards }) => {
 // @export
 // ===
 
-export const getStaticProps: GetStaticProps = async (context) => {
-  const boards = await prisma.board.findMany({});
+export const getStaticProps: GetStaticProps = async () => {
+  const boards = await prisma.board.findMany({})
   return {
     props: {
-      boards
-    }
+      boards,
+    },
   }
-};
+}
 
 export default Board

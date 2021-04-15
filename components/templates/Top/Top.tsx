@@ -5,12 +5,11 @@ import {
   VStack,
   Box,
   Button,
-  Input,
-  Flex,
   Heading,
   Text,
+  useDisclosure,
 } from '@chakra-ui/react'
-import { Link } from '../../atoms/Link/Link'
+import { Link } from '../../atoms/Link'
 
 // ===
 // @interface
@@ -28,21 +27,9 @@ export const Top: React.FC = () => {
           <Text mb={5}>
             コラボレーション、プロジェクト管理、生産性の向上。高層ビルでも自宅のオフィスでも、Trelloならチームの仕事の進め方に合わせて全てを達成出来ます。
           </Text>
-          <Flex>
-            <Input
-              placeholder="メールアドレス"
-              mr={5}
-              bg={'white'}
-              d="block"
-              w="100%"
-            />
-            <Button colorScheme="blue" d="block" w={300}>
-              アカウントを作成
-            </Button>
-          </Flex>
-          <Box>
-            <Link href="/">ログイン</Link>
-          </Box>
+          <Link as={Button} colorScheme="blue" d="block" w={300} href="/">
+            ログイン
+          </Link>
         </VStack>
       </Center>
     </Box>

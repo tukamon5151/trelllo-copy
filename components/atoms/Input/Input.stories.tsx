@@ -1,17 +1,11 @@
-import { Input } from './Input'
-import { Formik } from 'formik'
 import { InputProps } from '@chakra-ui/react'
+import { withFormik } from '../../../.storybook/withFormik'
+import { Input } from './Input'
 
 export default {
   title: 'atoms/Input',
   component: Input,
-  decorators: [
-    (Story) => (
-      <Formik initialValues={{}} onSubmit={() => null}>
-        <Story />
-      </Formik>
-    ),
-  ],
+  decorators: [withFormik],
 }
 
 export const Base = (args: InputProps): React.ReactElement => (

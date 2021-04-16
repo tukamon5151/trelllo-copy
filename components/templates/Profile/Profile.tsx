@@ -1,8 +1,8 @@
 // ===
 // @modules
+import { Heading, Box } from '@chakra-ui/react'
 import { LoginLayout } from '../LoginLayout/LoginLayout'
 import { User } from '../../../hooks/useUser'
-import { Heading, Box } from '@chakra-ui/react'
 import { ProfileForm } from '../../organizations/ProfileForm/ProfileForm'
 
 // ===
@@ -20,7 +20,9 @@ export const Profile: React.FC<Props> = ({ loading, user }) => {
     <LoginLayout loading={loading} user={user}>
       <Box mx="auto" w="700px">
         <Heading mb={10}>Settings</Heading>
-        <Box mb={10} bg="blue.200" p={5}>なんかタブがあって、いつか実装される</Box>
+        <Box mb={10} bg="blue.200" p={5}>
+          なんかタブがあって、いつか実装される
+        </Box>
         <ProfileForm user={user} />
       </Box>
     </LoginLayout>

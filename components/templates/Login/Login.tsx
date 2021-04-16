@@ -2,6 +2,7 @@
 // @modules
 import { Heading, VStack } from '@chakra-ui/react'
 import { GoogleLoginButton } from '../../molecules/GoogleLoginButton'
+import { useCallbackUrl } from '../../../hooks/useCallbackUrl'
 
 // ===
 // @interface
@@ -9,10 +10,12 @@ import { GoogleLoginButton } from '../../molecules/GoogleLoginButton'
 // ===
 // @view
 export const Login: React.FC = () => {
+  const callbackUrl = useCallbackUrl()
+
   return (
     <VStack textAlign="center">
       <Heading mb={15}>ログイン</Heading>
-      <GoogleLoginButton />
+      <GoogleLoginButton callbackUrl={callbackUrl} />
     </VStack>
   )
 }

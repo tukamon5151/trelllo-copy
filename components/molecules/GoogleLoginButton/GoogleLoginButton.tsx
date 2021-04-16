@@ -6,15 +6,21 @@ import { signIn } from 'next-auth/client'
 
 // ===
 // @interface
+interface Props extends ButtonProps {
+  callbackUrl?: string
+}
 
 // ===
 // @view
-export const GoogleLoginButton: React.FC<ButtonProps> = (props) => {
+export const GoogleLoginButton: React.FC<Props> = ({
+  callbackUrl,
+  ...other
+}) => {
   return (
     <Button
-      {...props}
+      {...other}
       leftIcon={<FcGoogle />}
-      onClick={() => signIn('google', { callbackUrl: '/', redirect: true })}
+      onClick={() => signIn('google', { callbackUrl })}
     >
       Login with Google
     </Button>

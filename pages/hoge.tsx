@@ -13,8 +13,8 @@ import { useUser } from '../hooks/useUser'
 // ===
 
 const Hoge: React.FC = () => {
-  const { loading } = useUser()
-  if (loading) {
+  const { user, loading } = useUser()
+  if (!user || loading) {
     return <Spinner />
   }
 

@@ -6,12 +6,16 @@ export default {
 }
 
 const Template = Modal.bind({})
-export const Open = (args) => <Template {...args} />
+export const Open = (args: Record<string, unknown>): React.ReactElement => (
+  <Template {...args} />
+)
 Open.args = {
   isOpen: true,
 }
 
-export const Close = (args) => <Template {...args} />
+export const Close = (args: Record<string, unknown>): React.ReactElement => (
+  <Template {...args} />
+)
 Close.args = {
   isOpen: false,
 }

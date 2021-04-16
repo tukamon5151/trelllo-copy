@@ -5,4 +5,6 @@ export default {
   component: Login,
 }
 
-export const Base = (args) => <Login {...args} />
+export const Base = (args: Record<string, unknown>): React.ReactElement => (
+  <Login {...args} />
+)

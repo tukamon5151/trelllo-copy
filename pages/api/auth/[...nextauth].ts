@@ -1,9 +1,9 @@
 import NextAuth, { Session } from 'next-auth'
 import Providers from 'next-auth/providers'
 import Adapters from 'next-auth/adapters'
-import { prisma } from '../../../lib/prisma'
 import { WithAdditionalParams } from 'next-auth/_utils'
 import { User } from '@prisma/client'
+import { prisma } from '../../../lib/prisma'
 
 export default NextAuth({
   providers: [

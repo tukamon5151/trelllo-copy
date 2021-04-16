@@ -5,4 +5,6 @@ export default {
   component: GoogleLoginButton,
 }
 
-export const Base = (args) => <GoogleLoginButton {...args} />
+export const Base = (args: Record<string, unknown>): React.ReactElement => (
+  <GoogleLoginButton {...args} />
+)

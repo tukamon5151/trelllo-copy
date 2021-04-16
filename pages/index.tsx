@@ -1,7 +1,7 @@
 import Head from 'next/head'
-import { Top } from '../components/templates/Top'
-import { useSession, signOut } from 'next-auth/client'
+import { signOut, useSession } from 'next-auth/client'
 import { Spinner, Box, Button, List, ListItem, Avatar } from '@chakra-ui/react'
+import { Top } from '../components/templates/Top'
 
 const Home: React.FC = () => {
   const [session, loading] = useSession()

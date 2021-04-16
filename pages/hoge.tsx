@@ -1,8 +1,7 @@
 // ===
 // @modules
 // ===
-import { Spinner } from '@chakra-ui/react'
-import { useUser } from '../hooks/useUser'
+import { LoginLayout } from '../components/templates/LoginLayout/LoginLayout'
 
 // ===
 // @Types
@@ -13,11 +12,10 @@ import { useUser } from '../hooks/useUser'
 // ===
 
 const Hoge: React.FC = () => {
-  const { user, loading } = useUser()
-  if (!user || loading) {
-    return <Spinner />
-  }
-
-  return <div>ログインしてますねあなたは</div>
+  return (
+    <LoginLayout>
+      <div>ログインしてますねあなたは</div>
+    </LoginLayout>
+  )
 }
 export default Hoge

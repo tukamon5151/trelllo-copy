@@ -1,0 +1,1 @@
+export { IconChanger } from './IconChanger'

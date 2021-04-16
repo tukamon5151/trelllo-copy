@@ -2,15 +2,18 @@
 // @modules
 import { Spinner } from '@chakra-ui/react'
 import { Header } from '../../organizations/Header/Header'
-import { useUser } from '../../../hooks/useUser'
+import { User } from '../../../hooks/useUser'
 
 // ===
 // @interface
+export interface Props {
+  user?: User
+  loading: boolean
+}
 
 // ===
 // @view
-export const LoginLayout: React.FC = ({ children }) => {
-  const { user, loading } = useUser()
+export const LoginLayout: React.FC<Props> = ({ children, user, loading }) => {
   if (!user || loading) return <Spinner />
 
   return (

@@ -3,11 +3,10 @@ import { getAbsoluteUrl } from '../lib/getAbsoluteUrl'
 
 export const queryKey = 'callbackUrl'
 
-export const useCallbackUrl = (): string => {
+export const useCallbackUrl = (): string | undefined => {
   const router = useRouter()
   let callbackPath = router.query[queryKey]
-  if (!callbackPath) return getAbsoluteUrl('')
-
-  callbackPath = callbackPath instanceof Array ? callbackPath[0] : callbackPath
+  if (!callbackPath) return undefined
+  if (callbackPath instanceof Array) callbackPath = callbackPath[0]
   return getAbsoluteUrl(callbackPath)
 }

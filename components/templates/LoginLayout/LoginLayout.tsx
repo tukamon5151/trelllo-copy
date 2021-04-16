@@ -1,6 +1,6 @@
 // ===
 // @modules
-import { Spinner } from '@chakra-ui/react'
+import { Spinner, Box } from '@chakra-ui/react'
 import { Header } from '../../organizations/Header/Header'
 import { User } from '../../../hooks/useUser'
 

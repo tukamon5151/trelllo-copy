@@ -12,5 +12,5 @@ const Template = (args: Props): React.ReactElement => (
 
 export const Base = Template.bind({})
 Base.args = {
-  user: BaseHeader.args.user,
+  user: BaseHeader.args.updateUser,
 }

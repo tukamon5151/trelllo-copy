@@ -41,10 +41,9 @@ export const IconChanger: React.FC<Props> = ({ image, callback, ...other }) => {
           cursor: 'pointer',
         }}
         {...other}
-        onClick={onClick}
       >
-        <Avatar src={image} size="2xl" mb={3} />
-        <Center>
+        <Avatar src={image} size="2xl" mb={3} onClick={onClick} />
+        <Center onClick={onClick}>
           <Icon as={GrUpdate} w={6} />
           <Text size="sm" colorScheme="gray">
             Change

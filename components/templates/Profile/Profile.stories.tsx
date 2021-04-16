@@ -10,6 +10,6 @@ const Template = (args: Props): React.ReactElement => <Profile {...args} />
 
 export const Base = Template.bind({})
 Base.args = {
-  user: LoginLayout.args.user,
+  user: LoginLayout.args.updateUser,
   loading: false,
 }

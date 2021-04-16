@@ -9,9 +9,8 @@ import {
   ModalBody,
   Text,
 } from '@chakra-ui/react'
-import { useRouter } from 'next/router'
+import { useCurrentUrl } from '../../../hooks/useCurrentUrl'
 import { GoogleLoginButton } from '../../molecules/GoogleLoginButton'
-import { getAbsoluteUrl } from '../../../lib/getAbsoluteUrl'
 
 // ===
 // @interface
@@ -23,7 +22,8 @@ interface Props {
 // ===
 // @view
 export const LoginModal: React.FC<Props> = (props) => {
-  const router = useRouter()
+  const currentUrl = useCurrentUrl()
+
   return (
     <Modal {...props} isCentered>
       <ModalOverlay />
@@ -34,7 +34,7 @@ export const LoginModal: React.FC<Props> = (props) => {
           <Text mb={15} d="block">
             Trelloはコラボレーション型タスク管理ツールです。ぜひ使ってみてください。
           </Text>
-          <GoogleLoginButton callbackUrl={getAbsoluteUrl(router.asPath)} />
+          <GoogleLoginButton callbackUrl={currentUrl} />
         </ModalBody>
       </ModalContent>
     </Modal>

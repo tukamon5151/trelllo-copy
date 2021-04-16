@@ -10,7 +10,7 @@ import { Square, SquareProps } from '@chakra-ui/react'
 export const RoundSquareButton: React.FC<SquareProps> = (props) => {
   return (
     <Square
-      borderRadius={2}
+      borderRadius={3}
       bg="hsla(0,0%,100%,.3)"
       color="white"
       fontWeight="bold"

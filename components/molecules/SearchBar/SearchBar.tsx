@@ -23,7 +23,7 @@ export const SearchBar: React.FC<InputProps> = (props) => {
   return (
     <InputGroup
       size="sm"
-      borderRadius={2}
+      borderRadius={3}
       w={60}
       _focusWithin={{
         w: 80,

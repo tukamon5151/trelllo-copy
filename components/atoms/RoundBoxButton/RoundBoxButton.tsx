@@ -10,7 +10,7 @@ import { Center, CenterProps } from '@chakra-ui/react'
 export const RoundBoxButton: React.FC<CenterProps> = (props) => {
   return (
     <Center
-      borderRadius={2}
+      borderRadius={3}
       bg="hsla(0,0%,100%,.3)"
       color="white"
       fontWeight="bold"

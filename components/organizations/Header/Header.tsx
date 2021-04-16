@@ -1,9 +1,9 @@
 // ===
 // @modules
-import { Avatar } from '@chakra-ui/react'
 import { User } from '../../../hooks/useUser'
 import { HeaderContainer } from '../../atoms/HeaderContainer'
 import { HeaderLeftItem } from '../../molecules/HeaderLeftItem'
+import { HeaderRightItem } from '../../molecules/HeaderRightItem'
 import { Logo } from '../../atoms/Logo'
 
 // ===
@@ -20,13 +20,7 @@ export const Header: React.FC<Props> = ({ user }) => {
     <HeaderContainer>
       <HeaderLeftItem flex={1} />
       <Logo />
-      <div style={{ flex: 1, justifyContent: 'flex-end', display: 'flex' }}>
-        <div>AddIcon</div>
-        <div>Notice</div>
-        <div>
-          <Avatar src={user.image} />
-        </div>
-      </div>
+      <HeaderRightItem user={user} flex={1} />
     </HeaderContainer>
   )
 }

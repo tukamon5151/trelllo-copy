@@ -3,11 +3,11 @@
 import { VStack, Box, Text, Button } from '@chakra-ui/react'
 import { Input } from '../../atoms/Input'
 import { Textarea } from '../../atoms/Textarea'
-import { User } from '../../../hooks/useCurrentUser'
+import { User } from '../../../model/client/User'
 
 // ===
 // @interface
-export interface Props {
+interface Props {
   user: User
 }
 

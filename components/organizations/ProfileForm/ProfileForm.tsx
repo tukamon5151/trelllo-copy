@@ -5,7 +5,7 @@ import { Flex } from '@chakra-ui/react'
 import { IconChanger } from '../../molecules/IconChanger'
 import { ProfileTextForm } from '../../molecules/ProfileTextForm/ProfileTextForm'
 import { patchMe, patchIcon } from '../../../lib/client/userRequest'
-import { useUser } from '../../../hooks/useMyPage'
+import { useMypage } from '../../../hooks/useUser'
 import { Values } from './FormValues'
 import { validationSchema } from './validationSchema'
 
@@ -15,7 +15,7 @@ import { validationSchema } from './validationSchema'
 // ===
 // @view
 export const ProfileForm: React.FC = () => {
-  const { user, setUser } = useUser()
+  const { user, setUser } = useMypage()
 
   const onSubmit = async (data: Values) => {
     const user = await patchMe(data)

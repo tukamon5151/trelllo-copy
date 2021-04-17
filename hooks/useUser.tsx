@@ -9,7 +9,7 @@ import {
 import { getMe } from '../lib/client/userRequest'
 import { User } from '../model/client/User'
 
-export const useMyPage = (
+export const useUser = (
   userId?: number,
 ): { user: User; setUser: Dispatch<SetStateAction<User>> } => {
   const [user, setUser] = useState<User>()
@@ -22,14 +22,13 @@ export const useMyPage = (
   return { user, setUser }
 }
 
-export const userContext = createContext<{
+export type MypageContextValue = {
   user: User
   setUser: Dispatch<SetStateAction<User>>
-}>(undefined)
+}
 
-export const UserProvider = userContext.Provider
+export const MypageContext = createContext<MypageContextValue>(undefined)
 
-export const useUser: () => {
-  user: User
-  setUser: Dispatch<SetStateAction<User>>
-} = () => useContext(userContext)
+export const MypageProvider = MypageContext.Provider
+
+export const useMypage = (): MypageContextValue => useContext(MypageContext)

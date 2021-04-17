@@ -3,7 +3,7 @@ import Providers from 'next-auth/providers'
 import Adapters from 'next-auth/adapters'
 import { WithAdditionalParams } from 'next-auth/_utils'
 import { User } from '@prisma/client'
-import { prisma } from '../../../lib/prisma'
+import { prisma } from '../../../lib/server/prisma'
 
 export default NextAuth({
   providers: [

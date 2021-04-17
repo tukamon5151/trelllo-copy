@@ -5,6 +5,7 @@ import { Flex } from '@chakra-ui/react'
 import { User } from '../../../hooks/useUser'
 import { IconChanger } from '../../molecules/IconChanger'
 import { ProfileTextForm } from '../../molecules/ProfileTextForm/ProfileTextForm'
+import { patchMe } from '../../../lib/client/userRequest'
 import { Values } from './FormValues'
 import { validationSchema } from './validationSchema'
 
@@ -18,13 +19,19 @@ export interface Props {
 // ===
 // @view
 export const ProfileForm: React.FC<Props> = ({ user }) => {
+  const onSubmit = async (data: Values) => {
+    const user = await patchMe(data)
+    window.alert(`サクセス! : ${JSON.stringify(user)}`)
+  }
+
   return (
     <Formik<Values>
       initialValues={{
+        id: user.id,
         name: user.name,
-        introduction: '',
+        introduction: user.introduction,
       }}
-      onSubmit={console.log}
+      onSubmit={onSubmit}
       validationSchema={validationSchema}
     >
       {() => (

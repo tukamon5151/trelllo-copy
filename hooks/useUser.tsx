@@ -8,6 +8,7 @@ export interface User {
   name?: string | null
   email?: string | null
   image?: string | null
+  introduction?: string | null
 }
 
 export const useUser = (): { user: User; loading: boolean } => {

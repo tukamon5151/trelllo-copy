@@ -4,7 +4,7 @@ import { Heading, Box, Spinner } from '@chakra-ui/react'
 import { Dispatch, SetStateAction } from 'react'
 import { ProfileForm } from '../../organizations/ProfileForm/ProfileForm'
 import { User } from '../../../model/client/User'
-import { MypageProvider } from '../../../hooks/useUser'
+import { MypageProvider } from '../../../hooks/useMypage'
 
 // ===
 // @interface

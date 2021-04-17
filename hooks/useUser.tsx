@@ -1,13 +1,6 @@
-import {
-  useEffect,
-  useState,
-  createContext,
-  useContext,
-  Dispatch,
-  SetStateAction,
-} from 'react'
-import { getMe } from '../lib/client/userRequest'
+import { Dispatch, SetStateAction, useEffect, useState } from 'react'
 import { User } from '../model/client/User'
+import { getMe } from '../lib/client/userRequest'
 
 export const useUser = (
   userId?: number,
@@ -21,14 +14,3 @@ export const useUser = (
 
   return { user, setUser }
 }
-
-export type MypageContextValue = {
-  user: User
-  setUser: Dispatch<SetStateAction<User>>
-}
-
-export const MypageContext = createContext<MypageContextValue>(undefined)
-
-export const MypageProvider = MypageContext.Provider
-
-export const useMypage = (): MypageContextValue => useContext(MypageContext)

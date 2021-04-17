@@ -1,11 +1,11 @@
 // ===
 // @modules
 import { Formik, Form } from 'formik'
-import { Flex } from '@chakra-ui/react'
+import { Flex, useToast } from '@chakra-ui/react'
 import { IconChanger } from '../../molecules/IconChanger'
 import { ProfileTextForm } from '../../molecules/ProfileTextForm/ProfileTextForm'
 import { patchMe, patchIcon } from '../../../lib/client/userRequest'
-import { useMypage } from '../../../hooks/useUser'
+import { useMypage } from '../../../hooks/useMypage'
 import { Values } from './FormValues'
 import { validationSchema } from './validationSchema'
 
@@ -16,10 +16,17 @@ import { validationSchema } from './validationSchema'
 // @view
 export const ProfileForm: React.FC = () => {
   const { user, setUser } = useMypage()
+  const toast = useToast()
 
   const onSubmit = async (data: Values) => {
     const user = await patchMe(data)
     setUser(user)
+    toast({
+      title: '更新しました',
+      status: 'success',
+      isClosable: true,
+      position: 'bottom-right',
+    })
   }
 
   const onFileChange = async (file: File) => {
@@ -27,6 +34,12 @@ export const ProfileForm: React.FC = () => {
     formData.append('file', file)
     const user = await patchIcon(formData)
     setUser(user)
+    toast({
+      title: '更新しました',
+      status: 'success',
+      isClosable: true,
+      position: 'bottom-right',
+    })
   }
 
   return (

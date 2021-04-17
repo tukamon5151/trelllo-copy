@@ -1,4 +1,4 @@
-import { User } from '../../../hooks/useUser'
+import { User } from '../../../hooks/useCurrentUser'
 import { LoginLayout, Props } from './LoginLayout'
 
 export default {

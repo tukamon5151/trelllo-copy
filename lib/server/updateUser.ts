@@ -1,4 +1,4 @@
-import { User } from 'next-auth'
+import { User } from '@prisma/client'
 import { User as UserDto } from '../../dto/user'
 import { prisma } from './prisma'
 

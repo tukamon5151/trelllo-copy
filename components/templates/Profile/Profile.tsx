@@ -1,30 +1,32 @@
 // ===
 // @modules
-import { Heading, Box } from '@chakra-ui/react'
-import { LoginLayout } from '../LoginLayout/LoginLayout'
-import { User } from '../../../hooks/useUser'
+import { Heading, Box, Spinner } from '@chakra-ui/react'
+import { Dispatch, SetStateAction } from 'react'
 import { ProfileForm } from '../../organizations/ProfileForm/ProfileForm'
+import { User } from '../../../model/client/User'
+import { UserProvider } from '../../../hooks/useMyPage'
 
 // ===
 // @interface
-
-export interface Props {
-  loading: boolean
+interface Props {
   user: User
+  setUser: Dispatch<SetStateAction<User>>
 }
 
 // ===
 // @view
-export const Profile: React.FC<Props> = ({ loading, user }) => {
+export const Profile: React.FC<Props> = ({ user, setUser }) => {
+  if (!user) return <Spinner />
+
   return (
-    <LoginLayout loading={loading} user={user}>
+    <UserProvider value={{ user, setUser }}>
       <Box mx="auto" w="700px">
         <Heading mb={10}>Settings</Heading>
         <Box mb={10} bg="blue.200" p={5}>
           なんかタブがあって、いつか実装される
         </Box>
-        <ProfileForm user={user} />
+        <ProfileForm />
       </Box>
-    </LoginLayout>
+    </UserProvider>
   )
 }

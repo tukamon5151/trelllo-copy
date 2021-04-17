@@ -1,9 +1,12 @@
 import { NextApiRequest, NextApiResponse } from 'next'
+import { plainToClass } from 'class-transformer'
 import { getCurrentUser } from '../../../lib/server/session'
 import { User as UserDto } from '../../../dto/user'
 import { updateUser } from '../../../lib/server/updateUser'
 import { loginCheck } from '../../../lib/server/middleware/loginCheck'
 import { initMiddleware } from '../../../lib/server/middleware/initMiddleware'
+import { getUser } from '../../../lib/server/getUser'
+
 const loginCheckMiddleware = initMiddleware(loginCheck)
 
 export default async function handler(
@@ -20,7 +23,13 @@ export default async function handler(
     const userDto: UserDto = JSON.parse(req.body).user
     userDto.id = currentUser.id as number
 
-    const user = await updateUser(userDto)
+    const user: UserDto = plainToClass(UserDto, await updateUser(userDto))
+    res.status(200).json({ user })
+  } else if (req.method === 'GET') {
+    const user: UserDto = plainToClass(
+      UserDto,
+      await getUser(currentUser.id as number),
+    )
     res.status(200).json({ user })
   } else {
     res.status(404).end()

@@ -1,12 +1,18 @@
-import { User } from '../../hooks/useUser'
-import { patch } from './request'
+import { plainToClass } from 'class-transformer'
+import { User } from '../../model/client/User'
+import { patch, get } from './request'
 
 export const patchMe = async (user: User): Promise<User> => {
   const json = await patch('/api/me', JSON.stringify({ user }))
-  return json.user as User
+  return plainToClass(User, json.user)
 }
 
-export const patchIcon = async (FormData): Promise<User> => {
+export const patchIcon = async (FormData: FormData): Promise<User> => {
   const json = await patch('/api/me/icon', FormData)
-  return json.user as User
+  return plainToClass(User, json.user)
+}
+
+export const getMe = async (): Promise<User> => {
+  const json = await get('/api/me')
+  return plainToClass(User, json.user)
 }

@@ -2,24 +2,29 @@
 // @modules
 import { Spinner } from '@chakra-ui/react'
 import { Header } from '../../organizations/Header/Header'
-import { User } from '../../../hooks/useUser'
+import { CurrentUserProvider } from '../../../hooks/useCurrentUser'
+import { CurrentUser } from '../../../model/client/CurrentUser'
 
 // ===
 // @interface
-export interface Props {
-  user?: User
+interface Props {
+  currentUser: CurrentUser
   loading: boolean
 }
 
 // ===
 // @view
-export const LoginLayout: React.FC<Props> = ({ children, user, loading }) => {
-  if (!user || loading) return <Spinner />
+export const LoginLayout: React.FC<Props> = ({
+  children,
+  currentUser,
+  loading,
+}) => {
+  if (!currentUser || loading) return <Spinner />
 
   return (
-    <>
-      <Header user={user} />
+    <CurrentUserProvider value={currentUser}>
+      <Header />
       {children}
-    </>
+    </CurrentUserProvider>
   )
 }

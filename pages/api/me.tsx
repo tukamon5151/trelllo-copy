@@ -14,16 +14,17 @@ export default async function handler(
     return
   }
 
-  const userDto: UserDto = JSON.parse(req.body).user
-
-  if (!isCorrectUser(currentUser, userDto)) {
-    res.status(400).end()
-    return
-  }
-
   // TODO: UserDtoのvalidationをかけたい
-
+  // prismaによってDBレベルの型安全は担保されているが、アプリケーションの仕様に基づくValidationがかけられていない
+  // そういう仕様が登場する頃に考える
   if (req.method === 'PATCH') {
+    const userDto: UserDto = await parseBody(req)
+
+    if (!isCorrectUser(currentUser, userDto)) {
+      res.status(400).end()
+      return
+    }
+
     const user = await updateUser(userDto)
     res.status(200).json({ user })
   } else {
@@ -33,4 +34,15 @@ export default async function handler(
 
 const isCorrectUser = (currentUser, userDto): boolean => {
   return currentUser.id === userDto.id
+}
+
+const parseBody = async (req: NextApiRequest): Promise<UserDto> => {
+  if (req.body.files) return await uploadFile(req)
+  return JSON.parse(req.body).user as UserDto
+}
+
+const uploadFile = async (req: NextApiRequest): Promise<UserDto> => {
+  const currentUser = await getCurrentUser(req)
+  const image = 'https://~~~~~'
+  return { id: currentUser.id, image } as UserDto
 }

@@ -16,7 +16,7 @@ import { useRef } from 'react'
 
 export interface Props extends StackProps {
   image?: string
-  callback: (files: FileList) => void
+  callback: (file: File) => void
 }
 
 // ===
@@ -30,7 +30,7 @@ export const IconChanger: React.FC<Props> = ({ image, callback, ...other }) => {
   }
 
   const onFileChange: React.ChangeEventHandler<HTMLInputElement> = (e) => {
-    callback(e.target.files)
+    callback(e.target.files[0])
   }
 
   return (

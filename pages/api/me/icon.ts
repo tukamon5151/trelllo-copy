@@ -5,6 +5,8 @@ import { updateUser } from '../../../lib/server/updateUser'
 import { initMiddleware } from '../../../lib/server/middleware/initMiddleware'
 import { createUploader } from '../../../lib/server/multer'
 import { NextApiRequestsWithFormData } from '../../../lib/server/type/NextApiRequestsWithFormData'
+import { loginCheck } from '../../../lib/server/middleware/loginCheck'
+
 export const config = {
   api: {
     bodyParser: false,
@@ -13,11 +15,13 @@ export const config = {
 
 const upload = createUploader()
 const multerSingle = initMiddleware(upload.single('file'))
+const loginCheckMiddleware = initMiddleware(loginCheck)
 
 export default async function handler(
   req: NextApiRequestsWithFormData,
   res: NextApiResponse,
 ): Promise<void> {
+  await loginCheckMiddleware(req, res)
   await multerSingle(req, res)
   const currentUser = await getCurrentUser(req)
 

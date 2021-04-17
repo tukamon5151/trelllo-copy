@@ -2,18 +2,17 @@ import { NextApiRequest, NextApiResponse } from 'next'
 import { getCurrentUser } from '../../../lib/server/session'
 import { User as UserDto } from '../../../dto/user'
 import { updateUser } from '../../../lib/server/updateUser'
+import { loginCheck } from '../../../lib/server/middleware/loginCheck'
+import { initMiddleware } from '../../../lib/server/middleware/initMiddleware'
+const loginCheckMiddleware = initMiddleware(loginCheck)
+
 
 export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse,
 ): Promise<void> {
-  // await multerSingle(req, res)
+  await loginCheckMiddleware(req, res)
   const currentUser = await getCurrentUser(req)
-
-  if (!currentUser) {
-    res.status(404).end()
-    return
-  }
 
   // TODO: UserDtoのvalidationをかけたい
   // prismaによってDBレベルの型安全は担保されているが、アプリケーションの仕様に基づくValidationがかけられていない

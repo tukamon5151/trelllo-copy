@@ -12,7 +12,6 @@ const Home: React.FC = () => {
       <Box>
         <Box mb={10}>ログインしてますねあなた</Box>
         <List mb={10}>
-          <ListItem>userId: {user.id}</ListItem>
           <ListItem>email: {user.email}</ListItem>
           <ListItem>name: {user.name}</ListItem>
           <ListItem>

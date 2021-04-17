@@ -34,7 +34,7 @@ export const ProfileForm: React.FC = () => {
       initialValues={{
         id: user.id,
         name: user.name,
-        introduction: '',
+        introduction: user.introduction,
       }}
       onSubmit={onSubmit}
       validationSchema={validationSchema}

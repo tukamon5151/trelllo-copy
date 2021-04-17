@@ -25,11 +25,6 @@ export default async function handler(
   await multerSingle(req, res)
   const currentUser = await getCurrentUser(req)
 
-  if (!currentUser) {
-    res.status(404).end()
-    return
-  }
-
   // TODO: UserDtoのvalidationをかけたい
   // prismaによってDBレベルの型安全は担保されているが、アプリケーションの仕様に基づくValidationがかけられていない
   // そういう仕様が登場する頃に考える

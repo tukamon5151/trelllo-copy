@@ -6,7 +6,6 @@ import { loginCheck } from '../../../lib/server/middleware/loginCheck'
 import { initMiddleware } from '../../../lib/server/middleware/initMiddleware'
 const loginCheckMiddleware = initMiddleware(loginCheck)
 
-
 export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse,

@@ -6,6 +6,7 @@ import { initMiddleware } from '../../../lib/server/middleware/initMiddleware'
 import { createUploader } from '../../../lib/server/multer'
 import { NextApiRequestsWithFormData } from '../../../lib/server/type/NextApiRequestsWithFormData'
 import { loginCheck } from '../../../lib/server/middleware/loginCheck'
+import { nextPublicUrl } from '../../../lib/server/nextPublicUrl'
 
 export const config = {
   api: {
@@ -31,7 +32,7 @@ export default async function handler(
   if (req.method === 'PATCH') {
     const userDto: UserDto = {
       id: currentUser.id as number,
-      image: req.file.path,
+      image: nextPublicUrl(req.file.path),
     }
 
     const user = await updateUser(userDto)

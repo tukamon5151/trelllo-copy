@@ -1,17 +1,14 @@
 import { useEffect } from 'react'
 import { useSession } from 'next-auth/client'
 import { useRouter } from 'next/router'
+import { plainToClass } from 'class-transformer'
+import { CurrentUser } from '../model/client/CurrentUser'
 import { queryKey as callbackPathKey } from './useCallbackUrl'
 
-export interface User {
-  id?: number | null
-  name?: string | null
-  email?: string | null
-  image?: string | null
-  introduction?: string | null
-}
-
-export const useUser = (): { user: User; loading: boolean } => {
+export const useLogin = (): {
+  currentUser: CurrentUser
+  loading: boolean
+} => {
   const [session, loading] = useSession()
   const router = useRouter()
 
@@ -20,8 +17,12 @@ export const useUser = (): { user: User; loading: boolean } => {
       router.push(`/login?${callbackPathKey}=${router.asPath}`)
   }, [session, loading])
 
+  const currentUser = session
+    ? plainToClass(CurrentUser, session.user)
+    : undefined
+
   return {
-    user: session?.user as User | undefined,
+    currentUser,
     loading,
   }
 }

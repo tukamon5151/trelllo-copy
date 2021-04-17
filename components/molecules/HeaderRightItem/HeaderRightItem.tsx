@@ -4,19 +4,18 @@ import { Flex, FlexProps, Icon, Avatar } from '@chakra-ui/react'
 import { CgInfo, CgBell } from 'react-icons/cg'
 import { VscAdd } from 'react-icons/vsc'
 import { RoundSquareButton } from '../../atoms/RoundSquareButton'
-import { User } from '../../../hooks/useUser'
+import { useCurrentUser } from '../../../hooks/useCurrentUser'
 
 // ===
 // @interface
-export interface Props extends FlexProps {
-  user: User
-}
 
 // ===
 // @view
-export const HeaderRightItem: React.FC<Props> = ({ user, ...other }) => {
+export const HeaderRightItem: React.FC<FlexProps> = (props) => {
+  const currentUser = useCurrentUser()
+
   return (
-    <Flex justifyContent="flex-end" {...other}>
+    <Flex justifyContent="flex-end" {...props}>
       <RoundSquareButton mr={1}>
         <Icon as={VscAdd} w={8} />
       </RoundSquareButton>
@@ -26,7 +25,7 @@ export const HeaderRightItem: React.FC<Props> = ({ user, ...other }) => {
       <RoundSquareButton mr={1}>
         <Icon as={CgBell} w={8} />
       </RoundSquareButton>
-      <Avatar src={user.image} size="sm" />
+      <Avatar src={currentUser.image} size="sm" />
     </Flex>
   )
 }

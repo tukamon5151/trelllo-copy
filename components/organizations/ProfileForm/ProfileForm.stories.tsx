@@ -10,5 +10,5 @@ export const Base = (args: Props): React.ReactElement => (
   <ProfileForm {...args} />
 )
 Base.args = {
-  user: Profile.args.updateUser,
+  user: Profile.args.user,
 }

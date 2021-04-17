@@ -1,5 +1,5 @@
 import { NextApiRequest, NextApiResponse } from 'next'
-import { getCurrentUser } from '../../lib/server/authenticate'
+import { getCurrentUser } from '../../lib/server/session'
 import { User as UserDto } from '../../dto/user'
 import { updateUser } from '../../lib/server/updateUser'
 

@@ -28,18 +28,20 @@ export const BoardList: React.FC<StackProps> = (props) => {
   ])
 
   return (
-    <VStack spacing={5} {...props}>
-      <Box>
-        <Heading size="md" mb={3}>
-          <Icon as={AiOutlineStar} mr={2} />
-          スター付きボード
-        </Heading>
-        <Grid templateColumns="repeat(3, 1fr)" gap={2}>
-          {staredBoards.map((board) => (
-            <BoardCard board={board} key={board.id} />
-          ))}
-        </Grid>
-      </Box>
+    <VStack spacing={5} {...props} align="start">
+      {staredBoards && (
+        <Box>
+          <Heading size="md" mb={3}>
+            <Icon as={AiOutlineStar} mr={2} />
+            スター付きボード
+          </Heading>
+          <Grid templateColumns="repeat(3, 1fr)" gap={2}>
+            {staredBoards.map((board) => (
+              <BoardCard board={board} key={board.id} />
+            ))}
+          </Grid>
+        </Box>
+      )}
       <Box>
         <Heading size="md" mb={3}>
           <Flex alignItems="center">
@@ -56,13 +58,12 @@ export const BoardList: React.FC<StackProps> = (props) => {
           </Flex>
         </Heading>
         <Grid templateColumns="repeat(3, 1fr)" gap={2}>
-          {boards.map((board) => (
-            <BoardCard board={board} key={board.id} />
-          ))}
+          {boards &&
+            boards.map((board) => <BoardCard board={board} key={board.id} />)}
         </Grid>
       </Box>
       <Box>
-        <Button colorScheme="gray.400" color="black">
+        <Button colorScheme="gray" color="black">
           アーカイブ済みの全てのボードを表示
         </Button>
       </Box>

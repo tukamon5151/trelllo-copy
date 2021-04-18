@@ -1,5 +1,6 @@
 import { useState, useEffect, Dispatch, SetStateAction } from 'react'
 import { Board } from '../model/client/Bard'
+import { getBoards } from '../lib/client/boardRequest'
 
 export const useBoards = (): {
   boards: Board[]
@@ -7,7 +8,9 @@ export const useBoards = (): {
 } => {
   const [boards, setBoards] = useState<Board[]>(undefined)
 
-  useEffect(() => {}, [])
+  useEffect(() => {
+    getBoards().then(setBoards)
+  }, [])
 
   return {
     boards,

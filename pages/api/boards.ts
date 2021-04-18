@@ -16,6 +16,8 @@ export default async function handler(
   if (req.method === 'GET') {
     const data = await getBoards(currentUser.id as number)
     const boards = plainToClass(BoardDto, data)
+    // まだスターの機能を作っていないため、便宜上この様な形にしている
+    // TODO: BoardDtoにinitializeする際にスターデータからbook値を決定するようにする
     boards.map((board) => (board.star = true))
     res.status(200).json({ boards })
   } else {

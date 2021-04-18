@@ -2,12 +2,13 @@
 // @modules
 import { Flex, Box, FlexProps } from '@chakra-ui/react'
 import { Sidebar } from '../../organizations/Sidebar/Sidebar'
+import { Board } from '../../../model/client/Bard'
 
 // ===
 // @interface
 
 export interface Props extends FlexProps {
-  boards?: any
+  boards?: Board[]
 }
 
 // ===

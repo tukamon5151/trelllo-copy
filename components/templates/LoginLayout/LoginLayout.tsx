@@ -7,7 +7,7 @@ import { CurrentUser } from '../../../model/client/CurrentUser'
 
 // ===
 // @interface
-interface Props {
+export interface Props {
   currentUser: CurrentUser
   loading: boolean
 }

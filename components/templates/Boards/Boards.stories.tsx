@@ -8,3 +8,4 @@ export default {
 const Template = (args: Props): React.ReactElement => <Boards {...args} />
 
 export const Base = Template.bind({})
+Base.args = {}

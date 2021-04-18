@@ -8,7 +8,7 @@ import { MypageProvider } from '../../../hooks/useMypage'
 
 // ===
 // @interface
-interface Props {
+export interface Props {
   user: User
   setUser: Dispatch<SetStateAction<User>>
 }

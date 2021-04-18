@@ -1,4 +1,5 @@
 import { withFormik } from '../../../.storybook/withFormik'
+import { getAbsoluteUrl } from '../../../lib/getAbsoluteUrl'
 import { IconChanger, Props } from './IconChanger'
 
 export default {
@@ -11,6 +12,6 @@ export const Base = (args: Props): React.ReactElement => (
   <IconChanger {...args} />
 )
 Base.args = {
-  name: 'image',
+  image: getAbsoluteUrl('/user-image.png'),
   callback: async () => undefined,
 }

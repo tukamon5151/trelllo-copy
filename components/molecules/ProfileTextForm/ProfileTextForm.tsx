@@ -7,7 +7,7 @@ import { User } from '../../../model/client/User'
 
 // ===
 // @interface
-interface Props {
+export interface Props {
   user: User
 }
 

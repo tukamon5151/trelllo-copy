@@ -1,7 +1,7 @@
+import { Story } from '@storybook/react'
 import { MypageProvider } from '../../../hooks/useMypage'
 import { Base as Profile } from '../../templates/Profile/Profile.stories'
 import { ProfileForm } from './ProfileForm'
-import { Story } from '@storybook/react'
 
 export default {
   title: 'organizations/ProfileForm',

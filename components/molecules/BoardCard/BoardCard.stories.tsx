@@ -1,3 +1,4 @@
+import { getAbsoluteUrl } from '../../../lib/getAbsoluteUrl'
 import { BoardCard, Props } from './BoardCard'
 
 export default {
@@ -23,7 +24,7 @@ export const CoverImage = Template.bind({})
 CoverImage.args = {
   board: {
     ...board,
-    image: '/board-cover.png',
+    image: getAbsoluteUrl('/board-cover.png'),
     color: '',
   },
 }

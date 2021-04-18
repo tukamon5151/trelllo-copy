@@ -2,36 +2,46 @@
 // @modules
 import {
   VStack,
+  StackProps,
   Heading,
   Icon,
   Square,
   Box,
   Button,
   Flex,
+  Grid,
 } from '@chakra-ui/react'
 import { AiOutlineStar } from 'react-icons/ai'
-import { Board } from '../../../model/client/Bard'
+import { useMemo } from 'react'
+import { BoardCard } from '../../molecules/BoardCard/BoardCard'
+import { useBardsPage } from '../../../hooks/useBoardsPage'
 
 // ===
 // @interface
 
-export interface Props {
-  boards?: Board[]
-}
-
 // ===
 // @view
-export const BoardList: React.FC<Props> = (props) => {
+export const BoardList: React.FC<StackProps> = (props) => {
+  const { boards } = useBardsPage()
+  const staredBoards = useMemo(() => boards.filter((board) => board.star), [
+    boards,
+  ])
+
   return (
-    <VStack spacing={3}>
+    <VStack spacing={5} {...props}>
       <Box>
-        <Heading size="md">
+        <Heading size="md" mb={3}>
           <Icon as={AiOutlineStar} mr={2} />
           スター付きボード
         </Heading>
+        <Grid templateColumns="repeat(3, 1fr)" gap={2}>
+          {staredBoards.map((board) => (
+            <BoardCard board={board} key={board.id} />
+          ))}
+        </Grid>
       </Box>
       <Box>
-        <Heading size="md">
+        <Heading size="md" mb={3}>
           <Flex alignItems="center">
             <Square
               bgGradient="linear(to-b, orange.500, orange.300 )"
@@ -45,9 +55,14 @@ export const BoardList: React.FC<Props> = (props) => {
             パーソナルボード
           </Flex>
         </Heading>
+        <Grid templateColumns="repeat(3, 1fr)" gap={2}>
+          {boards.map((board) => (
+            <BoardCard board={board} key={board.id} />
+          ))}
+        </Grid>
       </Box>
       <Box>
-        <Button colorScheme="gray.200" color="black">
+        <Button colorScheme="gray.400" color="black">
           アーカイブ済みの全てのボードを表示
         </Button>
       </Box>

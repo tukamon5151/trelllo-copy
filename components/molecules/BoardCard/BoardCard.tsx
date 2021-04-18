@@ -9,7 +9,6 @@ import {
 } from '@chakra-ui/react'
 import { AiOutlineStar } from 'react-icons/ai'
 import { Board } from '../../../model/client/Bard'
-import { getAbsoluteUrl } from '../../../lib/getAbsoluteUrl'
 
 // ===
 // @interface
@@ -31,7 +30,7 @@ export const BoardCard: React.FC<Props> = ({ board, ...other }) => {
     >
       <Box
         position="relative"
-        bgImage={board.image ? `url(${getAbsoluteUrl(board.image)})` : ''}
+        bgImage={board.image ? `url(${board.image})` : ''}
         bgColor={board.color ? board.color : ''}
         bgSize="cover"
         bgPosition="50%"

@@ -1,4 +1,4 @@
-import { User } from '../../../hooks/useCurrentUser'
+import { CurrentUser } from '../../../model/client/CurrentUser'
 import { LoginLayout, Props } from './LoginLayout'
 
 export default {
@@ -6,7 +6,7 @@ export default {
   component: LoginLayout,
 }
 
-const user: User = {
+const currentUser: CurrentUser = {
   id: 1,
   name: 'hoge',
   email: 'hoge@hoge.com',
@@ -19,7 +19,7 @@ const Template = (args: Props): React.ReactElement => (
 export const Base = Template.bind({})
 Base.args = {
   loading: false,
-  user,
+  currentUser,
 }
 
 export const Loading = Template.bind({})

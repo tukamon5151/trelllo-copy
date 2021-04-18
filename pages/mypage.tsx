@@ -13,7 +13,7 @@ import { LoginLayout } from '../components/templates/LoginLayout/LoginLayout'
 
 const Mypage: NextPage = () => {
   const { currentUser, loading } = useLogin()
-  const { user, setUser } = useUser(currentUser?.id)
+  const { user, setUser } = useUser()
   return (
     <LoginLayout currentUser={currentUser} loading={loading}>
       <Profile user={user} setUser={setUser} />

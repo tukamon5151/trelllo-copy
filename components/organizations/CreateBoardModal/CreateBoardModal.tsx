@@ -11,6 +11,7 @@ import {
 import { Formik, Form } from 'formik'
 import { CreateBoard } from '../../../dto/board'
 import { BoardPreviewForm } from '../../molecules/BoardPreviewForm/BoardPreviewForm'
+import { BoardCoverSelector } from '../../molecules/BoardCoverSelector/BoardCoverSelector'
 
 export type Props = {
   isOpen: boolean
@@ -42,9 +43,11 @@ export const CreateBoardModal: React.VFC<Props> = ({
                   image={values.image}
                   flex={1}
                 />
-                <Box bg="gray" w="100px" ml={2}>
-                  b
-                </Box>
+                <BoardCoverSelector
+                  color={values.color}
+                  image={values.image}
+                  ml={2}
+                />
               </HStack>
               <Button colorScheme="green" type="submit">
                 ボードを作成

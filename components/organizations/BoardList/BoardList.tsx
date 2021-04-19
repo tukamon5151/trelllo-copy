@@ -23,7 +23,7 @@ import { useBoardsDispatch, useBoardsState } from '../../../hooks/useBoards'
 // @view
 export const BoardList: React.FC<StackProps> = (props) => {
   const { boards } = useBoardsState()
-  const { createBoard } = useBoardsDispatch()
+  const { startCreateBoard } = useBoardsDispatch()
   const staredBoards = useMemo(() => boards.filter((board) => board.star), [
     boards,
   ])
@@ -65,7 +65,7 @@ export const BoardList: React.FC<StackProps> = (props) => {
             colorScheme="gray"
             w="100%"
             h="100%"
-            onClick={() => createBoard({ title: 'hoge', color: 'blue' })}
+            onClick={startCreateBoard}
           >
             新しいボードを作成
           </Button>

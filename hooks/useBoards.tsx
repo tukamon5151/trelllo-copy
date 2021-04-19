@@ -11,6 +11,7 @@ import { createBoard as createBoardRequest } from '../lib/client/boardRequest'
 
 export type State = {
   boards: Board[]
+  isCreating: boolean
 }
 
 type Action =
@@ -22,13 +23,23 @@ type Action =
       type: 'updateBoards'
       payload: { boards: Board[] }
     }
+  | {
+      type: 'startCreate'
+    }
+  | {
+      type: 'endCreate'
+    }
 
 const reducer: Reducer<State, Action> = (state: State, action: Action) => {
   switch (action.type) {
     case 'create':
-      return { boards: [action.payload.board, ...state.boards] }
+      return { ...state, boards: [action.payload.board, ...state.boards] }
     case 'updateBoards':
       return { ...state, boards: action.payload.boards }
+    case 'startCreate':
+      return { ...state, isCreating: true }
+    case 'endCreate':
+      return { ...state, isCreating: false }
     default:
       throw new Error()
   }
@@ -36,6 +47,7 @@ const reducer: Reducer<State, Action> = (state: State, action: Action) => {
 
 const createInitialState = (initialState?: Partial<State>): State => ({
   boards: undefined,
+  isCreating: false,
   ...initialState,
 })
 
@@ -49,6 +61,7 @@ export const useBoardsCore = (initialState?: Partial<State>) => {
     async (boardDto: CreateBoard): Promise<void> => {
       const board = await createBoardRequest(boardDto)
       dispatch({ type: 'create', payload: { board } })
+      dispatch({ type: 'endCreate' })
     },
     [dispatch],
   )
@@ -59,11 +72,22 @@ export const useBoardsCore = (initialState?: Partial<State>) => {
     [dispatch],
   )
 
+  const startCreateBoard = useCallback(
+    () => dispatch({ type: 'startCreate' }),
+    [dispatch],
+  )
+
+  const endCreateBoard = useCallback(() => dispatch({ type: 'endCreate' }), [
+    dispatch,
+  ])
+
   return {
     state,
     dispatchers: {
       createBoard,
       initBoards,
+      startCreateBoard,
+      endCreateBoard
     },
   }
 }

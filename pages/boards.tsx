@@ -1,6 +1,7 @@
 // ===
 // @modules
 // ===
+import { NextPage } from 'next'
 import { useEffect } from 'react'
 import { useLogin } from '../hooks/useLogin'
 import { useBoardsDispatch, useBoardsState } from '../hooks/useBoards'
@@ -16,7 +17,7 @@ import { getBoards } from '../lib/client/boardRequest'
 // @Component
 // ===
 
-const Bards: React.FC = () => {
+const Bards: NextPage = () => {
   const { boards } = useBoardsState()
   const { initBoards } = useBoardsDispatch()
   useEffect(() => {

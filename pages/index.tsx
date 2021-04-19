@@ -1,9 +1,10 @@
 import Head from 'next/head'
+import { NextPage } from 'next'
 import { signOut, useSession } from 'next-auth/client'
 import { Spinner, Box, Button, List, ListItem, Avatar } from '@chakra-ui/react'
 import { Top } from '../components/templates/Top'
 
-const Home: React.FC = () => {
+const Home: NextPage = () => {
   const [session, loading] = useSession()
 
   if (session) {

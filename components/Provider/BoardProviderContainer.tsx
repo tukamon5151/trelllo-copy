@@ -6,6 +6,7 @@ import {
   BoardsStateProvider,
   BoardsDispatchProvider,
 } from '../../hooks/useBoards'
+import { CreateBoardModal } from '../organizations/CreateBoardModal'
 
 // ===
 // @interface
@@ -26,6 +27,10 @@ export const BoardsProviderContainer: React.VFC<Props> = ({
     <BoardsStateProvider value={state}>
       <BoardsDispatchProvider value={dispatchers}>
         {children}
+        <CreateBoardModal
+          isOpen={state.isCreating}
+          onClose={dispatchers.endCreateBoard}
+        />
       </BoardsDispatchProvider>
     </BoardsStateProvider>
   )

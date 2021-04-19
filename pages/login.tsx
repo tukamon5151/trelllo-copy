@@ -1,6 +1,7 @@
 // ===
 // @modules
 // ===
+import { NextPage } from 'next'
 import { useSession } from 'next-auth/client'
 import { useEffect } from 'react'
 import { useRouter } from 'next/router'
@@ -15,7 +16,7 @@ import { useFriendlyForwadingUrl } from '../hooks/useFriendlyForwadingUrl'
 // @Component
 // ===
 
-const Login: React.FC = () => {
+const Login: NextPage = () => {
   const [session, loading] = useSession()
   const router = useRouter()
   const callbackUrl = useFriendlyForwadingUrl()

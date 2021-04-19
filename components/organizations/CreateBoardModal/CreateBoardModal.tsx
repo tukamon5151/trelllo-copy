@@ -4,33 +4,55 @@ import {
   Modal,
   ModalOverlay,
   ModalContent,
-  Center,
-  Grid,
-  GridItem,
-  Flex,
+  HStack,
   Box,
+  Button,
 } from '@chakra-ui/react'
+import { Formik, Form } from 'formik'
+import { CreateBoard } from '../../../dto/board'
+import { BoardPreviewForm } from '../../molecules/BoardPreviewForm/BoardPreviewForm'
 
 export type Props = {
   isOpen: boolean
   onClose: () => void
+  onSubmit: (board: CreateBoard) => void
 }
 
 // ===
 // @view
-export const CreateBoardModal: React.VFC<Props> = ({ isOpen, onClose }) => {
+export const CreateBoardModal: React.VFC<Props> = ({
+  isOpen,
+  onClose,
+  onSubmit,
+}) => {
   return (
-    <Modal isOpen={isOpen} onClose={onClose}>
-      <ModalOverlay />
-      <ModalContent>
-        <Flex mb={2}>
-          <Box mr={2} bg="red" flex={1}>
-            a
-          </Box>
-          <Box bg="green" w={100}>b</Box>
-        </Flex>
-        <Box bg="yellow">unko</Box>
-      </ModalContent>
-    </Modal>
+    <Formik<CreateBoard>
+      initialValues={{ title: '', color: 'green', image: '' }}
+      onSubmit={onSubmit}
+    >
+      {({ values }) => (
+        <Form>
+          <Modal isOpen={isOpen} onClose={onClose}>
+            <ModalOverlay />
+            <ModalContent>
+              <HStack mb={2} align="start">
+                <BoardPreviewForm
+                  onClose={onClose}
+                  color={values.color}
+                  image={values.image}
+                  flex={1}
+                />
+                <Box bg="gray" w="100px" ml={2}>
+                  b
+                </Box>
+              </HStack>
+              <Button colorScheme="green" type="submit">
+                ボードを作成
+              </Button>
+            </ModalContent>
+          </Modal>
+        </Form>
+      )}
+    </Formik>
   )
 }

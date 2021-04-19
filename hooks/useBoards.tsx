@@ -22,12 +22,10 @@ type Action =
       type: 'updateBoards'
       payload: { boards: Board[] }
     }
-type Dispatchers = TypeUtil.Dispatchers<typeof useBoardsCore>
 
 const reducer: Reducer<State, Action> = (state: State, action: Action) => {
   switch (action.type) {
     case 'create':
-      console.log(action.payload.board)
       return { boards: [action.payload.board, ...state.boards] }
     case 'updateBoards':
       return { ...state, boards: action.payload.boards }
@@ -41,36 +39,36 @@ const createInitialState = (initialState?: Partial<State>): State => ({
   ...initialState,
 })
 
-export const useBoardsCore: TypeUtil.StateManagementModule<State> = (
-  initialState?,
-) => {
+export const useBoardsCore = (initialState?: Partial<State>) => {
   const [state, dispatch] = useReducer(
     reducer,
     createInitialState(initialState),
   )
 
   const createBoard = useCallback(
-    async (boardDto: CreateBoard) => {
+    async (boardDto: CreateBoard): Promise<void> => {
       const board = await createBoardRequest(boardDto)
       dispatch({ type: 'create', payload: { board } })
     },
     [dispatch],
   )
 
-  const updateBoards = useCallback(
-    (boards: Board[]) =>
+  const initBoards = useCallback(
+    (boards: Board[]): void =>
       dispatch({ type: 'updateBoards', payload: { boards } }),
     [dispatch],
   )
 
   return {
     state,
-    actions: {
+    dispatchers: {
       createBoard,
-      updateBoards,
+      initBoards,
     },
   }
 }
+
+type Dispatchers = TypeUtil.Dispatchers<typeof useBoardsCore>
 
 const BoardsStateContext = createContext<State>(undefined)
 export const BoardsStateProvider = BoardsStateContext.Provider

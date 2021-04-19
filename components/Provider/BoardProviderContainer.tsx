@@ -21,10 +21,10 @@ export const BoardsProviderContainer: React.VFC<Props> = ({
   initialState,
   children,
 }) => {
-  const { state, actions } = useBoardsCore(initialState)
+  const { state, dispatchers } = useBoardsCore(initialState)
   return (
     <BoardsStateProvider value={state}>
-      <BoardsDispatchProvider value={actions}>
+      <BoardsDispatchProvider value={dispatchers}>
         {children}
       </BoardsDispatchProvider>
     </BoardsStateProvider>

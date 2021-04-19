@@ -20,5 +20,5 @@ export const createBoard = async (board: CreateBoard): Promise<Board> => {
     '/api/boards',
     JSON.stringify({ board }),
   )) as PostResponseType
-  return plainToClass(Board, data)
+  return plainToClass(Board, data.board)
 }

@@ -21,10 +21,10 @@ export const MeProviderContainer: React.VFC<Props> = ({
   initialState,
   children,
 }) => {
-  const { state, actions } = useMeCore(initialState)
+  const { state, dispatchers } = useMeCore(initialState)
   return (
     <MeStateProvider value={state}>
-      <MeDispatchProvider value={actions}>{children}</MeDispatchProvider>
+      <MeDispatchProvider value={dispatchers}>{children}</MeDispatchProvider>
     </MeStateProvider>
   )
 }

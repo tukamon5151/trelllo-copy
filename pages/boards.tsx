@@ -18,9 +18,9 @@ import { getBoards } from '../lib/client/boardRequest'
 
 const Bards: React.FC = () => {
   const { boards } = useBoardsState()
-  const { updateBoards } = useBoardsDispatch()
+  const { initBoards } = useBoardsDispatch()
   useEffect(() => {
-    getBoards().then(updateBoards)
+    getBoards().then(initBoards)
   }, [])
 
   return (

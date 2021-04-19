@@ -20,8 +20,6 @@ type Action =
       payload: { user: User }
     }
 
-type Dispatchers = TypeUtil.Dispatchers<typeof useMeCore>
-
 const reducer: Reducer<State, Action> = (state, action) => {
   switch (action.type) {
     case 'update':
@@ -34,9 +32,7 @@ const createInitialState = (initialState?: Partial<State>) => ({
   ...initialState,
 })
 
-export const useMeCore: TypeUtil.StateManagementModule<State> = (
-  initialState?,
-) => {
+export const useMeCore = (initialState?: Partial<State>) => {
   const [state, dispatch] = useReducer(
     reducer,
     createInitialState(initialState),
@@ -49,11 +45,13 @@ export const useMeCore: TypeUtil.StateManagementModule<State> = (
 
   return {
     state,
-    actions: {
+    dispatchers: {
       updateMe,
     },
   }
 }
+
+type Dispatchers = TypeUtil.Dispatchers<typeof useMeCore>
 
 const MeStateContext = createContext<State>(undefined)
 export const MeStateProvider = MeStateContext.Provider

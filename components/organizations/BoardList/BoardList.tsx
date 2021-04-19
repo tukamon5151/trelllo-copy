@@ -14,7 +14,7 @@ import {
 import { AiOutlineStar } from 'react-icons/ai'
 import { useMemo } from 'react'
 import { BoardCard } from '../../molecules/BoardCard/BoardCard'
-import { useBoardsState } from '../../../hooks/useBoards'
+import { useBoardsDispatch, useBoardsState } from '../../../hooks/useBoards'
 
 // ===
 // @interface
@@ -23,6 +23,7 @@ import { useBoardsState } from '../../../hooks/useBoards'
 // @view
 export const BoardList: React.FC<StackProps> = (props) => {
   const { boards } = useBoardsState()
+  const { createBoard } = useBoardsDispatch()
   const staredBoards = useMemo(() => boards.filter((board) => board.star), [
     boards,
   ])
@@ -60,7 +61,12 @@ export const BoardList: React.FC<StackProps> = (props) => {
         <SimpleGrid columns={3} spacing={2}>
           {boards &&
             boards.map((board) => <BoardCard board={board} key={board.id} />)}
-          <Button colorScheme="gray" w="100%" h="100%">
+          <Button
+            colorScheme="gray"
+            w="100%"
+            h="100%"
+            onClick={() => createBoard({ title: 'hoge', color: 'blue' })}
+          >
             新しいボードを作成
           </Button>
         </SimpleGrid>

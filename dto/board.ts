@@ -4,12 +4,15 @@ export class ResponseBoard {
   image?: string
   color?: 'red' | 'blue' | 'green'
   star: boolean
-  userId: number
+
+  constructor() {
+    this.star = false
+  }
 }
 
 export class CreateBoard {
   title: string
   image?: string
   color?: 'red' | 'blue' | 'green'
-  userId: number
+  userId?: number
 }

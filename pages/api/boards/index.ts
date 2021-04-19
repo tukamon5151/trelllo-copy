@@ -21,9 +21,9 @@ export default async function handler(
     boards.map((board) => (board.star = true))
     res.status(200).json({ boards })
   } else if (req.method === 'POST') {
-    const data = await createBoard(
-      plainToClass(CreateBoard, JSON.parse(req.body).board),
-    )
+    const createBoardDto = plainToClass(CreateBoard, JSON.parse(req.body).board)
+    createBoardDto.userId = currentUser.id as number
+    const data = await createBoard(createBoardDto)
     const board = plainToClass(ResponseBoard, data)
     res.status(200).json({ board })
   } else {

@@ -4,6 +4,7 @@ export class ResponseBoard {
   image?: string
   color?: 'red' | 'blue' | 'green'
   star: boolean
+  userId: number
 }
 
 export class CreateBoard {

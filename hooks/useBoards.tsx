@@ -6,6 +6,8 @@ import {
   useCallback,
 } from 'react'
 import { Board } from '../model/client/Bard'
+import { CreateBoard } from '../dto/board'
+import { createBoard as createBoardRequest } from '../lib/client/boardRequest'
 
 export type State = {
   boards: Board[]
@@ -26,7 +28,7 @@ const reducer: Reducer<State, Action> = (state: State, action: Action) => {
   switch (action.type) {
     case 'create':
       console.log(action.payload.board)
-      return { boards: [...state.boards, action.payload.board] }
+      return { boards: [action.payload.board, ...state.boards] }
     case 'updateBoards':
       return { ...state, boards: action.payload.boards }
     default:
@@ -48,9 +50,13 @@ export const useBoardsCore: TypeUtil.StateManagementModule<State> = (
   )
 
   const createBoard = useCallback(
-    (board: Board) => dispatch({ type: 'create', payload: { board } }),
+    async (boardDto: CreateBoard) => {
+      const board = await createBoardRequest(boardDto)
+      dispatch({ type: 'create', payload: { board } })
+    },
     [dispatch],
   )
+
   const updateBoards = useCallback(
     (boards: Board[]) =>
       dispatch({ type: 'updateBoards', payload: { boards } }),

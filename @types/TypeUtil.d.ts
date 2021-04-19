@@ -5,7 +5,7 @@ declare namespace TypeUtil {
     initialState?: Partial<State>,
   ) => {
     state: State
-    actions: Record<string, (args: unknown) => void>
+    actions: Record<string, (args: unknown) => void | Promise<void>>
   }
 
   type Dispatchers<T extends StateManagementModule> = valueOf<

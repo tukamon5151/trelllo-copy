@@ -2,10 +2,9 @@ import { NextApiRequest, NextApiResponse } from 'next'
 import { plainToClass } from 'class-transformer'
 import { getCurrentUser } from '../../../lib/server/session'
 import { User as UserDto } from '../../../dto/user'
-import { updateUser } from '../../../lib/server/updateUser'
 import { loginCheck } from '../../../lib/server/middleware/loginCheck'
 import { initMiddleware } from '../../../lib/server/middleware/initMiddleware'
-import { getUser } from '../../../lib/server/getUser'
+import { getUser, updateUser } from '../../../lib/server/repositories/user'
 
 const loginCheckMiddleware = initMiddleware(loginCheck)
 

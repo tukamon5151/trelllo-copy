@@ -1,7 +1,7 @@
 import { NextApiResponse } from 'next'
 import { getCurrentUser } from '../../../lib/server/session'
 import { User as UserDto } from '../../../dto/user'
-import { updateUser } from '../../../lib/server/updateUser'
+import { updateUser } from '../../../lib/server/repositories/user'
 import { initMiddleware } from '../../../lib/server/middleware/initMiddleware'
 import { createUploader } from '../../../lib/server/multer'
 import { NextApiRequestsWithFormData } from '../../../lib/server/type/NextApiRequestsWithFormData'
@@ -15,15 +15,13 @@ export const config = {
 }
 
 const upload = createUploader()
-const multerSingle = initMiddleware(upload.single('file'))
-const loginCheckMiddleware = initMiddleware(loginCheck)
 
 export default async function handler(
   req: NextApiRequestsWithFormData,
   res: NextApiResponse,
 ): Promise<void> {
-  await loginCheckMiddleware(req, res)
-  await multerSingle(req, res)
+  await initMiddleware(loginCheck)(req, res)
+  await initMiddleware(upload.single('file'))(req, res)
   const currentUser = await getCurrentUser(req)
 
   // TODO: UserDtoのvalidationをかけたい

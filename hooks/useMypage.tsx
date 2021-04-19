@@ -6,6 +6,8 @@ export type MypageContextValue = {
   setUser: Dispatch<SetStateAction<User>>
 }
 
+export const initMypage = () => {}
+
 export const MypageContext = createContext<MypageContextValue>(undefined)
 
 export const MypageProvider = MypageContext.Provider

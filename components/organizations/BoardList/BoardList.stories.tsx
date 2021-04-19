@@ -1,17 +1,17 @@
 import { Story } from '@storybook/react'
 import { StackProps as Props } from '@chakra-ui/react'
-import { BoardsPageProvider } from '../../../hooks/useBoardsPage'
 import { Base as Boards } from '../../templates/Boards/Boards.stories'
 import { BoardList } from './BoardList'
+import { BoardsProviderContainer } from '../../Provider/BoardProviderContainer'
 
 export default {
   title: 'organizations/BoardList',
   component: BoardList,
   decorators: [
     (Story: Story): React.ReactElement => (
-      <BoardsPageProvider value={Boards.args}>
+      <BoardsProviderContainer initialState={{ boards: Boards.args.boards }}>
         <Story />
-      </BoardsPageProvider>
+      </BoardsProviderContainer>
     ),
   ],
 }

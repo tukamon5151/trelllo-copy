@@ -15,7 +15,6 @@ import { AiOutlineStar } from 'react-icons/ai'
 import { useMemo } from 'react'
 import { BoardCard } from '../../molecules/BoardCard/BoardCard'
 import { useBardsPage } from '../../../hooks/useBoardsPage'
-import { RoundBoxButton } from '../../atoms/RoundBoxButton/RoundBoxButton'
 
 // ===
 // @interface

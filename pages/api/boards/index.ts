@@ -19,8 +19,7 @@ export default async function handler(
     res.status(200).json({ boards })
   } else if (req.method === 'POST') {
     const createBoardDto = plainToClass(CreateBoard, JSON.parse(req.body).board)
-    createBoardDto.userId = currentUser.id as number
-    const data = await createBoard(createBoardDto)
+    const data = await createBoard(currentUser.id as number, createBoardDto)
     const board = plainToClass(ResponseBoard, data)
     res.status(200).json({ board })
   } else {

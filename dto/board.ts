@@ -14,5 +14,4 @@ export class CreateBoard {
   title: string
   image?: string
   color?: 'red' | 'blue' | 'green'
-  userId?: number
 }

@@ -1,6 +1,6 @@
 import { Story } from '@storybook/react'
-import { MypageProvider } from '../../../hooks/useMypage'
 import { Base as Profile } from '../../templates/Profile/Profile.stories'
+import { MeProviderContainer } from '../../Provider/MeProviderContainer'
 import { ProfileForm } from './ProfileForm'
 
 export default {
@@ -8,9 +8,9 @@ export default {
   component: ProfileForm,
   decorators: [
     (Story: Story): React.ReactElement => (
-      <MypageProvider value={Profile.args}>
+      <MeProviderContainer initialState={{ user: Profile.args }}>
         <Story />
-      </MypageProvider>
+      </MeProviderContainer>
     ),
   ],
 }

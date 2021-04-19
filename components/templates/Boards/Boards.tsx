@@ -1,7 +1,6 @@
 // ===
 // @modules
 import { Flex, FlexProps, Spinner } from '@chakra-ui/react'
-import { Dispatch, SetStateAction } from 'react'
 import { Sidebar } from '../../organizations/Sidebar/Sidebar'
 import { Board } from '../../../model/client/Bard'
 import { BoardList } from '../../organizations/BoardList/BoardList'

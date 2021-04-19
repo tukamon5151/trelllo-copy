@@ -1,8 +1,8 @@
 import { Story } from '@storybook/react'
 import { StackProps as Props } from '@chakra-ui/react'
 import { Base as Boards } from '../../templates/Boards/Boards.stories'
-import { BoardList } from './BoardList'
 import { BoardsProviderContainer } from '../../Provider/BoardProviderContainer'
+import { BoardList } from './BoardList'
 
 export default {
   title: 'organizations/BoardList',

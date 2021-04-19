@@ -20,6 +20,7 @@ type Action =
       type: 'updateBoards'
       payload: { boards: Board[] }
     }
+type Dispatchers = TypeUtil.Dispatchers<typeof useBoardsCore>
 
 const reducer: Reducer<State, Action> = (state: State, action: Action) => {
   switch (action.type) {
@@ -27,7 +28,7 @@ const reducer: Reducer<State, Action> = (state: State, action: Action) => {
       console.log(action.payload.board)
       return { boards: [...state.boards, action.payload.board] }
     case 'updateBoards':
-      return { boards: action.payload.boards }
+      return { ...state, boards: action.payload.boards }
     default:
       throw new Error()
   }
@@ -38,7 +39,9 @@ const createInitialState = (initialState?: Partial<State>): State => ({
   ...initialState,
 })
 
-export const useBoardsCore = (initialState?: Partial<State>) => {
+export const useBoardsCore: TypeUtil.StateManagementModule<State> = (
+  initialState?,
+) => {
   const [state, dispatch] = useReducer(
     reducer,
     createInitialState(initialState),
@@ -65,7 +68,8 @@ export const useBoardsCore = (initialState?: Partial<State>) => {
 
 const BoardsStateContext = createContext<State>(undefined)
 export const BoardsStateProvider = BoardsStateContext.Provider
-export const useBoardsState = () => useContext(BoardsStateContext)
-const BoardsDispatchContext = createContext(undefined)
+export const useBoardsState = (): State => useContext(BoardsStateContext)
+const BoardsDispatchContext = createContext<Dispatchers>(undefined)
 export const BoardsDispatchProvider = BoardsDispatchContext.Provider
-export const useBoardsDispatch = () => useContext(BoardsDispatchContext)
+export const useBoardsDispatch = (): Dispatchers =>
+  useContext(BoardsDispatchContext)

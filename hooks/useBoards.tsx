@@ -73,7 +73,7 @@ const createInitialState = (initialState?: Partial<State>): State => ({
 })
 
 export const useBoardsCore = (initialState?: Partial<State>) => {
-  const [state, dispatch] = useReducer(
+  const [state, dispatch] = useReducer<Reducer<State, Action>>(
     reducer,
     createInitialState(initialState),
   )

@@ -7,18 +7,20 @@ type GetResponseType = {
   boards: ResponseBoard[]
 }
 
-export const getBoards = async (): Promise<Board[]> => {
+export const getBoardsRequest = async (): Promise<Board[]> => {
   const data = (await get('api/boards')) as GetResponseType
-  return plainToClass(Board, data.boards)
+  return plainToClass(Board, data.boards, { excludeExtraneousValues: true })
 }
 
 type PostResponseType = {
   board: ResponseBoard
 }
-export const createBoard = async (board: CreateBoard): Promise<Board> => {
+export const createBoardRequest = async (
+  board: CreateBoard,
+): Promise<Board> => {
   const data = (await post(
     '/api/boards',
     JSON.stringify({ board }),
   )) as PostResponseType
-  return plainToClass(Board, data.board)
+  return plainToClass(Board, data.board, { excludeExtraneousValues: true })
 }

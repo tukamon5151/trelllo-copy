@@ -2,11 +2,11 @@ import { User } from '@prisma/client'
 import { UpdateUser } from '../../../dto/user'
 import { prisma } from '../prisma'
 
-export const getUser = async (id: number): Promise<User> => {
+export const getUserRequest = async (id: number): Promise<User | null> => {
   return await prisma.user.findUnique({ where: { id } })
 }
 
-export const updateUser = async (
+export const updateUserRequest = async (
   id: number,
   userDto: UpdateUser,
 ): Promise<User> => {

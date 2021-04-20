@@ -1,6 +1,8 @@
+import { Expose } from 'class-transformer'
+
 export class CurrentUser {
-  id: number
-  name?: string
-  image?: string
-  email?: string
+  @Expose() id: number
+  @Expose() name?: string
+  @Expose() image?: string
+  @Expose() email?: string
 }

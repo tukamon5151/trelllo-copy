@@ -17,11 +17,11 @@ model Board {
   color              BoardColor?
   image              String?
   userId             Int                 @map(name: "user_id")
-  User               User                @relation(fields: [userId], references: [id])
-  StarUsers          User[]              @relation("_board_stars")
+  user               User                @relation(fields: [userId], references: [id])
+  starUsers          User[]              @relation("_board_stars")
   createdAt          DateTime            @default(now()) @map(name: "created_at")
   updatedAt          DateTime            @default(now()) @map(name: "updated_at")
-  BoardStarRelations BoardStarRelation[]
+  boardStarRelations BoardStarRelation[]
 
   @@map(name: "boards")
 }
@@ -38,9 +38,9 @@ enum BoardColor {
 
 model BoardStarRelation {
   boardId   Int      @map(name: "board_id")
-  Board     Board    @relation(fields: [boardId], references: [id])
+  board     Board    @relation(fields: [boardId], references: [id])
   userId    Int      @map(name: "user_id")
-  User      User     @relation(fields: [userId], references: [id])
+  user      User     @relation(fields: [userId], references: [id])
   createdAt DateTime @default(now()) @map(name: "created_at")
   updatedAt DateTime @default(now()) @map(name: "updated_at")
 
@@ -89,10 +89,10 @@ model User {
   introduction      String?
   createdAt         DateTime            @default(now()) @map(name: "created_at")
   updatedAt         DateTime            @default(now()) @map(name: "updated_at")
-  StarBoards        Board[]             @relation("_board_stars")
-  BoardStarRelation BoardStarRelation[]
+  starBoards        Board[]             @relation("_board_stars")
+  boards            Board[]
+  boardStarRelations BoardStarRelation[]
 
-  boards Board[]
   @@map(name: "users")
 }
 

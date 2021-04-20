@@ -1,9 +1,10 @@
+import { Expose } from 'class-transformer'
 import { BoardColor } from '../../dto/board'
 
 export class Board {
-  id: number
-  title: string
-  star: boolean
-  image?: string
-  color?: BoardColor
+  @Expose() id: number
+  @Expose() title: string
+  @Expose() star: boolean
+  @Expose() image?: string
+  @Expose() color?: BoardColor
 }

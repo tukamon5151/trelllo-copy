@@ -7,7 +7,6 @@ import { useLogin } from '../hooks/useLogin'
 import { useBoardsDispatch, useBoardsState } from '../hooks/useBoards'
 import { LoginLayout } from '../components/templates/LoginLayout/LoginLayout'
 import { Boards } from '../components/templates/Boards/Boards'
-import { getBoards } from '../lib/client/boardRequest'
 
 // ===
 // @Types
@@ -21,7 +20,7 @@ const Bards: NextPage = () => {
   const { boards } = useBoardsState()
   const { initBoards } = useBoardsDispatch()
   useEffect(() => {
-    getBoards().then(initBoards)
+    initBoards()
   }, [])
 
   return (

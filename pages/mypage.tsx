@@ -7,7 +7,7 @@ import { Profile } from '../components/templates/Profile'
 import { useLogin } from '../hooks/useLogin'
 import { useMeDispatch, useMeState } from '../hooks/useMe'
 import { LoginLayout } from '../components/templates/LoginLayout/LoginLayout'
-import { getMe } from '../lib/client/userRequest'
+import { getMeRequest } from '../lib/client/userRequest'
 
 // ===
 // @Component
@@ -19,7 +19,7 @@ const Mypage: NextPage = () => {
   const { updateMe } = useMeDispatch()
 
   useEffect(() => {
-    getMe().then(updateMe)
+    getMeRequest().then(updateMe)
   }, [])
   return (
     <LoginLayout currentUser={currentUser} loading={loading}>

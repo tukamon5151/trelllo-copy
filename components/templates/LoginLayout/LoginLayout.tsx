@@ -8,7 +8,7 @@ import { CurrentUser } from '../../../model/client/CurrentUser'
 // ===
 // @interface
 export interface Props {
-  currentUser: CurrentUser
+  currentUser: CurrentUser | null
   loading: boolean
 }
 

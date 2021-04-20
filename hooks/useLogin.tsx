@@ -5,10 +5,7 @@ import { plainToClass } from 'class-transformer'
 import { CurrentUser } from '../model/client/CurrentUser'
 import { queryKey as callbackPathKey } from './useFriendlyForwadingUrl'
 
-export const useLogin = (): {
-  currentUser: CurrentUser
-  loading: boolean
-} => {
+export const useLogin = () => {
   const [session, loading] = useSession()
   const router = useRouter()
 
@@ -18,8 +15,8 @@ export const useLogin = (): {
   }, [session, loading])
 
   const currentUser = session
-    ? plainToClass(CurrentUser, session.user)
-    : undefined
+    ? plainToClass(CurrentUser, session.user, { excludeExtraneousValues: true })
+    : null
 
   return {
     currentUser,

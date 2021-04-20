@@ -12,12 +12,16 @@ generator client {
 }
 
 model Board {
-  id                 Int       @id @default(autoincrement())
-  title  String
-  color  BoardColor?
-  image  String?
-  userId Int         @map(name: "user_id")
-  User   User        @relation(fields: [userId], references: [id])
+  id                 Int                 @id @default(autoincrement())
+  title              String
+  color              BoardColor?
+  image              String?
+  userId             Int                 @map(name: "user_id")
+  user               User                @relation(fields: [userId], references: [id])
+  starUsers          User[]              @relation("_board_stars")
+  createdAt          DateTime            @default(now()) @map(name: "created_at")
+  updatedAt          DateTime            @default(now()) @map(name: "updated_at")
+  boardStarRelations BoardStarRelation[]
 
   @@map(name: "boards")
 }
@@ -30,6 +34,18 @@ enum BoardColor {
   pink
   gray
   purple
+}
+
+model BoardStarRelation {
+  boardId   Int      @map(name: "board_id")
+  board     Board    @relation(fields: [boardId], references: [id])
+  userId    Int      @map(name: "user_id")
+  user      User     @relation(fields: [userId], references: [id])
+  createdAt DateTime @default(now()) @map(name: "created_at")
+  updatedAt DateTime @default(now()) @map(name: "updated_at")
+
+  @@id([boardId, userId])
+  @@map(name: "_board_star_relations")
 }
 
 model Account {
@@ -65,16 +81,18 @@ model Session {
 }
 
 model User {
-  id            Int       @id @default(autoincrement())
-  name          String?
-  email         String?   @unique
-  emailVerified DateTime? @map(name: "email_verified")
-  image         String?
-  introduction  String?
-  createdAt     DateTime  @default(now()) @map(name: "created_at")
-  updatedAt     DateTime  @default(now()) @map(name: "updated_at")
+  id                Int                 @id @default(autoincrement())
+  name              String?
+  email             String?             @unique
+  emailVerified     DateTime?           @map(name: "email_verified")
+  image             String?
+  introduction      String?
+  createdAt         DateTime            @default(now()) @map(name: "created_at")
+  updatedAt         DateTime            @default(now()) @map(name: "updated_at")
+  starBoards        Board[]             @relation("_board_stars")
+  boards            Board[]
+  boardStarRelations BoardStarRelation[]
 
-  boards Board[]
   @@map(name: "users")
 }
 

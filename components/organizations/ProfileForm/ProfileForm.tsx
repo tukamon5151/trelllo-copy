@@ -4,7 +4,10 @@ import { Formik, Form } from 'formik'
 import { Flex, useToast } from '@chakra-ui/react'
 import { IconChanger } from '../../molecules/IconChanger'
 import { ProfileTextForm } from '../../molecules/ProfileTextForm/ProfileTextForm'
-import { patchMe, patchIcon } from '../../../lib/client/userRequest'
+import {
+  patchMeRequest,
+  patchIconRequest,
+} from '../../../lib/client/userRequest'
 import { useMeState, useMeDispatch } from '../../../hooks/useMe'
 import { Values } from './FormValues'
 import { validationSchema } from './validationSchema'
@@ -20,7 +23,7 @@ export const ProfileForm: React.FC = () => {
   const toast = useToast()
 
   const onSubmit = async (data: Values) => {
-    const user = await patchMe(data)
+    const user = await patchMeRequest(data)
     updateMe(user)
     toast({
       title: '更新しました',
@@ -33,7 +36,7 @@ export const ProfileForm: React.FC = () => {
   const onFileChange = async (file: File) => {
     const formData = new FormData()
     formData.append('file', file)
-    const user = await patchIcon(formData)
+    const user = await patchIconRequest(formData)
     updateMe(user)
     toast({
       title: '更新しました',

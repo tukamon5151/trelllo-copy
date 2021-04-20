@@ -11,29 +11,27 @@ export type State = {
   user: User
 }
 
-type Action =
-  | {
-      type: 'get'
-    }
-  | {
-      type: 'update'
-      payload: { user: User }
-    }
+type Action = {
+  type: 'update'
+  payload: { user: User }
+}
 
 const reducer: Reducer<State, Action> = (state, action) => {
   switch (action.type) {
     case 'update':
       return { ...state, user: action.payload.user }
+    default:
+      throw new Error()
   }
 }
 
 const createInitialState = (initialState?: Partial<State>) => ({
-  user: undefined,
+  user: {} as User,
   ...initialState,
 })
 
 export const useMeCore = (initialState?: Partial<State>) => {
-  const [state, dispatch] = useReducer(
+  const [state, dispatch] = useReducer<Reducer<State, Action>>(
     reducer,
     createInitialState(initialState),
   )
@@ -53,9 +51,9 @@ export const useMeCore = (initialState?: Partial<State>) => {
 
 type Dispatchers = TypeUtil.Dispatchers<typeof useMeCore>
 
-const MeStateContext = createContext<State>(undefined)
+const MeStateContext = createContext<State>({} as State)
 export const MeStateProvider = MeStateContext.Provider
 export const useMeState = (): State => useContext(MeStateContext)
-const MeDispatchContext = createContext<Dispatchers>(undefined)
+const MeDispatchContext = createContext<Dispatchers>({} as Dispatchers)
 export const MeDispatchProvider = MeDispatchContext.Provider
 export const useMeDispatch = (): Dispatchers => useContext(MeDispatchContext)

@@ -1,19 +1,16 @@
+import { Expose } from 'class-transformer'
 export class ResponseBoard {
-  id: number
-  title: string
-  image?: string
-  color?: 'red' | 'blue' | 'green'
-  star: boolean
-
-  constructor() {
-    this.star = false
-  }
+  @Expose() id: number
+  @Expose() title: string
+  @Expose() image?: string
+  @Expose() color?: 'red' | 'blue' | 'green'
+  @Expose() star: boolean
 }
 
 export class CreateBoard {
-  title: string
-  image?: string
-  color?: BoardColor
+  @Expose() title: string
+  @Expose() image?: string
+  @Expose() color?: BoardColor
 }
 
 export type BoardColor =

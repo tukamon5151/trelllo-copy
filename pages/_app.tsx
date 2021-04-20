@@ -1,4 +1,5 @@
 import '../styles/globals.css'
+import 'reflect-metadata'
 import { AppProps } from 'next/app'
 import { ChakraProvider } from '@chakra-ui/react'
 import { Provider as NextAuthProvider } from 'next-auth/client'

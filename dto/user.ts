@@ -1,12 +1,14 @@
+import { Expose } from 'class-transformer'
+
 export class ResponseUser {
-  id: number
-  name?: string
-  image?: string
-  introduction?: string
+  @Expose() id: number
+  @Expose() name?: string
+  @Expose() image?: string
+  @Expose() introduction?: string
 }
 
 export class UpdateUser {
-  name?: string
-  image?: string
-  introduction?: string
+  @Expose() name?: string
+  @Expose() image?: string
+  @Expose() introduction?: string
 }

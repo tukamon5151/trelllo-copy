@@ -1,26 +1,29 @@
 import { NextApiRequest, NextApiResponse } from 'next'
 import { plainToClass } from 'class-transformer'
-import { initMiddleware } from '../../../lib/server/middleware/initMiddleware'
-import { loginCheck } from '../../../lib/server/middleware/loginCheck'
 import { getCurrentUser } from '../../../lib/server/session'
-import { createBoard, getBoards } from '../../../lib/server/repositories/board'
-import { ResponseBoard, CreateBoard } from '../../../dto/board'
+import { CreateBoard } from '../../../dto/board'
+import { getBoards, createBoard } from '../../../lib/server/useCase/board'
 
 export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse,
 ): Promise<void> {
-  await initMiddleware(loginCheck)(req, res)
   const currentUser = await getCurrentUser(req)
 
+  if (!currentUser) {
+    return res.status(404).end()
+  }
+
   if (req.method === 'GET') {
-    const data = await getBoards(currentUser.id as number)
-    const boards = plainToClass(ResponseBoard, data)
+    const boards = await getBoards(currentUser.id)
     res.status(200).json({ boards })
   } else if (req.method === 'POST') {
-    const createBoardDto = plainToClass(CreateBoard, JSON.parse(req.body).board)
-    const data = await createBoard(currentUser.id as number, createBoardDto)
-    const board = plainToClass(ResponseBoard, data)
+    const createBoardDto = plainToClass(
+      CreateBoard,
+      JSON.parse(req.body).board,
+      { excludeExtraneousValues: true },
+    )
+    const board = await createBoard(currentUser.id, createBoardDto)
     res.status(200).json({ board })
   } else {
     res.status(404).end()

@@ -31,10 +31,10 @@ export const CreateBoardModal: React.VFC<Props> = ({
       onSubmit={onSubmit}
     >
       {({ values }) => (
-        <Form>
-          <Modal isOpen={isOpen} onClose={onClose}>
-            <ModalOverlay />
-            <ModalContent>
+        <Modal isOpen={isOpen} onClose={onClose}>
+          <ModalOverlay />
+          <ModalContent>
+            <Form>
               <Flex mb={2}>
                 <BoardPreviewForm
                   onClose={onClose}
@@ -51,9 +51,9 @@ export const CreateBoardModal: React.VFC<Props> = ({
               <Button colorScheme="green" type="submit">
                 ボードを作成
               </Button>
-            </ModalContent>
-          </Modal>
-        </Form>
+            </Form>
+          </ModalContent>
+        </Modal>
       )}
     </Formik>
   )

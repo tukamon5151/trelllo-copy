@@ -30,6 +30,7 @@ export const BoardsProviderContainer: React.VFC<Props> = ({
         <CreateBoardModal
           isOpen={state.isCreating}
           onClose={dispatchers.endCreateBoard}
+          onSubmit={dispatchers.createBoard}
         />
       </BoardsDispatchProvider>
     </BoardsStateProvider>

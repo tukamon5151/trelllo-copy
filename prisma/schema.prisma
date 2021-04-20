@@ -26,6 +26,10 @@ enum BoardColor {
   red
   green
   blue
+  tomato
+  pink
+  gray
+  purple
 }
 
 model Account {

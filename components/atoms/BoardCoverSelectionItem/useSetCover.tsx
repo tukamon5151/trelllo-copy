@@ -14,7 +14,7 @@ export const useSetCover = () => {
 
       setValues({ ...values, color, image: undefined })
     },
-    [values.image, values.color],
+    [values],
   )
 
   return setCover

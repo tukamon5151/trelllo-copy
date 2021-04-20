@@ -47,7 +47,7 @@ export const BoardCoverGridSelector: React.VFC<Props> = ({
           ownImage={getAbsoluteUrl(image)}
           selectedColor={selectedColor}
           selectedImage={getAbsoluteUrl(selectedImage)}
-          key={color}
+          key={image}
         />
       ))}
     </SimpleGrid>

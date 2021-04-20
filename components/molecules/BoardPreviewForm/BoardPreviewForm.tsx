@@ -50,11 +50,11 @@ export const BoardPreviewForm: React.FC<Props> = ({
         right={0}
       />
       <Input
+        name="title"
         bg="transparent"
         position="absolute"
         left={2}
         top={2}
-        name="title"
         placeholder="ボードタイトルの追加"
         fontWeight="bold"
         fontSize="md"

@@ -13,5 +13,14 @@ export class ResponseBoard {
 export class CreateBoard {
   title: string
   image?: string
-  color?: 'red' | 'blue' | 'green'
+  color?: BoardColor
 }
+
+export type BoardColor =
+  | 'red'
+  | 'blue'
+  | 'green'
+  | 'tomato'
+  | 'pink'
+  | 'gray'
+  | 'purple'

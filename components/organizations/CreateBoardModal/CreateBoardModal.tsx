@@ -4,14 +4,13 @@ import {
   Modal,
   ModalOverlay,
   ModalContent,
-  HStack,
-  Box,
+  Flex,
   Button,
 } from '@chakra-ui/react'
 import { Formik, Form } from 'formik'
 import { CreateBoard } from '../../../dto/board'
-import { BoardPreviewForm } from '../../molecules/BoardPreviewForm/BoardPreviewForm'
-import { BoardCoverSelector } from '../../molecules/BoardCoverSelector/BoardCoverSelector'
+import { BoardPreviewForm } from '../../molecules/BoardPreviewForm'
+import { BoardCoverGridSelector } from '../../molecules/BoardCoverGridSelector'
 
 export type Props = {
   isOpen: boolean
@@ -28,7 +27,7 @@ export const CreateBoardModal: React.VFC<Props> = ({
 }) => {
   return (
     <Formik<CreateBoard>
-      initialValues={{ title: '', color: 'green', image: '' }}
+      initialValues={{ title: '', color: 'green', image: undefined }}
       onSubmit={onSubmit}
     >
       {({ values }) => (
@@ -36,19 +35,19 @@ export const CreateBoardModal: React.VFC<Props> = ({
           <Modal isOpen={isOpen} onClose={onClose}>
             <ModalOverlay />
             <ModalContent>
-              <HStack mb={2} align="start">
+              <Flex mb={2}>
                 <BoardPreviewForm
                   onClose={onClose}
-                  color={values.color}
-                  image={values.image}
+                  selectedColor={values.color}
+                  selectedImage={values.image}
                   flex={1}
                 />
-                <BoardCoverSelector
-                  color={values.color}
-                  image={values.image}
+                <BoardCoverGridSelector
+                  selectedColor={values.color}
+                  selectedImage={values.image}
                   ml={2}
                 />
-              </HStack>
+              </Flex>
               <Button colorScheme="green" type="submit">
                 ボードを作成
               </Button>

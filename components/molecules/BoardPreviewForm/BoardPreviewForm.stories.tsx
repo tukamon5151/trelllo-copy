@@ -1,11 +1,11 @@
-import { BoardPreviewForm, Props } from './BoardPreviewForm'
 import { getAbsoluteUrl } from '../../../lib/getAbsoluteUrl'
 import { withFormik } from '../../../.storybook/withFormik'
+import { BoardPreviewForm, Props } from './BoardPreviewForm'
 
 export default {
   title: 'molecules/BoardPreviewForm',
   component: BoardPreviewForm,
-  decorators: [withFormik]
+  decorators: [withFormik],
 }
 
 const Template = (args: Props): React.ReactElement => (

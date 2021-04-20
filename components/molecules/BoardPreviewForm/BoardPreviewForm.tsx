@@ -2,27 +2,27 @@
 // @modules
 import { Box, BoxProps, Icon } from '@chakra-ui/react'
 import { IoMdClose } from 'react-icons/io'
-import { Input } from '../../atoms/Input'
 import { useEffect, useRef } from 'react'
+import { Input } from '../../atoms/Input'
 
 // ===
 // @interface
 
 export interface Props extends BoxProps {
-  image?: string
-  color?: string
+  selectedImage?: string
+  selectedColor?: string
   onClose: () => void
 }
 
 // ===
 // @view
 export const BoardPreviewForm: React.FC<Props> = ({
-  image,
-  color,
+  selectedImage,
+  selectedColor,
   onClose,
   ...other
 }) => {
-  const inputRef = useRef<HTMLInputElement>()
+  const inputRef = useRef<HTMLInputElement>(null)
 
   useEffect(() => {
     if (inputRef.current) {
@@ -32,8 +32,8 @@ export const BoardPreviewForm: React.FC<Props> = ({
 
   return (
     <Box
-      bg={color}
-      bgImage={`url(${image})`}
+      bg={selectedColor}
+      bgImage={selectedImage ? `url(${selectedImage})` : ''}
       bgSize="cover"
       bgPosition="50%"
       borderRadius={3}

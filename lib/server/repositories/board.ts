@@ -13,7 +13,7 @@ export const createBoard = async (
   return await prisma.board.create({
     data: {
       ...createBoardDto,
-      userId
+      userId,
     },
   })
 }

@@ -13,7 +13,7 @@ import {
 } from '@chakra-ui/react'
 import { AiOutlineStar } from 'react-icons/ai'
 import { useMemo } from 'react'
-import { BoardCard } from '../../molecules/BoardCard/BoardCard'
+import { BoardCard } from '../../molecules/BoardCard'
 import { useBoardsDispatch, useBoardsState } from '../../../hooks/useBoards'
 
 // ===

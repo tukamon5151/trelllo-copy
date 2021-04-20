@@ -87,7 +87,7 @@ export const useBoardsCore = (initialState?: Partial<State>) => {
       createBoard,
       initBoards,
       startCreateBoard,
-      endCreateBoard
+      endCreateBoard,
     },
   }
 }

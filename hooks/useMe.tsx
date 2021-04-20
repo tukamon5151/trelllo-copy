@@ -13,7 +13,7 @@ export type State = {
 
 type Action =
   | {
-      type: 'get'
+      type: 'getRequest'
     }
   | {
       type: 'update'

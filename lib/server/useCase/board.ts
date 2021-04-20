@@ -3,6 +3,7 @@ import {
   getBoardsRequest,
   createBoardRequest,
   createBoardStarRequest,
+  deleteBoardStarRequest,
 } from '../repositories/board'
 import { withStar } from '../selector/board'
 import { CreateBoard, ResponseBoard } from '../../../dto/board'
@@ -19,6 +20,11 @@ export const createBoard = async (userId: number, boardDto: CreateBoard) => {
 
 export const createBoardStar = async (userId: number, boardId: number) => {
   const data = await createBoardStarRequest(userId, boardId)
+  return transformClass(withStar(data, userId))
+}
+
+export const deleteBoardStar = async (userId: number, boardId: number) => {
+  const data = await deleteBoardStarRequest(userId, boardId)
   return transformClass(withStar(data, userId))
 }
 

@@ -11,6 +11,7 @@ import {
   createBoardRequest,
   getBoardsRequest,
   addStarRequest,
+  removeStarRequest,
 } from '../lib/client/boardRequest'
 
 export type State = {
@@ -107,6 +108,14 @@ export const useBoardsCore = (initialState?: Partial<State>) => {
     [dispatch],
   )
 
+  const removeStar = useCallback(
+    async (boardId: number) => {
+      const board = await removeStarRequest(boardId)
+      dispatch({ type: 'updateBoard', payload: { board } })
+    },
+    [dispatch],
+  )
+
   return {
     state,
     dispatchers: {
@@ -115,6 +124,7 @@ export const useBoardsCore = (initialState?: Partial<State>) => {
       startCreateBoard,
       endCreateBoard,
       addStar,
+      removeStar,
     },
   }
 }

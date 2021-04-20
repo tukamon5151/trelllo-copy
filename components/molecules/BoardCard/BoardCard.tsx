@@ -21,7 +21,7 @@ export interface Props extends AspectRatioProps {
 // ===
 // @view
 export const BoardCard: React.FC<Props> = ({ board, ...other }) => {
-  const { addStar } = useBoardsDispatch()
+  const { addStar, removeStar } = useBoardsDispatch()
   return (
     <AspectRatio ratio={16 / 9} overflow="hidden" borderRadius={3} {...other}>
       <Box
@@ -67,6 +67,7 @@ export const BoardCard: React.FC<Props> = ({ board, ...other }) => {
               position="absolute"
               bottom={2}
               right={2}
+              onClick={() => removeStar(board.id)}
               _hover={{
                 transform: 'scale(1.1)',
               }}

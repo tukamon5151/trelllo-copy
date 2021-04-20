@@ -42,3 +42,18 @@ export const createBoardStarRequest = async (
     include: { boardStarRelations: true },
   })
 }
+
+export const deleteBoardStarRequest = async (
+  userId: number,
+  boardId: number,
+): Promise<BoardWithStarRelation> => {
+  return await prisma.board.update({
+    where: { id: boardId },
+    data: {
+      boardStarRelations: {
+        delete: { boardId_userId: { userId, boardId } },
+      },
+    },
+    include: { boardStarRelations: true },
+  })
+}

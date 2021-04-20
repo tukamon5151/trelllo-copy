@@ -10,6 +10,7 @@ import { CreateBoard } from '../dto/board'
 import {
   createBoardRequest,
   getBoardsRequest,
+  addStarRequest,
 } from '../lib/client/boardRequest'
 
 export type State = {
@@ -32,6 +33,10 @@ type Action =
   | {
       type: 'endCreate'
     }
+  | {
+      type: 'updateBoard'
+      payload: { board: Board }
+    }
 
 const reducer: Reducer<State, Action> = (state: State, action: Action) => {
   switch (action.type) {
@@ -47,6 +52,14 @@ const reducer: Reducer<State, Action> = (state: State, action: Action) => {
       return { ...state, isCreating: true }
     case 'endCreate':
       return { ...state, isCreating: false }
+    case 'updateBoard': {
+      const boards = state.boards.map((board) => {
+        return board.id === action.payload.board.id
+          ? action.payload.board
+          : board
+      })
+      return { ...state, boards }
+    }
     default:
       throw new Error()
   }
@@ -86,6 +99,14 @@ export const useBoardsCore = (initialState?: Partial<State>) => {
     dispatch,
   ])
 
+  const addStar = useCallback(
+    async (boardId: number) => {
+      const board = await addStarRequest(boardId)
+      dispatch({ type: 'updateBoard', payload: { board } })
+    },
+    [dispatch],
+  )
+
   return {
     state,
     dispatchers: {
@@ -93,6 +114,7 @@ export const useBoardsCore = (initialState?: Partial<State>) => {
       initBoards,
       startCreateBoard,
       endCreateBoard,
+      addStar,
     },
   }
 }

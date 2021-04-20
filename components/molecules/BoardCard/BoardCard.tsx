@@ -9,6 +9,7 @@ import {
 } from '@chakra-ui/react'
 import { AiOutlineStar } from 'react-icons/ai'
 import { Board } from '../../../model/client/Bard'
+import { useBoardsDispatch } from '../../../hooks/useBoards'
 
 // ===
 // @interface
@@ -20,6 +21,7 @@ export interface Props extends AspectRatioProps {
 // ===
 // @view
 export const BoardCard: React.FC<Props> = ({ board, ...other }) => {
+  const { addStar } = useBoardsDispatch()
   return (
     <AspectRatio ratio={16 / 9} overflow="hidden" borderRadius={3} {...other}>
       <Box
@@ -79,6 +81,7 @@ export const BoardCard: React.FC<Props> = ({ board, ...other }) => {
               right={-10}
               transitionProperty="right"
               transitionDuration=".15s"
+              onClick={() => addStar(board.id)}
               _hover={{
                 transform: 'scale(1.1)',
               }}

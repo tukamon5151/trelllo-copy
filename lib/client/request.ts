@@ -9,7 +9,7 @@ export const get = async (url: string): Promise<unknown> => {
   return response.json()
 }
 
-export const post = async (url: string, body: BodyInit): Promise<unknown> => {
+export const post = async (url: string, body?: BodyInit): Promise<unknown> => {
   return await customFetch(url, 'post', { body })
 }
 

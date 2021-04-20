@@ -18,6 +18,8 @@ model Board {
   image  String?
   userId Int         @map(name: "user_id")
   User   User        @relation(fields: [userId], references: [id])
+  createdAt          DateTime  @default(now()) @map(name: "created_at")
+  updatedAt          DateTime  @default(now()) @map(name: "updated_at")
 
   @@map(name: "boards")
 }

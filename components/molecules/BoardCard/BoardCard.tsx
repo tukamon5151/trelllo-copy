@@ -21,13 +21,7 @@ export interface Props extends AspectRatioProps {
 // @view
 export const BoardCard: React.FC<Props> = ({ board, ...other }) => {
   return (
-    <AspectRatio
-      ratio={16 / 9}
-      overflow="hidden"
-      borderRadius={3}
-      w={40}
-      {...other}
-    >
+    <AspectRatio ratio={16 / 9} overflow="hidden" borderRadius={3} {...other}>
       <Box
         position="relative"
         bgImage={board.image ? `url(${board.image})` : ''}
@@ -35,6 +29,7 @@ export const BoardCard: React.FC<Props> = ({ board, ...other }) => {
         bgSize="cover"
         bgPosition="50%"
         cursor="pointer"
+        w="100%"
         _hover={{
           '> .boardBoxFade': {
             background: 'rgba(0,0,0,0.25)',

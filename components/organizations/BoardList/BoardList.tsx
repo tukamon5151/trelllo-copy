@@ -9,12 +9,12 @@ import {
   Box,
   Button,
   Flex,
-  Grid,
+  SimpleGrid,
 } from '@chakra-ui/react'
 import { AiOutlineStar } from 'react-icons/ai'
 import { useMemo } from 'react'
-import { BoardCard } from '../../molecules/BoardCard/BoardCard'
-import { useBardsPage } from '../../../hooks/useBoardsPage'
+import { BoardCard } from '../../molecules/BoardCard'
+import { useBoardsDispatch, useBoardsState } from '../../../hooks/useBoards'
 
 // ===
 // @interface
@@ -22,27 +22,28 @@ import { useBardsPage } from '../../../hooks/useBoardsPage'
 // ===
 // @view
 export const BoardList: React.FC<StackProps> = (props) => {
-  const { boards } = useBardsPage()
+  const { boards } = useBoardsState()
+  const { startCreateBoard } = useBoardsDispatch()
   const staredBoards = useMemo(() => boards.filter((board) => board.star), [
     boards,
   ])
 
   return (
-    <VStack spacing={5} {...props} align="start">
+    <VStack spacing={6} {...props} align="start">
       {staredBoards && (
-        <Box>
+        <Box w="100%">
           <Heading size="md" mb={3}>
             <Icon as={AiOutlineStar} mr={2} />
             スター付きボード
           </Heading>
-          <Grid templateColumns="repeat(3, 1fr)" gap={2}>
+          <SimpleGrid columns={3} spacing={2}>
             {staredBoards.map((board) => (
               <BoardCard board={board} key={board.id} />
             ))}
-          </Grid>
+          </SimpleGrid>
         </Box>
       )}
-      <Box>
+      <Box w="100%">
         <Heading size="md" mb={3}>
           <Flex alignItems="center">
             <Square
@@ -57,10 +58,18 @@ export const BoardList: React.FC<StackProps> = (props) => {
             パーソナルボード
           </Flex>
         </Heading>
-        <Grid templateColumns="repeat(3, 1fr)" gap={2}>
+        <SimpleGrid columns={3} spacing={2}>
           {boards &&
             boards.map((board) => <BoardCard board={board} key={board.id} />)}
-        </Grid>
+          <Button
+            colorScheme="gray"
+            w="100%"
+            h="100%"
+            onClick={startCreateBoard}
+          >
+            新しいボードを作成
+          </Button>
+        </SimpleGrid>
       </Box>
       <Box>
         <Button colorScheme="gray" color="black">

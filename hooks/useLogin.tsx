@@ -3,7 +3,7 @@ import { useSession } from 'next-auth/client'
 import { useRouter } from 'next/router'
 import { plainToClass } from 'class-transformer'
 import { CurrentUser } from '../model/client/CurrentUser'
-import { queryKey as callbackPathKey } from './useCallbackUrl'
+import { queryKey as callbackPathKey } from './useFriendlyForwadingUrl'
 
 export const useLogin = (): {
   currentUser: CurrentUser

@@ -5,7 +5,7 @@ import { Flex, useToast } from '@chakra-ui/react'
 import { IconChanger } from '../../molecules/IconChanger'
 import { ProfileTextForm } from '../../molecules/ProfileTextForm/ProfileTextForm'
 import { patchMe, patchIcon } from '../../../lib/client/userRequest'
-import { useMypage } from '../../../hooks/useMypage'
+import { useMeState, useMeDispatch } from '../../../hooks/useMe'
 import { Values } from './FormValues'
 import { validationSchema } from './validationSchema'
 
@@ -15,12 +15,13 @@ import { validationSchema } from './validationSchema'
 // ===
 // @view
 export const ProfileForm: React.FC = () => {
-  const { user, setUser } = useMypage()
+  const { user } = useMeState()
+  const { updateMe } = useMeDispatch()
   const toast = useToast()
 
   const onSubmit = async (data: Values) => {
     const user = await patchMe(data)
-    setUser(user)
+    updateMe(user)
     toast({
       title: '更新しました',
       status: 'success',
@@ -33,7 +34,7 @@ export const ProfileForm: React.FC = () => {
     const formData = new FormData()
     formData.append('file', file)
     const user = await patchIcon(formData)
-    setUser(user)
+    updateMe(user)
     toast({
       title: '更新しました',
       status: 'success',

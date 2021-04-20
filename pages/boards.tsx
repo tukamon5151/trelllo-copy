@@ -1,10 +1,13 @@
 // ===
 // @modules
 // ===
+import { NextPage } from 'next'
+import { useEffect } from 'react'
 import { useLogin } from '../hooks/useLogin'
-import { useBoards } from '../hooks/useBoards'
+import { useBoardsDispatch, useBoardsState } from '../hooks/useBoards'
 import { LoginLayout } from '../components/templates/LoginLayout/LoginLayout'
 import { Boards } from '../components/templates/Boards/Boards'
+import { getBoards } from '../lib/client/boardRequest'
 
 // ===
 // @Types
@@ -14,10 +17,16 @@ import { Boards } from '../components/templates/Boards/Boards'
 // @Component
 // ===
 
-const Bards: React.FC = () => {
+const Bards: NextPage = () => {
+  const { boards } = useBoardsState()
+  const { initBoards } = useBoardsDispatch()
+  useEffect(() => {
+    getBoards().then(initBoards)
+  }, [])
+
   return (
     <LoginLayout {...useLogin()}>
-      <Boards {...useBoards()} pt={10} />
+      <Boards boards={boards} pt={10} />
     </LoginLayout>
   )
 }

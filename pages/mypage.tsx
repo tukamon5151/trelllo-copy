@@ -2,10 +2,12 @@
 // @modules
 // ===
 import { NextPage } from 'next'
+import { useEffect } from 'react'
 import { Profile } from '../components/templates/Profile'
 import { useLogin } from '../hooks/useLogin'
-import { useUser } from '../hooks/useUser'
+import { useMeDispatch, useMeState } from '../hooks/useMe'
 import { LoginLayout } from '../components/templates/LoginLayout/LoginLayout'
+import { getMe } from '../lib/client/userRequest'
 
 // ===
 // @Component
@@ -13,10 +15,15 @@ import { LoginLayout } from '../components/templates/LoginLayout/LoginLayout'
 
 const Mypage: NextPage = () => {
   const { currentUser, loading } = useLogin()
-  const { user, setUser } = useUser()
+  const { user } = useMeState()
+  const { updateMe } = useMeDispatch()
+
+  useEffect(() => {
+    getMe().then(updateMe)
+  }, [])
   return (
     <LoginLayout currentUser={currentUser} loading={loading}>
-      <Profile user={user} setUser={setUser} />
+      <Profile user={user} />
     </LoginLayout>
   )
 }

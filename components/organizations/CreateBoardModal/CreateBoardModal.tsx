@@ -11,6 +11,7 @@ import { Formik, Form } from 'formik'
 import { CreateBoard } from '../../../dto/board'
 import { BoardPreviewForm } from '../../molecules/BoardPreviewForm'
 import { BoardCoverGridSelector } from '../../molecules/BoardCoverGridSelector'
+import { validationSchema } from './validationSchema'
 
 export type Props = {
   isOpen: boolean
@@ -29,11 +30,18 @@ export const CreateBoardModal: React.VFC<Props> = ({
     <Formik<CreateBoard>
       initialValues={{ title: '', color: 'green', image: undefined }}
       onSubmit={onSubmit}
+      validationSchema={validationSchema}
     >
-      {({ values }) => (
-        <Modal isOpen={isOpen} onClose={onClose}>
+      {({ values, resetForm, isValid }) => (
+        <Modal
+          isOpen={isOpen}
+          onClose={() => {
+            onClose()
+            resetForm()
+          }}
+        >
           <ModalOverlay />
-          <ModalContent>
+          <ModalContent bg="transparent">
             <Form>
               <Flex mb={2}>
                 <BoardPreviewForm
@@ -48,7 +56,7 @@ export const CreateBoardModal: React.VFC<Props> = ({
                   ml={2}
                 />
               </Flex>
-              <Button colorScheme="green" type="submit">
+              <Button colorScheme="green" type="submit" isDisabled={!isValid}>
                 ボードを作成
               </Button>
             </Form>

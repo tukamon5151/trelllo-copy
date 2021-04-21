@@ -43,7 +43,9 @@ export const BoardList: React.FC<StackProps> = (props) => {
           <SimpleGrid columns={3} spacing={2}>
             {staredBoards.map((board) => (
               <Link href={`/boards/${board.id}`} key={board.id}>
-                <BoardCard board={board} />
+                <a>
+                  <BoardCard board={board} />
+                </a>
               </Link>
             ))}
           </SimpleGrid>
@@ -68,7 +70,9 @@ export const BoardList: React.FC<StackProps> = (props) => {
           {boards &&
             boards.map((board) => (
               <Link href={`/boards/${board.id}`} key={board.id}>
-                <BoardCard board={board} />
+                <a>
+                  <BoardCard board={board} />
+                </a>
               </Link>
             ))}
           <Button

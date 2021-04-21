@@ -1,6 +1,6 @@
 import { Board, BoardStarRelation } from '@prisma/client'
 import { prisma } from '../prisma'
-import { CreateBoard } from '../../../dto/board'
+import { CreateBoard, UpdateBoard } from '../../../dto/board'
 
 export type BoardWithStarRelation = Board & {
   boardStarRelations: BoardStarRelation[]
@@ -22,6 +22,7 @@ export const getBoardRequest = async (
   return await prisma.board.findFirst({
     where: { id: boardId, userId },
     include: { boardStarRelations: true },
+    rejectOnNotFound: true,
   })
 }
 
@@ -34,6 +35,16 @@ export const createBoardRequest = async (
       ...createBoardDto,
       userId,
     },
+    include: { boardStarRelations: true },
+  })
+}
+
+export const updateBoardRequest = async (
+  dto: UpdateBoard,
+): Promise<BoardWithStarRelation> => {
+  return await prisma.board.update({
+    where: { id: dto.id },
+    data: { ...dto },
     include: { boardStarRelations: true },
   })
 }

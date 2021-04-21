@@ -39,7 +39,7 @@ type UpdateBoardResponse = {
 }
 export const updateBoardRequest = async (
   board: UpdateBoard,
-): Promise<ResponseBoard> => {
+): Promise<Board> => {
   const response = (await patchRequest(
     `/api/boards/${board.id}`,
     JSON.stringify({ board }),

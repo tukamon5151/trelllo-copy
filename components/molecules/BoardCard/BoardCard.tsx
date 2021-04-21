@@ -56,9 +56,11 @@ export const BoardCard: React.FC<Props> = ({ board, ...other }) => {
           isStar={board.star}
           position="absolute"
           bottom={2}
-          right={2}
+          right={board.star ? 2 : -10}
+          transition="right 0.15s"
           onAdd={() => addStar(board.id)}
           onRemove={() => removeStar(board.id)}
+          className={board.star ? '' : 'addStarIcon'}
         />
       </Box>
     </AspectRatio>

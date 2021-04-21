@@ -2,7 +2,6 @@ import { useEffect, useRef, useState } from 'react'
 import { Props } from './BoardTitleInput'
 
 export const useBoardTitleInput = ({ board, onBlur }: Props) => {
-  console.log(board)
   const [title, setTitle] = useState<string | undefined>(board.title)
   const [isInputting, setIsInputting] = useState<boolean>(false)
   const inputRef = useRef<HTMLInputElement>(null)

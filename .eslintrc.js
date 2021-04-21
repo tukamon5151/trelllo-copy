@@ -51,5 +51,6 @@ module.exports = {
     'react/react-in-jsx-scope': 'off',
     'react/jsx-filename-extension': ['error', { extensions: ['.jsx', '.tsx'] }],
     'import/order': ['error'],
+    'jsx-a11y/anchor-is-valid': ['off'],
   },
 }

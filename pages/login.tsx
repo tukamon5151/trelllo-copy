@@ -6,7 +6,7 @@ import { useSession } from 'next-auth/client'
 import { useEffect } from 'react'
 import { useRouter } from 'next/router'
 import { Login as LoginTemplate } from '../components/templates/Login'
-import { useFriendlyForwadingUrl } from '../hooks/useFriendlyForwadingUrl'
+import { useFriendlyForwadingUrl } from '../lib/client/hooks/useFriendlyForwadingUrl'
 
 // ===
 // @Types

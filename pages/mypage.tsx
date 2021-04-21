@@ -4,10 +4,10 @@
 import { NextPage } from 'next'
 import { useEffect } from 'react'
 import { Profile } from '../components/templates/Profile'
-import { useLogin } from '../hooks/useLogin'
-import { useMeDispatch, useMeState } from '../hooks/useMe'
+import { useLogin } from '../lib/client/hooks/useLogin'
+import { useMeDispatch, useMeState } from '../lib/client/hooks/useMe'
 import { LoginLayout } from '../components/templates/LoginLayout/LoginLayout'
-import { getMeRequest } from '../lib/client/userRequest'
+import { getMeRequest } from '../lib/client/requests/userRequest'
 
 // ===
 // @Component

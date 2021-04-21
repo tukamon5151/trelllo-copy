@@ -5,7 +5,7 @@ import {
   MeDispatchProvider,
   useMeCore,
   State,
-} from '../../hooks/useMe'
+} from '../../lib/client/hooks/useMe'
 
 // ===
 // @interface

@@ -5,7 +5,7 @@ import {
   createContext,
   Reducer,
 } from 'react'
-import { User } from '../model/client/User'
+import { User } from '../../../model/client/User'
 
 export type State = {
   user: User

@@ -5,14 +5,16 @@ import {
   useContext,
   useCallback,
 } from 'react'
-import { Board } from '../model/client/Bard'
-import { CreateBoard } from '../dto/board'
+import { Board } from '../../../model/client/Bard'
+import { CreateBoard } from '../../../dto/board'
 import {
   createBoardRequest,
   getBoardsRequest,
+  getBoardRequest,
   addStarRequest,
   removeStarRequest,
-} from '../lib/client/boardRequest'
+} from '../requests/boardRequest'
+import { findBoard } from '../selectors/board'
 
 export type State = {
   boards: Board[]
@@ -21,7 +23,7 @@ export type State = {
 
 type Action =
   | {
-      type: 'create'
+      type: 'addBoard'
       payload: { board: Board }
     }
   | {
@@ -41,7 +43,7 @@ type Action =
 
 const reducer: Reducer<State, Action> = (state: State, action: Action) => {
   switch (action.type) {
-    case 'create':
+    case 'addBoard':
       return {
         ...state,
         boards: [action.payload.board, ...state.boards],
@@ -81,7 +83,7 @@ export const useBoardsCore = (initialState?: Partial<State>) => {
   const createBoard = useCallback(
     async (boardDto: CreateBoard): Promise<void> => {
       const board = await createBoardRequest(boardDto)
-      dispatch({ type: 'create', payload: { board } })
+      dispatch({ type: 'addBoard', payload: { board } })
     },
     [dispatch],
   )
@@ -116,6 +118,19 @@ export const useBoardsCore = (initialState?: Partial<State>) => {
     [dispatch],
   )
 
+  const getBoard = useCallback(
+    async (boardId: number) => {
+      const board = await getBoardRequest(boardId)
+      findBoard(state.boards, board.id)
+        ? dispatch({
+            type: 'updateBoard',
+            payload: { board },
+          })
+        : dispatch({ type: 'addBoard', payload: { board } })
+    },
+    [dispatch],
+  )
+
   return {
     state,
     dispatchers: {
@@ -125,6 +140,7 @@ export const useBoardsCore = (initialState?: Partial<State>) => {
       endCreateBoard,
       addStar,
       removeStar,
+      getBoard,
     },
   }
 }

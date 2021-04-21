@@ -1,5 +1,5 @@
 import { plainToClass } from 'class-transformer'
-import { User } from '../../model/client/User'
+import { User } from '../../../model/client/User'
 import { patchRequest, getRequest } from './request'
 
 type ResponseType = {

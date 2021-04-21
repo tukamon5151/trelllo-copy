@@ -9,7 +9,7 @@ import {
   ModalBody,
   Text,
 } from '@chakra-ui/react'
-import { useCurrentUrl } from '../../../hooks/useCurrentUrl'
+import { useCurrentUrl } from '../../../lib/client/hooks/useCurrentUrl'
 import { GoogleLoginButton } from '../../molecules/GoogleLoginButton'
 
 // ===

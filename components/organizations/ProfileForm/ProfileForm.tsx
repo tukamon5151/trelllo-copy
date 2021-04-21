@@ -7,8 +7,8 @@ import { ProfileTextForm } from '../../molecules/ProfileTextForm/ProfileTextForm
 import {
   patchMeRequest,
   patchIconRequest,
-} from '../../../lib/client/userRequest'
-import { useMeState, useMeDispatch } from '../../../hooks/useMe'
+} from '../../../lib/client/requests/userRequest'
+import { useMeState, useMeDispatch } from '../../../lib/client/hooks/useMe'
 import { Values } from './FormValues'
 import { validationSchema } from './validationSchema'
 

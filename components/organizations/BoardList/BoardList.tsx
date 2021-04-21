@@ -14,7 +14,7 @@ import {
 import { AiOutlineStar } from 'react-icons/ai'
 import { useMemo } from 'react'
 import { BoardCard } from '../../molecules/BoardCard'
-import { useBoardsDispatch, useBoardsState } from '../../../hooks/useBoards'
+import { useBoardsDispatch, useBoardsState } from '../../../lib/client/hooks/useBoards'
 
 // ===
 // @interface

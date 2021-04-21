@@ -1,5 +1,6 @@
 // ===
 // @modules
+import Link from 'next/link'
 import {
   VStack,
   StackProps,
@@ -41,7 +42,9 @@ export const BoardList: React.FC<StackProps> = (props) => {
           </Heading>
           <SimpleGrid columns={3} spacing={2}>
             {staredBoards.map((board) => (
-              <BoardCard board={board} key={board.id} />
+              <Link href={`/boards/${board.id}`}>
+                <BoardCard board={board} key={board.id} />
+              </Link>
             ))}
           </SimpleGrid>
         </Box>
@@ -63,7 +66,11 @@ export const BoardList: React.FC<StackProps> = (props) => {
         </Heading>
         <SimpleGrid columns={3} spacing={2}>
           {boards &&
-            boards.map((board) => <BoardCard board={board} key={board.id} />)}
+            boards.map((board) => (
+              <Link href={`/boards/${board.id}`}>
+                <BoardCard board={board} key={board.id} />
+              </Link>
+            ))}
           <Button
             colorScheme="gray"
             w="100%"

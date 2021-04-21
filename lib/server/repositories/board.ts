@@ -15,6 +15,16 @@ export const getBoardsRequest = async (
   })
 }
 
+export const getBoardRequest = async (
+  userId: number,
+  boardId: number,
+): Promise<BoardWithStarRelation | null> => {
+  return await prisma.board.findFirst({
+    where: { id: boardId, userId },
+    include: { boardStarRelations: true },
+  })
+}
+
 export const createBoardRequest = async (
   userId: number,
   createBoardDto: CreateBoard,

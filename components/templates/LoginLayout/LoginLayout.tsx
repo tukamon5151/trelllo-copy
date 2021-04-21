@@ -2,7 +2,7 @@
 // @modules
 import { Spinner } from '@chakra-ui/react'
 import { Header } from '../../organizations/Header/Header'
-import { CurrentUserProvider } from '../../../hooks/useCurrentUser'
+import { CurrentUserProvider } from '../../../lib/client/hooks/useCurrentUser'
 import { CurrentUser } from '../../../model/client/CurrentUser'
 
 // ===

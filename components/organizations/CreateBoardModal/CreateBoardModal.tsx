@@ -8,15 +8,17 @@ import {
   Button,
 } from '@chakra-ui/react'
 import { Formik, Form } from 'formik'
+import { useRouter } from 'next/router'
 import { CreateBoard } from '../../../dto/board'
 import { BoardPreviewForm } from '../../molecules/BoardPreviewForm'
 import { BoardCoverGridSelector } from '../../molecules/BoardCoverGridSelector'
+import { Board } from '../../../model/client/Bard'
 import { validationSchema } from './validationSchema'
 
 export type Props = {
   isOpen: boolean
   onClose: () => void
-  onSubmit: (board: CreateBoard) => void
+  onSubmit: (board: CreateBoard) => Promise<Board>
 }
 
 // ===
@@ -26,10 +28,15 @@ export const CreateBoardModal: React.VFC<Props> = ({
   onClose,
   onSubmit,
 }) => {
+  const router = useRouter()
+
   return (
     <Formik<CreateBoard>
       initialValues={{ title: '', color: 'green', image: undefined }}
-      onSubmit={onSubmit}
+      onSubmit={async (values) => {
+        const board = await onSubmit(values)
+        router.push(`/boards/${board.id}`)
+      }}
       validationSchema={validationSchema}
     >
       {({ values, resetForm, isValid }) => (

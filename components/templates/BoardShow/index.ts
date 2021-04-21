@@ -1,0 +1,1 @@
+export { BoardShow } from './BoardShow'

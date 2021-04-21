@@ -9,7 +9,7 @@ import {
 } from '@chakra-ui/react'
 import { AiOutlineStar } from 'react-icons/ai'
 import { Board } from '../../../model/client/Bard'
-import { useBoardsDispatch } from '../../../hooks/useBoards'
+import { useBoardsDispatch } from '../../../lib/client/hooks/useBoards'
 
 // ===
 // @interface

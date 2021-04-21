@@ -1,4 +1,4 @@
-import { User } from '../../../hooks/useCurrentUser'
+import { User } from '../../../lib/client/hooks/useCurrentUser'
 import { Header, Props } from './Header'
 
 export default {

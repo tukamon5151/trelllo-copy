@@ -1,5 +1,6 @@
 // ===
 // @modules
+import Link from 'next/link'
 import {
   VStack,
   StackProps,
@@ -14,7 +15,10 @@ import {
 import { AiOutlineStar } from 'react-icons/ai'
 import { useMemo } from 'react'
 import { BoardCard } from '../../molecules/BoardCard'
-import { useBoardsDispatch, useBoardsState } from '../../../hooks/useBoards'
+import {
+  useBoardsDispatch,
+  useBoardsState,
+} from '../../../lib/client/hooks/useBoards'
 
 // ===
 // @interface
@@ -38,7 +42,9 @@ export const BoardList: React.FC<StackProps> = (props) => {
           </Heading>
           <SimpleGrid columns={3} spacing={2}>
             {staredBoards.map((board) => (
-              <BoardCard board={board} key={board.id} />
+              <Link href={`/boards/${board.id}`} key={board.id}>
+                <BoardCard board={board} />
+              </Link>
             ))}
           </SimpleGrid>
         </Box>
@@ -60,7 +66,11 @@ export const BoardList: React.FC<StackProps> = (props) => {
         </Heading>
         <SimpleGrid columns={3} spacing={2}>
           {boards &&
-            boards.map((board) => <BoardCard board={board} key={board.id} />)}
+            boards.map((board) => (
+              <Link href={`/boards/${board.id}`} key={board.id}>
+                <BoardCard board={board} />
+              </Link>
+            ))}
           <Button
             colorScheme="gray"
             w="100%"

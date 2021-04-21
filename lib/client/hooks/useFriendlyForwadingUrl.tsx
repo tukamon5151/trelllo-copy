@@ -1,5 +1,5 @@
 import { useRouter } from 'next/router'
-import { getAbsoluteUrl } from '../lib/getAbsoluteUrl'
+import { getAbsoluteUrl } from '../../getAbsoluteUrl'
 
 export const queryKey = 'callbackUrl'
 

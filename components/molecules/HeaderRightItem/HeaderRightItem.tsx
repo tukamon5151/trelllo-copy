@@ -4,7 +4,7 @@ import { Flex, FlexProps, Icon, Avatar } from '@chakra-ui/react'
 import { CgInfo, CgBell } from 'react-icons/cg'
 import { VscAdd } from 'react-icons/vsc'
 import { RoundSquareButton } from '../../atoms/RoundSquareButton'
-import { useCurrentUser } from '../../../hooks/useCurrentUser'
+import { useCurrentUser } from '../../../lib/client/hooks/useCurrentUser'
 
 // ===
 // @interface

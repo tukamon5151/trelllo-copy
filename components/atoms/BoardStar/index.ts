@@ -1,0 +1,1 @@
+export { BoardStar } from './BoardStar'

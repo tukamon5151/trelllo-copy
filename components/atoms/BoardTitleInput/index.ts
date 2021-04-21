@@ -1,0 +1,1 @@
+export { BoardTitleInput } from './BoardTitleInput'

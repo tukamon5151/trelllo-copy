@@ -4,20 +4,28 @@ import { Center, CenterProps } from '@chakra-ui/react'
 
 // ===
 // @interface
+interface Props extends CenterProps {
+  mode?: 'black' | 'white'
+}
 
 // ===
 // @view
-export const RoundBoxButton: React.FC<CenterProps> = (props) => {
+export const RoundBoxButton: React.FC<Props> = ({
+  mode = 'white',
+  ...other
+}) => {
   return (
     <Center
       borderRadius={3}
-      bg="hsla(0,0%,100%,.3)"
+      bg={`${mode}Alpha.400`}
       color="white"
       fontWeight="bold"
+      p={1}
+      cursor="pointer"
       _hover={{
-        background: 'hsla(0,0%,100%,.2)',
+        background: `${mode}Alpha.300`,
       }}
-      {...props}
+      {...other}
     />
   )
 }

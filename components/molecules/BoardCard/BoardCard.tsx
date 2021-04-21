@@ -1,15 +1,9 @@
 // ===
 // @modules
-import {
-  AspectRatio,
-  Text,
-  Box,
-  AspectRatioProps,
-  Icon,
-} from '@chakra-ui/react'
-import { AiOutlineStar } from 'react-icons/ai'
+import { AspectRatio, Text, Box, AspectRatioProps } from '@chakra-ui/react'
 import { Board } from '../../../model/client/Bard'
 import { useBoardsDispatch } from '../../../lib/client/hooks/useBoards'
+import { BoardStar } from '../../atoms/BoardStar'
 
 // ===
 // @interface
@@ -31,7 +25,6 @@ export const BoardCard: React.FC<Props> = ({ board, ...other }) => {
         bgSize="cover"
         bgPosition="50%"
         cursor="pointer"
-        w="100%"
         _hover={{
           '> .boardBoxFade': {
             background: 'rgba(0,0,0,0.25)',
@@ -59,36 +52,14 @@ export const BoardCard: React.FC<Props> = ({ board, ...other }) => {
         >
           {board.title}
         </Text>
-        <Box>
-          {board.star ? (
-            <Icon
-              as={AiOutlineStar}
-              color="yellow"
-              position="absolute"
-              bottom={2}
-              right={2}
-              onClick={() => removeStar(board.id)}
-              _hover={{
-                transform: 'scale(1.1)',
-              }}
-            />
-          ) : (
-            <Icon
-              as={AiOutlineStar}
-              color="white"
-              className="addStarIcon"
-              position="absolute"
-              bottom={2}
-              right={-10}
-              transitionProperty="right"
-              transitionDuration=".15s"
-              onClick={() => addStar(board.id)}
-              _hover={{
-                transform: 'scale(1.1)',
-              }}
-            />
-          )}
-        </Box>
+        <BoardStar
+          isStar={board.star}
+          position="absolute"
+          bottom={2}
+          right={2}
+          onAdd={() => addStar(board.id)}
+          onRemove={() => removeStar(board.id)}
+        />
       </Box>
     </AspectRatio>
   )

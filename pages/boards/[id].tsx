@@ -25,12 +25,12 @@ const Board: NextPage = () => {
   const { boards } = useBoardsState()
   const { getBoard } = useBoardsDispatch()
   const router = useRouter()
-  const boardId: number = parseInt(router.query.id as string)
-  const board = findBoard(boards, boardId)
+  const id = parseInt(router.query.id as string)
+  const board = findBoard(boards, id)
 
   useEffect(() => {
-    if (!board) getBoard(boardId)
-  }, [])
+    if (id && !board) getBoard(id)
+  }, [id])
 
   return (
     <LoginLayout {...useLogin()}>

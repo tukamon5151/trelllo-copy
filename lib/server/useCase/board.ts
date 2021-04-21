@@ -1,6 +1,7 @@
 import { plainToClass } from 'class-transformer'
 import {
   getBoardsRequest,
+  getBoardRequest,
   createBoardRequest,
   createBoardStarRequest,
   deleteBoardStarRequest,
@@ -13,22 +14,42 @@ export const getBoards = async (userId: number): Promise<ResponseBoard[]> => {
   return transformClass(withStar(data, userId)) as ResponseBoard[]
 }
 
-export const createBoard = async (userId: number, boardDto: CreateBoard): Promise<ResponseBoard> => {
+export const getBoard = async (
+  userId: number,
+  boardId: number,
+): Promise<ResponseBoard | void> => {
+  const data = await getBoardRequest(userId, boardId)
+  if (!data) return
+  return transformClass(withStar(data, userId)) as ResponseBoard
+}
+
+export const createBoard = async (
+  userId: number,
+  boardDto: CreateBoard,
+): Promise<ResponseBoard> => {
   const data = await createBoardRequest(userId, boardDto)
   return transformClass(withStar(data, userId)) as ResponseBoard
 }
 
-export const createBoardStar = async (userId: number, boardId: number): Promise<ResponseBoard> => {
+export const createBoardStar = async (
+  userId: number,
+  boardId: number,
+): Promise<ResponseBoard> => {
   const data = await createBoardStarRequest(userId, boardId)
   return transformClass(withStar(data, userId)) as ResponseBoard
 }
 
-export const deleteBoardStar = async (userId: number, boardId: number): Promise<ResponseBoard> => {
+export const deleteBoardStar = async (
+  userId: number,
+  boardId: number,
+): Promise<ResponseBoard> => {
   const data = await deleteBoardStarRequest(userId, boardId)
   return transformClass(withStar(data, userId)) as ResponseBoard
 }
 
-const transformClass = (boards: ReturnType<typeof withStar>): ResponseBoard | ResponseBoard[] => {
+const transformClass = (
+  boards: ReturnType<typeof withStar>,
+): ResponseBoard | ResponseBoard[] => {
   return plainToClass<ResponseBoard, typeof boards>(ResponseBoard, boards, {
     excludeExtraneousValues: true,
   })

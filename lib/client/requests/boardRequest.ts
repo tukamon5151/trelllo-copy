@@ -8,7 +8,7 @@ type GetBoardsResponse = {
 }
 
 export const getBoardsRequest = async (): Promise<Board[]> => {
-  const response = (await getRequest('api/boards')) as GetBoardsResponse
+  const response = (await getRequest('/api/boards')) as GetBoardsResponse
   return transformClass(response.boards) as Board[]
 }
 
@@ -17,7 +17,7 @@ type GetBoardResponse = {
 }
 
 export const getBoardRequest = async (boardId: number): Promise<Board> => {
-  const data = (await getRequest(`api/boards/${boardId}`)) as GetBoardResponse
+  const data = (await getRequest(`/api/boards/${boardId}`)) as GetBoardResponse
   return transformClass(data.board) as Board
 }
 
@@ -55,5 +55,7 @@ export const removeStarRequest = async (boardId: number): Promise<Board> => {
   return transformClass(response.board) as Board
 }
 
-const transformClass = (data: ResponseBoard | ResponseBoard[]): Board | Board[] =>
+const transformClass = (
+  data: ResponseBoard | ResponseBoard[],
+): Board | Board[] =>
   plainToClass(Board, data, { excludeExtraneousValues: true })

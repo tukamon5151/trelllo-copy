@@ -81,9 +81,10 @@ export const useBoardsCore = (initialState?: Partial<State>) => {
   )
 
   const createBoard = useCallback(
-    async (boardDto: CreateBoard): Promise<void> => {
+    async (boardDto: CreateBoard): Promise<Board> => {
       const board = await createBoardRequest(boardDto)
       dispatch({ type: 'addBoard', payload: { board } })
+      return board
     },
     [dispatch],
   )

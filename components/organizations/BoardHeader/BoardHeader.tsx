@@ -18,17 +18,15 @@ export interface Props extends FlexProps {
 // ===
 // @view
 export const BoardHeader: React.VFC<Props> = ({ board, ...other }) => {
-  const { addStar, removeStar } = useBoardsDispatch()
+  const { addStar, removeStar, updateBoard } = useBoardsDispatch()
   return (
     <Flex {...other}>
       <HStack>
         <BoardTitleInput
           mr={2}
           fontSize="lg"
-          title={board.title}
-          onBlur={async (value) => {
-            return { id: 1, title: 'hogehoge', color: 'green' } as Board
-          }}
+          board={board}
+          onBlur={updateBoard}
         />
         <RoundSquareButton size={8} mode="black">
           <BoardStar

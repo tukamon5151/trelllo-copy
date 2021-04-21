@@ -15,6 +15,6 @@ const Template = (args: Props): React.ReactElement => (
 
 export const Base = Template.bind({})
 Base.args = {
-  title: BoardShow.args.board.title,
+  board: BoardShow.args.board,
   onBlur: async () => BoardShow.args.board,
 }

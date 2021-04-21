@@ -3,11 +3,18 @@ export class ResponseBoard {
   @Expose() id: number
   @Expose() title: string
   @Expose() image?: string
-  @Expose() color?: 'red' | 'blue' | 'green'
+  @Expose() color?: BoardColor
   @Expose() star: boolean
 }
 
 export class CreateBoard {
+  @Expose() title: string
+  @Expose() image?: string
+  @Expose() color?: BoardColor
+}
+
+export class UpdateBoard {
+  @Expose() id: number
   @Expose() title: string
   @Expose() image?: string
   @Expose() color?: BoardColor

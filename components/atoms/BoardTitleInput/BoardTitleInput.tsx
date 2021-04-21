@@ -9,25 +9,25 @@ import { useBoardTitleInput } from './useBoardTitleInpu'
 // ===
 // @interface
 export interface Props extends Omit<InputProps, 'onBlur'> {
-  title: string
-  onBlur: (text?: string) => Promise<Board>
+  board: Board
+  onBlur: (board: Board) => Promise<Board>
 }
 
 // ===
 // @view
 export const BoardTitleInput: React.VFC<Props> = ({
-  title,
+  board,
   onBlur,
   ...other
 }) => {
   const {
-    value,
+    title,
     isInputting,
     inputRef,
     handleOnBlur,
     handleStartInput,
     handleOnChange,
-  } = useBoardTitleInput({ title, onBlur })
+  } = useBoardTitleInput({ board, onBlur })
 
   if (isInputting) {
     return (
@@ -38,7 +38,7 @@ export const BoardTitleInput: React.VFC<Props> = ({
           bgColor: 'white',
         }}
         {...other}
-        value={value}
+        value={title}
         onChange={handleOnChange}
         onBlur={handleOnBlur}
         ref={inputRef}

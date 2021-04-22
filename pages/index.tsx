@@ -1,32 +1,22 @@
 import Head from 'next/head'
 import { NextPage } from 'next'
-import { signOut, useSession } from 'next-auth/client'
-import { Spinner, Box, Button, List, ListItem, Avatar } from '@chakra-ui/react'
+import { useSession } from 'next-auth/client'
+import { Spinner } from '@chakra-ui/react'
 import { Top } from '../components/templates/Top'
+import { useEffect } from 'react'
+import { useRouter } from 'next/router'
 
 const Home: NextPage = () => {
   const [session, loading] = useSession()
-
-  if (session) {
-    const { user } = session
-    return (
-      <Box>
-        <Box mb={10}>ログインしてますねあなた</Box>
-        <List mb={10}>
-          <ListItem>email: {user.email}</ListItem>
-          <ListItem>name: {user.name}</ListItem>
-          <ListItem>
-            <Avatar src={user.image} name={user.name} />
-          </ListItem>
-        </List>
-        <Button onClick={() => signOut()}>ログアウト</Button>
-      </Box>
-    )
-  }
+  const router = useRouter()
 
   if (loading) {
     return <Spinner />
   }
+
+  useEffect(() => {
+    if (session) router.push('/boards')
+  }, [session, router])
 
   return (
     <>

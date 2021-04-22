@@ -7,6 +7,7 @@ import { useEffect } from 'react'
 import { useRouter } from 'next/router'
 import { Login as LoginTemplate } from '../components/templates/Login'
 import { useFriendlyForwadingUrl } from '../lib/client/hooks/useFriendlyForwadingUrl'
+import { Spinner } from '@chakra-ui/react'
 
 // ===
 // @Types
@@ -20,6 +21,8 @@ const Login: NextPage = () => {
   const [session, loading] = useSession()
   const router = useRouter()
   const callbackUrl = useFriendlyForwadingUrl()
+
+  if (loading) return <Spinner />
 
   useEffect(() => {
     if (session) router.push('/')

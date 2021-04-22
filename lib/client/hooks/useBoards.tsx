@@ -13,6 +13,7 @@ import {
   getBoardRequest,
   addStarRequest,
   removeStarRequest,
+  updateBoardRequest,
 } from '../requests/boardRequest'
 import { findBoard } from '../selectors/board'
 
@@ -119,6 +120,15 @@ export const useBoardsCore = (initialState?: Partial<State>) => {
     [dispatch],
   )
 
+  const updateBoard = useCallback(
+    async (board: Board) => {
+      const newBoard = await updateBoardRequest(board)
+      dispatch({ type: 'updateBoard', payload: { board: newBoard } })
+      return board
+    },
+    [dispatch],
+  )
+
   const getBoard = useCallback(
     async (boardId: number) => {
       const board = await getBoardRequest(boardId)
@@ -142,6 +152,7 @@ export const useBoardsCore = (initialState?: Partial<State>) => {
       addStar,
       removeStar,
       getBoard,
+      updateBoard,
     },
   }
 }

@@ -13,15 +13,15 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(function Input(
   { name, ...other },
   ref,
 ) {
-  if (!name) return <ChakraInput {...other} />
+  if (!name) return <ChakraInput {...other} ref={ref} />
 
   const [field, meta] = useField(name)
   return (
     <ChakraInput
-      isInvalid={!!meta.touched && !!meta.error}
-      ref={ref}
       {...field}
       {...other}
+      isInvalid={!!meta.touched && !!meta.error}
+      ref={ref}
     />
   )
 })

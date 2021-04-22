@@ -1,26 +1,32 @@
 // ===
 // @modules
+import { forwardRef } from 'react'
 import { Center, CenterProps } from '@chakra-ui/react'
 
 // ===
 // @interface
-
-// ===
-// @view
-export const RoundBoxButton: React.FC<CenterProps> = (props) => {
-  return (
-    <Center
-      borderRadius={3}
-      bg="hsla(0,0%,100%,.3)"
-      color="white"
-      fontWeight="bold"
-      _hover={{
-        background: 'hsla(0,0%,100%,.2)',
-      }}
-      {...props}
-    />
-  )
+interface Props extends CenterProps {
+  mode?: 'black' | 'white'
 }
 
 // ===
-// @styled
+// @view
+export const RoundBoxButton = forwardRef<HTMLDivElement, Props>(
+  function RoundBoxButton({ mode = 'white', ...other }, ref) {
+    return (
+      <Center
+        borderRadius={3}
+        bg={`${mode}Alpha.400`}
+        color="white"
+        fontWeight="bold"
+        p={1}
+        cursor="pointer"
+        ref={ref}
+        _hover={{
+          background: `${mode}Alpha.300`,
+        }}
+        {...other}
+      />
+    )
+  },
+)

@@ -1,5 +1,6 @@
 // ===
 // @modules
+import Link from 'next/link'
 import { Flex, FlexProps, Icon, Avatar } from '@chakra-ui/react'
 import { CgInfo, CgBell } from 'react-icons/cg'
 import { VscAdd } from 'react-icons/vsc'
@@ -25,7 +26,9 @@ export const HeaderRightItem: React.FC<FlexProps> = (props) => {
       <RoundSquareButton mr={1}>
         <Icon as={CgBell} w={8} />
       </RoundSquareButton>
-      <Avatar src={currentUser.image} size="sm" />
+      <Link href="/mypage">
+        <Avatar src={currentUser.image} size="sm" />
+      </Link>
     </Flex>
   )
 }

@@ -1,7 +1,7 @@
 import { plainToClass } from 'class-transformer'
 import { Board } from '../../../model/client/Bard'
-import { CreateBoard, ResponseBoard } from '../../../dto/board'
-import { deleteRequest, getRequest, postRequest } from './request'
+import { CreateBoard, ResponseBoard, UpdateBoard } from '../../../dto/board'
+import { deleteRequest, getRequest, patchRequest, postRequest } from './request'
 
 type GetBoardsResponse = {
   boards: ResponseBoard[]
@@ -31,6 +31,19 @@ export const createBoardRequest = async (
     '/api/boards',
     JSON.stringify({ board }),
   )) as CreateBoardResponse
+  return transformClass(response.board) as Board
+}
+
+type UpdateBoardResponse = {
+  board: ResponseBoard
+}
+export const updateBoardRequest = async (
+  board: UpdateBoard,
+): Promise<Board> => {
+  const response = (await patchRequest(
+    `/api/boards/${board.id}`,
+    JSON.stringify({ board }),
+  )) as UpdateBoardResponse
   return transformClass(response.board) as Board
 }
 

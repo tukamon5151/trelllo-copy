@@ -5,14 +5,23 @@
 // @interface
 import { Spinner, Box, BoxProps } from '@chakra-ui/react'
 import { Board } from '../../../model/client/Bard'
+import { BoardHeader } from '../../organizations/BoardHeader/BoardHeader'
+import { BoardBackground } from '../../atoms/BoardBackground'
+import { BoardBody } from '../../organizations/BoardBody'
 
-interface Props extends BoxProps {
+export interface Props extends BoxProps {
   board?: Board
 }
 
 // ===
 // @view
-export const BoardShow: React.VFC<Props> = ({ board }) => {
+export const BoardShow: React.VFC<Props> = ({ board, ...other }) => {
   if (!board) return <Spinner />
-  return <Box>{JSON.stringify(board)}</Box>
+  return (
+    <Box {...other}>
+      <BoardHeader board={board} mb={3} />
+      <BoardBody />
+      <BoardBackground board={board} />
+    </Box>
+  )
 }

@@ -1,5 +1,5 @@
-import { CreateListButton, Props } from './CreateListButton'
 import { Base as BoardShow } from '../../templates/BoardShow/BoardShow.stories'
+import { CreateListButton, Props } from './CreateListButton'
 
 export default {
   title: 'molecules/AddListButton',

@@ -1,21 +1,28 @@
 // ===
 // @modules
-import { Button } from '@chakra-ui/react'
+import { Button, Icon, Box, Collapse, BoxProps } from '@chakra-ui/react'
+import { IoMdAdd } from 'react-icons/io'
+import { CgClose } from 'react-icons/cg'
 import { CreateList } from '../../../dto/list'
-import { useCreateListButton } from './useCreateListButton'
 import { Input } from '../../atoms/Input'
+import { RoundBoxButton } from '../../atoms/RoundBoxButton/RoundBoxButton'
+import { useCreateListButton } from './useCreateListButton'
 
 // ===
 // @interface
 
-export interface Props {
+export interface Props extends Omit<BoxProps, 'onSubmit'> {
   boardId: number
-  onSubmit: (CreateList) => Promise<void>
+  onSubmit: (data: CreateList) => Promise<void>
 }
 
 // ===
 // @view
-export const CreateListButton: React.VFC<Props> = (props) => {
+export const CreateListButton: React.VFC<Props> = ({
+  boardId,
+  onSubmit: propsOnSubmit,
+  ...other
+}) => {
   const {
     state,
     inputRef,
@@ -23,16 +30,46 @@ export const CreateListButton: React.VFC<Props> = (props) => {
     onFinishCreation,
     onStartCreation,
     onSubmit,
-  } = useCreateListButton(props)
+  } = useCreateListButton({ boardId, onSubmit: propsOnSubmit })
 
-  if (state.isCreating) {
-    return (
-      <div>
-        <Input ref={inputRef} onChange={onChange} />
-        <Button onClick={onFinishCreation}>close</Button>
-        <Button onClick={onSubmit}>submit</Button>
-      </div>
-    )
-  }
-  return <Button onClick={onStartCreation}>hoge</Button>
+  const { isCreating, name } = state
+
+  return (
+    <>
+      <Box
+        p={isCreating ? 1 : 0}
+        bg={isCreating ? 'gray.100' : ''}
+        borderRadius={3}
+        {...other}
+      >
+        {!isCreating && (
+          <RoundBoxButton
+            mode="white"
+            onClick={onStartCreation}
+            {...other}
+            p={2}
+          >
+            <Icon as={IoMdAdd} w={8} mr={2} />
+            もう一つリストを追加
+          </RoundBoxButton>
+        )}
+        <Collapse in={isCreating} animateOpacity>
+          <Input
+            ref={inputRef}
+            onChange={onChange}
+            bg="white"
+            color="black"
+            fontWeight="bold"
+            mb={2}
+            value={name}
+            placeholder="リストのタイトルを入力"
+          />
+          <Button onClick={onSubmit} mr={1} colorScheme="green">
+            リストを追加
+          </Button>
+          <Icon as={CgClose} onClick={onFinishCreation} w={8} />
+        </Collapse>
+      </Box>
+    </>
+  )
 }

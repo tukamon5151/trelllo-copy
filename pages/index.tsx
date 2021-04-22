@@ -2,9 +2,9 @@ import Head from 'next/head'
 import { NextPage } from 'next'
 import { useSession } from 'next-auth/client'
 import { Spinner } from '@chakra-ui/react'
-import { Top } from '../components/templates/Top'
 import { useEffect } from 'react'
 import { useRouter } from 'next/router'
+import { Top } from '../components/templates/Top'
 
 const Home: NextPage = () => {
   const [session, loading] = useSession()

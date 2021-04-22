@@ -9,7 +9,7 @@ type CreateListResponse = {
 
 export const createListRequest = async (dto: CreateList): Promise<List> => {
   const response = (await postRequest(
-    '/api/lists',
+    `/api/boards/${dto.boardId}/lists`,
     JSON.stringify({ list: dto }),
   )) as CreateListResponse
   return transformClass(response.list) as List

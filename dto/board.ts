@@ -1,4 +1,5 @@
 import { Expose } from 'class-transformer'
+
 export class ResponseBoard {
   @Expose() id: number
   @Expose() title: string

@@ -8,16 +8,14 @@ import { AiOutlineStar } from 'react-icons/ai'
 
 export interface Props extends CenterProps {
   isStar: boolean
-  onAdd: React.MouseEventHandler
-  onRemove: React.MouseEventHandler
+  iconWidth?: string | number
 }
 
 // ===
 // @view
 export const BoardStar: React.VFC<Props> = ({
   isStar,
-  onAdd,
-  onRemove,
+  iconWidth = 8,
   ...other
 }) => {
   return (
@@ -25,7 +23,7 @@ export const BoardStar: React.VFC<Props> = ({
       <Icon
         as={AiOutlineStar}
         color={isStar ? 'yellow' : 'white'}
-        onClick={isStar ? onRemove : onAdd}
+        w={iconWidth}
         _hover={{
           transform: 'scale(1.1)',
         }}

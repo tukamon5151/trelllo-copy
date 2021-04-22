@@ -2,16 +2,22 @@
 // @modules
 import { BoardsProviderContainer } from './BoardProviderContainer'
 import { MeProviderContainer } from './MeProviderContainer'
+import { ListsProviderContainer } from './ListsProviderContainer'
 
 // ===
 // @interface
+type Props = {
+  children: React.ReactNode
+}
 
 // ===
 // @view
-export const BaseProvider: React.FC = ({ children }) => {
+export const BaseProvider: React.VFC<Props> = ({ children }) => {
   return (
-    <BoardsProviderContainer>
-      <MeProviderContainer>{children}</MeProviderContainer>
-    </BoardsProviderContainer>
+    <ListsProviderContainer>
+      <BoardsProviderContainer>
+        <MeProviderContainer>{children}</MeProviderContainer>
+      </BoardsProviderContainer>
+    </ListsProviderContainer>
   )
 }

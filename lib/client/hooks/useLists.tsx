@@ -7,21 +7,35 @@ import {
 } from 'react'
 import { List } from '../../../model/client/List'
 import { CreateList } from '../../../dto/list'
-import { createListRequest } from '../requests/listRequest'
+import { createListRequest, getListsRequest } from '../requests/listRequest'
+import { refreshByBoardId } from '../selectors/list'
 
 export type State = {
   lists: List[]
 }
 
-type Action = {
-  type: 'addList'
-  payload: { list: List }
-}
+type Action =
+  | {
+      type: 'addList'
+      payload: { list: List }
+    }
+  | {
+      type: 'updateListsByBoardId'
+      payload: { boardId: number; lists: List[] }
+    }
 
 const reducer: Reducer<State, Action> = (state, action) => {
   switch (action.type) {
     case 'addList':
       return { lists: [...state.lists, action.payload.list] }
+    case 'updateListsByBoardId': {
+      const lists = refreshByBoardId(
+        state.lists,
+        action.payload.lists,
+        action.payload.boardId,
+      )
+      return { lists }
+    }
     default:
       throw new Error()
   }
@@ -46,10 +60,19 @@ export const useListsCore = (initialState?: Partial<State>) => {
     [dispatch],
   )
 
+  const getListsByBoardId = useCallback(
+    async (boardId: number) => {
+      const lists = await getListsRequest(boardId)
+      dispatch({ type: 'updateListsByBoardId', payload: { boardId, lists } })
+    },
+    [dispatch],
+  )
+
   return {
     state,
     dispatchers: {
       createList,
+      getListsByBoardId,
     },
   }
 }

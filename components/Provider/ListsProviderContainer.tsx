@@ -18,7 +18,10 @@ interface Props {
 
 // ===
 // @view
-export const ListsProviderContainer: React.VFC<Props> = ({ children, initialState }) => {
+export const ListsProviderContainer: React.VFC<Props> = ({
+  children,
+  initialState,
+}) => {
   const { state, dispatchers } = useListsCore(initialState)
   return (
     <ListsStateProvider value={state}>
@@ -27,4 +30,4 @@ export const ListsProviderContainer: React.VFC<Props> = ({ children, initialStat
       </ListsDispatchProvider>
     </ListsStateProvider>
   )
-};
+}

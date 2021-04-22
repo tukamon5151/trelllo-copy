@@ -10,6 +10,7 @@ import {
   useBoardsDispatch,
   useBoardsState,
 } from '../../lib/client/hooks/useBoards'
+import { useListsDispatch } from '../../lib/client/hooks/useLists'
 import { findBoard } from '../../lib/client/selectors/board'
 import { BoardShow } from '../../components/templates/BoardShow'
 
@@ -24,12 +25,15 @@ import { BoardShow } from '../../components/templates/BoardShow'
 const Board: NextPage = () => {
   const { boards } = useBoardsState()
   const { getBoard } = useBoardsDispatch()
+  const { getListsByBoardId } = useListsDispatch()
   const router = useRouter()
   const id = parseInt(router.query.id as string)
   const board = findBoard(boards, id)
 
   useEffect(() => {
-    if (id && !board) getBoard(id)
+    if (id && !board) {
+      Promise.all([getBoard(id), getListsByBoardId(id)])
+    }
   }, [id])
 
   return (

@@ -5,7 +5,7 @@ import {
   useListsDispatch,
   useListsState,
 } from '../../../lib/client/hooks/useLists'
-import { filterBy } from '../../../lib/client/selectors/list'
+import { filterByBoardId } from '../../../lib/client/selectors/list'
 
 // ===
 // @interface
@@ -17,7 +17,7 @@ export interface Props {
 // ===
 // @view
 export const BoardBody: React.VFC<Props> = ({ boardId }) => {
-  const lists = filterBy(useListsState().lists, boardId)
+  const lists = filterByBoardId(useListsState().lists, boardId)
   const { createList } = useListsDispatch()
 
   return (

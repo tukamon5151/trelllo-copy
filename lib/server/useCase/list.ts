@@ -10,9 +10,7 @@ export const createList = async (
   return transformClass(data) as ResponseList
 }
 
-export const getLists = async (
-  boardId: number
-): Promise<ResponseList[]> => {
+export const getLists = async (boardId: number): Promise<ResponseList[]> => {
   const data = await getListsRequest(boardId)
   return transformClass(data) as ResponseList[]
 }

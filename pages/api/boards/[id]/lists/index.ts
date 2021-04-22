@@ -12,16 +12,18 @@ export default async function handle(
   if (!currentUser) return res.status(404).end()
 
   switch (req.method) {
-    case 'POST':
+    case 'POST': {
       const createDto = plainToClass(CreateList, JSON.parse(req.body).list, {
         excludeExtraneousValues: true,
       })
       const list = await createList(createDto)
       return res.status(200).json({ list })
-    case 'GET':
+    }
+    case 'GET': {
       const boardId = parseInt(req.query.id as string)
       const lists = await getLists(boardId)
       return res.status(200).json({ lists })
+    }
     default:
       res.status(404).end()
   }

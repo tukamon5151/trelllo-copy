@@ -1,7 +1,7 @@
 import { plainToClass } from 'class-transformer'
 import { List } from '../../../model/client/List'
 import { CreateList, ResponseList } from '../../../dto/list'
-import { postRequest } from './request'
+import { getRequest, postRequest } from './request'
 
 type CreateListResponse = {
   list: ResponseList
@@ -15,6 +15,17 @@ export const createListRequest = async (dto: CreateList): Promise<List> => {
   return transformClass(response.list) as List
 }
 
-const transformClass = (data: ResponseList): List | List[] => {
+type GetListsResponse = {
+  lists: ResponseList[]
+}
+
+export const getListsRequest = async (boardId: number): Promise<List[]> => {
+  const response = (await getRequest(
+    `/api/boards/${boardId}/lists`,
+  )) as GetListsResponse
+  return transformClass(response.lists) as List[]
+}
+
+const transformClass = (data: ResponseList | ResponseList[]): List | List[] => {
   return plainToClass(List, data, { excludeExtraneousValues: true })
 }

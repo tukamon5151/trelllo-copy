@@ -10,6 +10,6 @@ export const createListRequest = async (listDto: CreateList): Promise<List> => {
 
 export const getListsRequest = async (boardId: number): Promise<List[]> => {
   return await prisma.list.findMany({
-    where: { boardId }
+    where: { boardId },
   })
 }

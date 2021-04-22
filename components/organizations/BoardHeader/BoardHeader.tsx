@@ -21,6 +21,7 @@ export const BoardHeader: React.VFC<Props> = ({ board, ...other }) => {
   const { addStar, removeStar, updateBoard } = useBoardsDispatch()
   const onAddStar = () => addStar(board.id)
   const onRemoveStar = () => removeStar(board.id)
+  const baseColor = board.image ? 'black' : 'white'
   return (
     <Flex {...other}>
       <HStack>
@@ -29,17 +30,18 @@ export const BoardHeader: React.VFC<Props> = ({ board, ...other }) => {
           fontSize="lg"
           board={board}
           onBlur={updateBoard}
+          mode={baseColor}
         />
         <RoundSquareButton
           size={8}
-          mode="black"
+          mode={baseColor}
           onClick={board.star ? onRemoveStar : onAddStar}
         >
           <BoardStar iconWidth={8} isStar={board.star} />
         </RoundSquareButton>
       </HStack>
       <Spacer />
-      <RoundBoxButton h={8} mode="black">
+      <RoundBoxButton h={8} mode={baseColor}>
         ...ボードメニューの表示
       </RoundBoxButton>
     </Flex>

@@ -21,10 +21,11 @@ export const useBoardShow = () => {
   const board: Board | undefined = findBoard(boards, boardId)
 
   useEffect(() => {
+    if (!boardId) return
     const getBoardPromise = !board
       ? getBoard(boardId)
       : new Promise(() => undefined)
-    const getListsPromise = !lists
+    const getListsPromise = !lists.length
       ? getLists(boardId)
       : new Promise(() => undefined)
     Promise.all([getBoardPromise, getListsPromise])

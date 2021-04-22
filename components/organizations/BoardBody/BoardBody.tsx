@@ -1,11 +1,12 @@
 // ===
 // @modules
-import { HStack, Button, Box } from '@chakra-ui/react'
+import { HStack, Button } from '@chakra-ui/react'
 import {
   useListsDispatch,
   useListsState,
 } from '../../../lib/client/hooks/useLists'
 import { filterByBoardId } from '../../../lib/client/selectors/list'
+import { ListComponent } from '../ListComponent'
 
 // ===
 // @interface
@@ -21,9 +22,9 @@ export const BoardBody: React.VFC<Props> = ({ boardId }) => {
   const { createList } = useListsDispatch()
 
   return (
-    <HStack spacing={2}>
+    <HStack spacing={2} p={2}>
       {lists.map((list) => (
-        <Box key={list.id}>{list.name}</Box>
+        <ListComponent list={list} key={list.id} w={60} />
       ))}
       <Button onClick={() => createList({ name: 'hoge', boardId })}>
         +もう一つのリストを追加

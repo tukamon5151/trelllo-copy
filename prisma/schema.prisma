@@ -19,9 +19,10 @@ model Board {
   userId             Int                 @map(name: "user_id")
   user               User                @relation(fields: [userId], references: [id])
   starUsers          User[]              @relation("_board_stars")
+  boardStarRelations BoardStarRelation[]
+  lists List[]
   createdAt          DateTime            @default(now()) @map(name: "created_at")
   updatedAt          DateTime            @default(now()) @map(name: "updated_at")
-  boardStarRelations BoardStarRelation[]
 
   @@map(name: "boards")
 }
@@ -46,6 +47,17 @@ model BoardStarRelation {
 
   @@id([boardId, userId])
   @@map(name: "_board_star_relations")
+}
+
+model List {
+  id        Int      @id @default(autoincrement())
+  name      String
+  boardId   Int      @map("board_id")
+  board     Board    @relation(fields: [boardId], references: [id])
+  createdAt DateTime @default(now()) @map(name: "created_at")
+  updatedAt DateTime @default(now()) @map(name: "updated_at")
+
+  @@map(name: "lists")
 }
 
 model Account {
@@ -81,16 +93,16 @@ model Session {
 }
 
 model User {
-  id                Int                 @id @default(autoincrement())
-  name              String?
-  email             String?             @unique
-  emailVerified     DateTime?           @map(name: "email_verified")
-  image             String?
-  introduction      String?
-  createdAt         DateTime            @default(now()) @map(name: "created_at")
-  updatedAt         DateTime            @default(now()) @map(name: "updated_at")
-  starBoards        Board[]             @relation("_board_stars")
-  boards            Board[]
+  id                 Int                 @id @default(autoincrement())
+  name               String?
+  email              String?             @unique
+  emailVerified      DateTime?           @map(name: "email_verified")
+  image              String?
+  introduction       String?
+  createdAt          DateTime            @default(now()) @map(name: "created_at")
+  updatedAt          DateTime            @default(now()) @map(name: "updated_at")
+  starBoards         Board[]             @relation("_board_stars")
+  boards             Board[]
   boardStarRelations BoardStarRelation[]
 
   @@map(name: "users")

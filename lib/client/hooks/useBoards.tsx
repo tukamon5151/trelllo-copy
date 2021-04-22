@@ -6,7 +6,7 @@ import {
   useCallback,
 } from 'react'
 import { Board } from '../../../model/client/Bard'
-import { CreateBoard } from '../../../dto/board'
+import { CreateBoard, UpdateBoard } from '../../../dto/board'
 import {
   createBoardRequest,
   getBoardsRequest,
@@ -76,7 +76,7 @@ const createInitialState = (initialState?: Partial<State>): State => ({
 })
 
 export const useBoardsCore = (initialState?: Partial<State>) => {
-  const [state, dispatch] = useReducer<Reducer<State, Action>>(
+  const [state, dispatch] = useReducer(
     reducer,
     createInitialState(initialState),
   )
@@ -121,7 +121,7 @@ export const useBoardsCore = (initialState?: Partial<State>) => {
   )
 
   const updateBoard = useCallback(
-    async (board: Board) => {
+    async (board: UpdateBoard) => {
       const newBoard = await updateBoardRequest(board)
       dispatch({ type: 'updateBoard', payload: { board: newBoard } })
       return board

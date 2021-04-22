@@ -38,14 +38,13 @@ export const useListsCore = (initialState?: Partial<State>) => {
     createInitialState(initialState),
   )
 
-  const createList = () =>
-    useCallback(
-      async (listDto: CreateList) => {
-        const list = await createListRequest(listDto)
-        dispatch({ type: 'addList', payload: { list } })
-      },
-      [dispatch],
-    )
+  const createList = useCallback(
+    async (listDto: CreateList) => {
+      const list = await createListRequest(listDto)
+      dispatch({ type: 'addList', payload: { list } })
+    },
+    [dispatch],
+  )
 
   return {
     state,
@@ -59,7 +58,8 @@ type Dispatchers = TypeUtil.Dispatchers<typeof useListsCore>
 
 const ListsStateContext = createContext<State>({ lists: [] })
 export const ListsStateProvider = ListsStateContext.Provider
-export const useListsState = useContext<State>(ListsStateContext)
+export const useListsState = () => useContext<State>(ListsStateContext)
 const ListsDispatchContext = createContext<Dispatchers>({} as Dispatchers)
 export const ListsDispatchProvider = ListsDispatchContext.Provider
-export const useListsDispatch = useContext<Dispatchers>(ListsDispatchContext)
+export const useListsDispatch = () =>
+  useContext<Dispatchers>(ListsDispatchContext)

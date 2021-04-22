@@ -7,3 +7,9 @@ export const createListRequest = async (listDto: CreateList): Promise<List> => {
     data: listDto,
   })
 }
+
+export const getListsRequest = async (boardId: number): Promise<List[]> => {
+  return await prisma.list.findMany({
+    where: { boardId }
+  })
+}

@@ -5,9 +5,9 @@ import { NextPage } from 'next'
 import { useSession } from 'next-auth/client'
 import { useEffect } from 'react'
 import { useRouter } from 'next/router'
+import { Spinner } from '@chakra-ui/react'
 import { Login as LoginTemplate } from '../components/templates/Login'
 import { useFriendlyForwadingUrl } from '../lib/client/hooks/useFriendlyForwadingUrl'
-import { Spinner } from '@chakra-ui/react'
 
 // ===
 // @Types

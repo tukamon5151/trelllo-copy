@@ -62,7 +62,5 @@ export const deleteBoardStar = async (
 const transformClass = (
   boards: ReturnType<typeof withStar>,
 ): ResponseBoard | ResponseBoard[] => {
-  return plainToClass<ResponseBoard, typeof boards>(ResponseBoard, boards, {
-    excludeExtraneousValues: true,
-  })
+  return plainToClass(ResponseBoard, boards, { excludeExtraneousValues: true })
 }

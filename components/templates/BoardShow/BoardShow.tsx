@@ -20,7 +20,7 @@ export const BoardShow: React.VFC<Props> = ({ board, ...other }) => {
   return (
     <Box {...other}>
       <BoardHeader board={board} mb={3} />
-      <BoardBody />
+      <BoardBody boardId={board.id} />
       <BoardBackground board={board} />
     </Box>
   )

@@ -5,18 +5,9 @@ import {
   Flex,
   Heading,
   BoxProps,
-  useDisclosure,
-  Popover,
-  PopoverTrigger,
-  PopoverArrow,
-  PopoverBody,
-  PopoverCloseButton,
-  PopoverContent,
-  PopoverHeader,
 } from '@chakra-ui/react'
 import { List } from '../../../model/client/List'
-import { useListsDispatch } from '../../../lib/client/hooks/useLists'
-import { ListMenuIcon } from '../../atoms/ListMenuIcon'
+import { ListMenuPopover } from '../../molecules/ListMenuPopover/ListMenuPopover'
 
 // ===
 // @interface
@@ -28,42 +19,13 @@ export interface Props extends BoxProps {
 // ===
 // @view
 export const ListComponent: React.VFC<Props> = ({ list, ...other }) => {
-  const { onOpen, onClose, isOpen } = useDisclosure()
-  const { archiveList } = useListsDispatch()
-
   return (
     <Box borderRadius={3} bg="gray.100" p={2} {...other}>
       <Flex alignItems="center">
         <Heading flex={1} size="sm">
           {list.name}
         </Heading>
-        <Popover
-          isOpen={isOpen}
-          onOpen={onOpen}
-          onClose={onClose}
-          placement="right"
-        >
-          <PopoverTrigger>
-            <ListMenuIcon w={8} color="gray.500" />
-          </PopoverTrigger>
-          <PopoverContent>
-            <PopoverArrow />
-            <PopoverCloseButton />
-            <PopoverHeader>リスト操作</PopoverHeader>
-            <PopoverBody>
-              <Flex direction="column">
-                <Box
-                  onClick={() => archiveList(list.id)}
-                  _hover={{
-                    bg: 'gray.200',
-                  }}
-                >
-                  このリストをアーカイブ
-                </Box>
-              </Flex>
-            </PopoverBody>
-          </PopoverContent>
-        </Popover>
+        <ListMenuPopover listId={list.id} />
       </Flex>
     </Box>
   )

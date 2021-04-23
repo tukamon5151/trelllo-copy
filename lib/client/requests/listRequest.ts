@@ -30,7 +30,7 @@ type UpdateListResponse = {
   list: ResponseList
 }
 
-export const updateList = async (dto: UpdateList): Promise<List> => {
+export const updateListRequest = async (dto: UpdateList): Promise<List> => {
   const response = (await patchRequest(
     `api/lists/${dto.id}`,
     JSON.stringify({ list: dto }),

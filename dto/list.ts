@@ -7,9 +7,9 @@ export class CreateList {
 
 export class UpdateList {
   @Expose() id: number
-  @Expose() name: string
-  @Expose() boardId: number
-  @Expose() closed: boolean
+  @Expose() name?: string
+  @Expose() boardId?: number
+  @Expose() closed?: boolean
 }
 
 export class ResponseList {

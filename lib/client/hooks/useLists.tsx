@@ -6,8 +6,12 @@ import {
   useCallback,
 } from 'react'
 import { List } from '../../../model/client/List'
-import { CreateList } from '../../../dto/list'
-import { createListRequest, getListsRequest } from '../requests/listRequest'
+import { CreateList, UpdateList } from '../../../dto/list'
+import {
+  createListRequest,
+  getListsRequest,
+  updateListRequest,
+} from '../requests/listRequest'
 import { refreshByBoardId } from '../selectors/list'
 
 export type State = {
@@ -23,6 +27,10 @@ type Action =
       type: 'updateListsByBoardId'
       payload: { boardId: number; lists: List[] }
     }
+  | {
+      type: 'updateList'
+      payload: { list: List }
+    }
 
 const reducer: Reducer<State, Action> = (state, action) => {
   switch (action.type) {
@@ -33,6 +41,12 @@ const reducer: Reducer<State, Action> = (state, action) => {
         state.lists,
         action.payload.lists,
         action.payload.boardId,
+      )
+      return { lists }
+    }
+    case 'updateList': {
+      const lists = state.lists.map((list) =>
+        list.id === action.payload.list.id ? action.payload.list : list,
       )
       return { lists }
     }
@@ -68,11 +82,20 @@ export const useListsCore = (initialState?: Partial<State>) => {
     [dispatch],
   )
 
+  const updateList = useCallback(
+    async (dto: UpdateList) => {
+      const list = await updateListRequest(dto)
+      dispatch({ type: 'updateList', payload: { list } })
+    },
+    [dispatch],
+  )
+
   return {
     state,
     dispatchers: {
       createList,
       getListsByBoardId,
+      updateList,
     },
   }
 }

@@ -1,63 +1,45 @@
 // ===
 // @modules
-import { InputProps } from '@chakra-ui/react'
-import { Input } from '../Input'
-import { Board } from '../../../model/client/Bard'
+import { CenterProps } from '@chakra-ui/react'
 import { RoundBoxButton } from '../RoundBoxButton/RoundBoxButton'
-import { useBoardTitleInput } from './useBoardTitleInpu'
-import { UpdateBoard } from '../../../dto/board'
+import { Editable, EditablePreview, EditableInput } from '@chakra-ui/react'
+import { useState } from 'react'
+import { isNotEmptyString, NotEmptyString } from '../../../lib/isNotEmptyString'
 
 // ===
 // @interface
-export interface Props extends Omit<InputProps, 'onBlur'> {
-  board: Board
-  onBlur: (dto: UpdateBoard) => Promise<Board>
+export interface Props extends Omit<CenterProps, 'onSubmit'> {
   mode?: 'black' | 'white'
+  title: string
+  updateTitle: <T extends string>(title: NotEmptyString<T>) => void | Promise<void>
 }
 
 // ===
 // @view
 export const BoardTitleInput: React.VFC<Props> = ({
-  board,
-  onBlur,
   mode = 'black',
+  updateTitle,
+  title,
   ...other
 }) => {
-  const {
-    title,
-    isInputting,
-    inputRef,
-    handleOnBlur,
-    handleStartInput,
-    handleOnChange,
-  } = useBoardTitleInput({ board, onBlur })
-
-  if (isInputting) {
-    return (
-      <Input
-        variant="unstyled"
-        fontWeight="bold"
-        _focus={{
-          bgColor: 'white',
-        }}
-        {...other}
-        value={title}
-        onChange={handleOnChange}
-        onBlur={handleOnBlur}
-        ref={inputRef}
-      />
-    )
+  const [value, setValue] = useState(title)
+  const onSubmit = (value: string) => {
+    if (isNotEmptyString(value)) return updateTitle(value)
+    setValue(title)
   }
 
   return (
-    <RoundBoxButton
-      bg="transparent"
-      color={mode}
-      onClick={handleStartInput}
-      mode={mode}
-      {...other}
-    >
-      {title}
+    <RoundBoxButton color={mode} mode={mode} {...other}>
+      <Editable
+        defaultValue={title}
+        value={value}
+        onChange={setValue}
+        onSubmit={onSubmit}
+        colorScheme={`${mode}Alpha`}
+      >
+        <EditableInput />
+        <EditablePreview />
+      </Editable>
     </RoundBoxButton>
   )
 }

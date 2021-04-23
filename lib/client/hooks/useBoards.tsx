@@ -124,7 +124,6 @@ export const useBoardsCore = (initialState?: Partial<State>) => {
     async (dto: UpdateBoard) => {
       const board = await updateBoardRequest(dto)
       dispatch({ type: 'updateBoard', payload: { board } })
-      return board
     },
     [dispatch],
   )

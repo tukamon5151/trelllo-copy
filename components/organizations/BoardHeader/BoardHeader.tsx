@@ -7,6 +7,7 @@ import { Board } from '../../../model/client/Bard'
 import { BoardStar } from '../../atoms/BoardStar'
 import { useBoardsDispatch } from '../../../lib/client/hooks/useBoards'
 import { BoardTitleInput } from '../../atoms/BoardTitleInput'
+import { NotEmptyString } from '../../../lib/isNotEmptyString'
 
 // ===
 // @interface
@@ -21,21 +22,22 @@ export const BoardHeader: React.VFC<Props> = ({ board, ...other }) => {
   const { addStar, removeStar, updateBoard } = useBoardsDispatch()
   const onAddStar = () => addStar(board.id)
   const onRemoveStar = () => removeStar(board.id)
+  const updateTitle = <T extends string>(title: NotEmptyString<T>) =>
+    updateBoard({ id: board.id, title })
   const baseColor = board.image ? 'black' : 'white'
+
   return (
-    <Flex p={2} {...other}>
+    <Flex p={2} alignItems="center" {...other}>
       <BoardTitleInput
         mr={2}
-        fontSize="lg"
-        board={board}
-        onBlur={updateBoard}
+        title={board.title}
         mode={baseColor}
+        updateTitle={updateTitle}
       />
       <RoundSquareButton
-        size={8}
+        size={9}
         mode={baseColor}
         onClick={board.star ? onRemoveStar : onAddStar}
-        mr={2}
       >
         <BoardStar iconWidth={8} isStar={board.star} />
       </RoundSquareButton>

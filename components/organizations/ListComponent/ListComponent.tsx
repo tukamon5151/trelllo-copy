@@ -4,7 +4,6 @@ import {
   Box,
   Flex,
   Heading,
-  Icon,
   BoxProps,
   useDisclosure,
   Popover,
@@ -15,9 +14,9 @@ import {
   PopoverContent,
   PopoverHeader,
 } from '@chakra-ui/react'
-import { BiDotsHorizontal } from 'react-icons/bi'
 import { List } from '../../../model/client/List'
 import { useListsDispatch } from '../../../lib/client/hooks/useLists'
+import { ListMenuIcon } from '../../atoms/ListMenuIcon'
 
 // ===
 // @interface
@@ -45,7 +44,7 @@ export const ListComponent: React.VFC<Props> = ({ list, ...other }) => {
           placement="right"
         >
           <PopoverTrigger>
-            <Icon as={BiDotsHorizontal} w={8} color="gray.500" />
+            <ListMenuIcon w={8} color="gray.500" />
           </PopoverTrigger>
           <PopoverContent>
             <PopoverArrow />

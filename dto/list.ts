@@ -5,7 +5,7 @@ export class CreateList {
   @Expose() boardId: number
 }
 
-export class UpadteList {
+export class UpdateList {
   @Expose() id: number
   @Expose() name: string
   @Expose() boardId: number

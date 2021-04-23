@@ -1,6 +1,6 @@
 // ===
 // @modules
-import { Button, Icon, Box, Collapse, BoxProps } from '@chakra-ui/react'
+import { Button, Icon, Box, Collapse, BoxProps, Text } from '@chakra-ui/react'
 import { IoMdAdd } from 'react-icons/io'
 import { CgClose } from 'react-icons/cg'
 import { CreateList } from '../../../dto/list'
@@ -50,7 +50,7 @@ export const CreateListButton: React.VFC<Props> = ({
             p={2}
           >
             <Icon as={IoMdAdd} w={8} mr={2} />
-            もう一つリストを追加
+            <Text size="sm">もう一つリストを追加</Text>
           </RoundBoxButton>
         )}
         <Collapse in={isCreating} animateOpacity>

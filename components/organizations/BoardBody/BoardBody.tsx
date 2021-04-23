@@ -1,6 +1,6 @@
 // ===
 // @modules
-import { HStack } from '@chakra-ui/react'
+import { HStack, StackProps, Box } from '@chakra-ui/react'
 import {
   useListsDispatch,
   useListsState,
@@ -12,22 +12,24 @@ import { CreateListButton } from '../../molecules/CreateListButton'
 // ===
 // @interface
 
-export interface Props {
+export interface Props extends StackProps {
   boardId: number
 }
 
 // ===
 // @view
-export const BoardBody: React.VFC<Props> = ({ boardId }) => {
+export const BoardBody: React.VFC<Props> = ({ boardId, ...other }) => {
   const lists = filterByBoardId(useListsState().lists, boardId)
   const { createList } = useListsDispatch()
 
   return (
-    <HStack spacing={2} p={2} align="start">
+    <HStack spacing={2} p={2} align="start" overflowX="auto" {...other}>
       {lists.map((list) => (
-        <ListComponent list={list} key={list.id} w={60} />
+        <ListComponent list={list} key={list.id} minW={60} />
       ))}
-      <CreateListButton boardId={boardId} onSubmit={createList} w={60} />
+      <Box pr={2}>
+        <CreateListButton boardId={boardId} onSubmit={createList} minW={60} />
+      </Box>
     </HStack>
   )
 }

@@ -11,6 +11,7 @@ import { useBoardTitleInput } from './useBoardTitleInpu'
 export interface Props extends Omit<InputProps, 'onBlur'> {
   board: Board
   onBlur: (board: Board) => Promise<Board>
+  mode?: 'black' | 'white'
 }
 
 // ===
@@ -18,6 +19,7 @@ export interface Props extends Omit<InputProps, 'onBlur'> {
 export const BoardTitleInput: React.VFC<Props> = ({
   board,
   onBlur,
+  mode = 'black',
   ...other
 }) => {
   const {
@@ -49,9 +51,9 @@ export const BoardTitleInput: React.VFC<Props> = ({
   return (
     <RoundBoxButton
       bg="transparent"
-      color="black"
+      color={mode}
       onClick={handleStartInput}
-      mode="black"
+      mode={mode}
       {...other}
     >
       {title}

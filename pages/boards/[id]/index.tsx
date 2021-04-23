@@ -1,6 +1,7 @@
 // ===
 // @modules
 // ===
+import { Box } from '@chakra-ui/react'
 import { NextPage } from 'next'
 import { useLogin } from '../../../lib/client/hooks/useLogin'
 import { LoginLayout } from '../../../components/templates/LoginLayout/LoginLayout'
@@ -17,9 +18,11 @@ import { useBoardShow } from './useBoardShow'
 
 const Board: NextPage = () => {
   return (
-    <LoginLayout {...useLogin()}>
-      <BoardShow {...useBoardShow()} />
-    </LoginLayout>
+    <Box h="100vh">
+      <LoginLayout {...useLogin()}>
+        <BoardShow {...useBoardShow()} />
+      </LoginLayout>
+    </Box>
   )
 }
 

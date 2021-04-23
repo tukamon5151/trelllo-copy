@@ -1,6 +1,6 @@
 // ===
 // @modules
-import { Spinner } from '@chakra-ui/react'
+import { Spinner, Flex } from '@chakra-ui/react'
 import { Header } from '../../organizations/Header/Header'
 import { CurrentUserProvider } from '../../../lib/client/hooks/useCurrentUser'
 import { CurrentUser } from '../../../model/client/CurrentUser'
@@ -23,8 +23,10 @@ export const LoginLayout: React.FC<Props> = ({
 
   return (
     <CurrentUserProvider value={currentUser}>
-      <Header />
-      {children}
+      <Flex height="100%" direction="column">
+        <Header />
+        {children}
+      </Flex>
     </CurrentUserProvider>
   )
 }

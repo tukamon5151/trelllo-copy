@@ -3,7 +3,7 @@
 
 // ===
 // @interface
-import { Spinner, Box, BoxProps } from '@chakra-ui/react'
+import { Spinner, BoxProps, Flex, Portal } from '@chakra-ui/react'
 import { Board } from '../../../model/client/Bard'
 import { BoardHeader } from '../../organizations/BoardHeader/BoardHeader'
 import { BoardBackground } from '../../atoms/BoardBackground'
@@ -18,10 +18,14 @@ export interface Props extends BoxProps {
 export const BoardShow: React.VFC<Props> = ({ board, ...other }) => {
   if (!board) return <Spinner />
   return (
-    <Box {...other}>
-      <BoardHeader board={board} mb={3} />
-      <BoardBody boardId={board.id} />
-      <BoardBackground board={board} />
-    </Box>
+    <Flex flex={1} direction="column" {...other}>
+      <BoardHeader board={board} w="100%" mb={3} />
+      <Flex position="relative" flex={1}>
+        <BoardBody flex={1} boardId={board.id} />
+      </Flex>
+      <Portal>
+        <BoardBackground board={board} />
+      </Portal>
+    </Flex>
   )
 }

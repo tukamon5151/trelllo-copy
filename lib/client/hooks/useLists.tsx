@@ -76,7 +76,10 @@ export const useListsCore = (initialState?: Partial<State>) => {
 
   const getListsByBoardId = useCallback(
     async (boardId: number) => {
-      const lists = await getListsRequest(boardId)
+      const lists = await getListsRequest({
+        boardId,
+        closed: false,
+      })
       dispatch({ type: 'updateListsByBoardId', payload: { boardId, lists } })
     },
     [dispatch],

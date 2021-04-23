@@ -1,7 +1,13 @@
 import { plainToClass } from 'class-transformer'
 import { List } from '../../../model/client/List'
-import { CreateList, ResponseList, UpdateList } from '../../../dto/list'
+import {
+  CreateList,
+  ResponseList,
+  UpdateList,
+  GetLists,
+} from '../../../dto/list'
 import { getRequest, patchRequest, postRequest } from './request'
+import { objectToQueryString } from '../../objectToQueryString'
 
 type CreateListResponse = {
   list: ResponseList
@@ -19,9 +25,11 @@ type GetListsResponse = {
   lists: ResponseList[]
 }
 
-export const getListsRequest = async (boardId: number): Promise<List[]> => {
+export const getListsRequest = async (dto: GetLists): Promise<List[]> => {
+  const { boardId, ...other } = dto
+  const query = objectToQueryString(other)
   const response = (await getRequest(
-    `/api/boards/${boardId}/lists`,
+    `/api/boards/${dto.boardId}/lists${query}`,
   )) as GetListsResponse
   return transformClass(response.lists) as List[]
 }
@@ -32,7 +40,7 @@ type UpdateListResponse = {
 
 export const updateListRequest = async (dto: UpdateList): Promise<List> => {
   const response = (await patchRequest(
-    `api/lists/${dto.id}`,
+    `/api/lists/${dto.id}`,
     JSON.stringify({ list: dto }),
   )) as UpdateListResponse
   return transformClass(response.list) as List

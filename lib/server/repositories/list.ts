@@ -1,6 +1,7 @@
 import { List } from '@prisma/client'
 import { prisma } from '../prisma'
-import { CreateList, UpdateList } from '../../../dto/list'
+import { CreateList, GetLists, UpdateList } from '../../../dto/list'
+import { selectExistsProps } from '../../selectExistsProps'
 
 export const createListRequest = async (listDto: CreateList): Promise<List> => {
   return await prisma.list.create({
@@ -8,9 +9,9 @@ export const createListRequest = async (listDto: CreateList): Promise<List> => {
   })
 }
 
-export const getListsRequest = async (boardId: number): Promise<List[]> => {
+export const getListsRequest = async (dto: GetLists): Promise<List[]> => {
   return await prisma.list.findMany({
-    where: { boardId },
+    where: selectExistsProps(dto),
   })
 }
 

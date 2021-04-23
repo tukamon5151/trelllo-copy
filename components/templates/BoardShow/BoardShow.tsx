@@ -18,7 +18,7 @@ export interface Props extends BoxProps {
 export const BoardShow: React.VFC<Props> = ({ board, ...other }) => {
   if (!board) return <Spinner />
   return (
-    <Flex flex={1} direction="column" {...other}>
+    <Flex flex={1} direction="column" overflowX="hidden" {...other}>
       <BoardHeader board={board} w="100%" mb={3} />
       <Flex position="relative" flex={1}>
         <BoardBody flex={1} boardId={board.id} />

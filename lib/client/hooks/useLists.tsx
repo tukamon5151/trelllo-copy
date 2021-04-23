@@ -6,8 +6,12 @@ import {
   useCallback,
 } from 'react'
 import { List } from '../../../model/client/List'
-import { CreateList } from '../../../dto/list'
-import { createListRequest, getListsRequest } from '../requests/listRequest'
+import { CreateList, UpdateList } from '../../../dto/list'
+import {
+  createListRequest,
+  getListsRequest,
+  updateListRequest,
+} from '../requests/listRequest'
 import { refreshByBoardId } from '../selectors/list'
 
 export type State = {
@@ -23,6 +27,14 @@ type Action =
       type: 'updateListsByBoardId'
       payload: { boardId: number; lists: List[] }
     }
+  | {
+      type: 'updateList'
+      payload: { list: List }
+    }
+  | {
+      type: 'deleteList'
+      payload: { id: number }
+    }
 
 const reducer: Reducer<State, Action> = (state, action) => {
   switch (action.type) {
@@ -34,6 +46,16 @@ const reducer: Reducer<State, Action> = (state, action) => {
         action.payload.lists,
         action.payload.boardId,
       )
+      return { lists }
+    }
+    case 'updateList': {
+      const lists = state.lists.map((list) =>
+        list.id === action.payload.list.id ? action.payload.list : list,
+      )
+      return { lists }
+    }
+    case 'deleteList': {
+      const lists = state.lists.filter((list) => list.id !== action.payload.id)
       return { lists }
     }
     default:
@@ -62,8 +84,27 @@ export const useListsCore = (initialState?: Partial<State>) => {
 
   const getListsByBoardId = useCallback(
     async (boardId: number) => {
-      const lists = await getListsRequest(boardId)
+      const lists = await getListsRequest({
+        boardId,
+        closed: false,
+      })
       dispatch({ type: 'updateListsByBoardId', payload: { boardId, lists } })
+    },
+    [dispatch],
+  )
+
+  const updateList = useCallback(
+    async (dto: UpdateList) => {
+      const list = await updateListRequest(dto)
+      dispatch({ type: 'updateList', payload: { list } })
+    },
+    [dispatch],
+  )
+
+  const archiveList = useCallback(
+    async (id: number) => {
+      await updateListRequest({ id, closed: true })
+      dispatch({ type: 'deleteList', payload: { id } })
     },
     [dispatch],
   )
@@ -73,6 +114,7 @@ export const useListsCore = (initialState?: Partial<State>) => {
     dispatchers: {
       createList,
       getListsByBoardId,
+      archiveList
     },
   }
 }

@@ -6,7 +6,7 @@ import {
   useCallback,
 } from 'react'
 import { Board } from '../../../model/client/Bard'
-import { CreateBoard } from '../../../dto/board'
+import { CreateBoard, UpdateBoard } from '../../../dto/board'
 import {
   createBoardRequest,
   getBoardsRequest,
@@ -121,9 +121,9 @@ export const useBoardsCore = (initialState?: Partial<State>) => {
   )
 
   const updateBoard = useCallback(
-    async (board: Board) => {
-      const newBoard = await updateBoardRequest(board)
-      dispatch({ type: 'updateBoard', payload: { board: newBoard } })
+    async (dto: UpdateBoard) => {
+      const board = await updateBoardRequest(dto)
+      dispatch({ type: 'updateBoard', payload: { board } })
       return board
     },
     [dispatch],

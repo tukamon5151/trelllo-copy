@@ -5,12 +5,13 @@ import { Input } from '../Input'
 import { Board } from '../../../model/client/Bard'
 import { RoundBoxButton } from '../RoundBoxButton/RoundBoxButton'
 import { useBoardTitleInput } from './useBoardTitleInpu'
+import { UpdateBoard } from '../../../dto/board'
 
 // ===
 // @interface
 export interface Props extends Omit<InputProps, 'onBlur'> {
   board: Board
-  onBlur: (board: Board) => Promise<Board>
+  onBlur: (dto: UpdateBoard) => Promise<Board>
   mode?: 'black' | 'white'
 }
 

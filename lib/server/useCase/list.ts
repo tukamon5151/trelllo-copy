@@ -1,7 +1,7 @@
 import { plainToClass } from 'class-transformer'
 import { List } from '@prisma/client'
 import { CreateList, ResponseList, UpdateList } from '../../../dto/list'
-import { createListRequest, getListsRequest } from '../repositories/list'
+import { createListRequest, getListsRequest, updateListRequest } from '../repositories/list'
 
 export const createList = async (
   listDto: CreateList,

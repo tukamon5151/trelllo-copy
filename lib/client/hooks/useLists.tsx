@@ -31,6 +31,10 @@ type Action =
       type: 'updateList'
       payload: { list: List }
     }
+  | {
+      type: 'deleteList'
+      payload: { id: number }
+    }
 
 const reducer: Reducer<State, Action> = (state, action) => {
   switch (action.type) {
@@ -48,6 +52,10 @@ const reducer: Reducer<State, Action> = (state, action) => {
       const lists = state.lists.map((list) =>
         list.id === action.payload.list.id ? action.payload.list : list,
       )
+      return { lists }
+    }
+    case 'deleteList': {
+      const lists = state.lists.filter((list) => list.id !== action.payload.id)
       return { lists }
     }
     default:
@@ -93,12 +101,20 @@ export const useListsCore = (initialState?: Partial<State>) => {
     [dispatch],
   )
 
+  const archiveList = useCallback(
+    async (id: number) => {
+      await updateListRequest({ id, closed: true })
+      dispatch({ type: 'deleteList', payload: { id } })
+    },
+    [dispatch],
+  )
+
   return {
     state,
     dispatchers: {
       createList,
       getListsByBoardId,
-      updateList,
+      archiveList
     },
   }
 }

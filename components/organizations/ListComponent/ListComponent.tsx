@@ -30,8 +30,8 @@ export interface Props extends BoxProps {
 // @view
 export const ListComponent: React.VFC<Props> = ({ list, ...other }) => {
   const { onOpen, onClose, isOpen } = useDisclosure()
-  const { updateList } = useListsDispatch()
-  const archiveList = () => updateList({ id: list.id, closed: true })
+  const { archiveList } = useListsDispatch()
+
   return (
     <Box borderRadius={3} bg="gray.100" p={2} {...other}>
       <Flex alignItems="center">
@@ -54,7 +54,7 @@ export const ListComponent: React.VFC<Props> = ({ list, ...other }) => {
             <PopoverBody>
               <Flex direction="column">
                 <Box
-                  onClick={archiveList}
+                  onClick={() => archiveList(list.id)}
                   _hover={{
                     bg: 'gray.200',
                   }}

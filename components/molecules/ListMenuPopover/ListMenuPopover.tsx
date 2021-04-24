@@ -10,7 +10,7 @@ import {
   PopoverArrow,
   PopoverProps,
   Flex,
-  Box
+  Box,
 } from '@chakra-ui/react'
 import { ListMenuIcon } from '../../atoms/ListMenuIcon'
 import { useListMenuPopover } from './useListMenuPopover'

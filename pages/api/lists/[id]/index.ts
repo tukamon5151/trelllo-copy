@@ -1,10 +1,13 @@
 import { NextApiRequest, NextApiResponse } from 'next'
-import { getCurrentUser } from '../../../../lib/server/session'
 import { plainToClass } from 'class-transformer'
+import { getCurrentUser } from '../../../../lib/server/session'
 import { UpdateList } from '../../../../dto/list'
 import { updateList } from '../../../../lib/server/usecases/list'
 
-export default async function handle(req: NextApiRequest, res: NextApiResponse) {
+export default async function handle(
+  req: NextApiRequest,
+  res: NextApiResponse,
+) {
   const currentUser = getCurrentUser(req)
   if (!currentUser) {
     res.status(404).end()

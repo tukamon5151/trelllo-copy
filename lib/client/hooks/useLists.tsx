@@ -6,7 +6,7 @@ import {
   useCallback,
 } from 'react'
 import { List } from '../../../model/client/List'
-import { CreateList, UpdateList } from '../../../dto/list'
+import { CreateList } from '../../../dto/list'
 import {
   createListRequest,
   getListsRequest,

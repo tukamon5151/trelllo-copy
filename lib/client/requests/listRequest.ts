@@ -6,8 +6,8 @@ import {
   UpdateList,
   GetLists,
 } from '../../../dto/list'
-import { getRequest, patchRequest, postRequest } from './request'
 import { objectToQueryString } from '../../objectToQueryString'
+import { getRequest, patchRequest, postRequest } from './request'
 
 type CreateListResponse = {
   list: ResponseList
@@ -25,11 +25,13 @@ type GetListsResponse = {
   lists: ResponseList[]
 }
 
-export const getListsRequest = async (dto: GetLists): Promise<List[]> => {
-  const { boardId, ...other } = dto
+export const getListsRequest = async ({
+  boardId,
+  ...other
+}: GetLists): Promise<List[]> => {
   const query = objectToQueryString(other)
   const response = (await getRequest(
-    `/api/boards/${dto.boardId}/lists${query}`,
+    `/api/boards/${boardId}/lists${query}`,
   )) as GetListsResponse
   return transformClass(response.lists) as List[]
 }

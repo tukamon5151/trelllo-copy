@@ -1,6 +1,11 @@
 import { plainToClass } from 'class-transformer'
 import { List } from '@prisma/client'
-import { CreateList, GetLists, ResponseList, UpdateList } from '../../../dto/list'
+import {
+  CreateList,
+  GetLists,
+  ResponseList,
+  UpdateList,
+} from '../../../dto/list'
 import {
   createListRequest,
   getListsRequest,
@@ -14,9 +19,7 @@ export const createList = async (
   return transformClass(data) as ResponseList
 }
 
-export const getLists = async (
-  dto: GetLists
-): Promise<ResponseList[]> => {
+export const getLists = async (dto: GetLists): Promise<ResponseList[]> => {
   const data = await getListsRequest(dto)
   return transformClass(data) as ResponseList[]
 }

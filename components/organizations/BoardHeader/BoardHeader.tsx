@@ -5,9 +5,8 @@ import { RoundSquareButton } from '../../atoms/RoundSquareButton'
 import { RoundBoxButton } from '../../atoms/RoundBoxButton/RoundBoxButton'
 import { Board } from '../../../model/client/Bard'
 import { BoardStar } from '../../atoms/BoardStar'
-import { useBoardsDispatch } from '../../../lib/client/hooks/useBoards'
-import { BoardTitleInput } from '../../atoms/BoardTitleInput'
-import { NotEmptyString } from '../../../lib/isNotEmptyString'
+import { Editable } from '../../atoms/Editable'
+import { useBoardHeader } from './useBoardHeder'
 
 // ===
 // @interface
@@ -19,30 +18,30 @@ export interface Props extends FlexProps {
 // ===
 // @view
 export const BoardHeader: React.VFC<Props> = ({ board, ...other }) => {
-  const { addStar, removeStar, updateBoard } = useBoardsDispatch()
-  const onAddStar = () => addStar(board.id)
-  const onRemoveStar = () => removeStar(board.id)
-  const updateTitle = <T extends string>(title: NotEmptyString<T>) =>
-    updateBoard({ id: board.id, title })
-  const baseColor = board.image ? 'black' : 'white'
+  const {
+    title,
+    onClickStar,
+    onSubmitTitle,
+    onChangeTitle,
+    mode,
+  } = useBoardHeader(board)
 
   return (
     <Flex p={2} alignItems="center" {...other}>
-      <BoardTitleInput
-        mr={2}
-        title={board.title}
-        mode={baseColor}
-        updateTitle={updateTitle}
-      />
-      <RoundSquareButton
-        size={9}
-        mode={baseColor}
-        onClick={board.star ? onRemoveStar : onAddStar}
-      >
+      <RoundBoxButton color={mode} mode={mode} mr={2}>
+        <Editable
+          defaultValue={board.title}
+          value={title}
+          onChange={onChangeTitle}
+          onSubmit={onSubmitTitle}
+          colorScheme={`${mode}Alpha`}
+        />
+      </RoundBoxButton>
+      <RoundSquareButton size={9} mode={mode} onClick={onClickStar}>
         <BoardStar iconWidth={8} isStar={board.star} />
       </RoundSquareButton>
       <Spacer />
-      <RoundBoxButton h={8} mode={baseColor}>
+      <RoundBoxButton h={8} mode={mode}>
         ...ボードメニューの表示
       </RoundBoxButton>
     </Flex>

@@ -8,7 +8,7 @@ import {
 import { User } from '../../../model/client/User'
 
 export type State = {
-  user: User
+  user?: User
 }
 
 type Action = {
@@ -26,7 +26,6 @@ const reducer: Reducer<State, Action> = (state, action) => {
 }
 
 const createInitialState = (initialState?: Partial<State>) => ({
-  user: {} as User,
   ...initialState,
 })
 

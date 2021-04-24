@@ -44,7 +44,6 @@ export const ProfileForm: React.FC = () => {
   return (
     <Formik<Values>
       initialValues={{
-        id: user.id,
         name: user.name,
         introduction: user.introduction,
       }}

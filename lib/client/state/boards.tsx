@@ -6,9 +6,8 @@ import {
   useCallback,
 } from 'react'
 import { Board } from '../../../model/client/Bard'
-import { CreateBoard, UpdateBoard } from '../../../dto/board'
+import { UpdateBoard } from '../../../dto/board'
 import {
-  createBoardRequest,
   getBoardsRequest,
   getBoardRequest,
   addStarRequest,
@@ -81,11 +80,9 @@ export const useBoardsCore = (initialState?: Partial<State>) => {
     createInitialState(initialState),
   )
 
-  const createBoard = useCallback(
-    async (boardDto: CreateBoard): Promise<Board> => {
-      const board = await createBoardRequest(boardDto)
+  const addBoard = useCallback(
+    (board: Board) => {
       dispatch({ type: 'addBoard', payload: { board } })
-      return board
     },
     [dispatch],
   )
@@ -144,7 +141,7 @@ export const useBoardsCore = (initialState?: Partial<State>) => {
   return {
     state,
     dispatchers: {
-      createBoard,
+      addBoard,
       initBoards,
       startCreateBoard,
       endCreateBoard,
@@ -156,7 +153,7 @@ export const useBoardsCore = (initialState?: Partial<State>) => {
   }
 }
 
-type Dispatchers = TypeUtil.Dispatchers<typeof useBoardsCore>
+export type Dispatchers = TypeUtil.Dispatchers<typeof useBoardsCore>
 
 const BoardsStateContext = createContext<State>({
   boards: [],

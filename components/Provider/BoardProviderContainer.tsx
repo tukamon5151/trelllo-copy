@@ -7,6 +7,10 @@ import {
   BoardsDispatchProvider,
 } from '../../lib/client/state/boards'
 import { CreateBoardModal } from '../organizations/CreateBoardModal'
+import {
+  createBoardUseCases,
+  BoardUseCaseProvider,
+} from '../../lib/client/useCases/board'
 
 // ===
 // @interface
@@ -23,15 +27,18 @@ export const BoardsProviderContainer: React.VFC<Props> = ({
   children,
 }) => {
   const { state, dispatchers } = useBoardsCore(initialState)
+  const usecases = createBoardUseCases(dispatchers)
+
   return (
     <BoardsStateProvider value={state}>
       <BoardsDispatchProvider value={dispatchers}>
-        {children}
-        <CreateBoardModal
-          isOpen={state.isCreating}
-          onClose={dispatchers.endCreateBoard}
-          onSubmit={dispatchers.createBoard}
-        />
+        <BoardUseCaseProvider value={usecases}>
+          {children}
+          <CreateBoardModal
+            isOpen={state.isCreating}
+            onClose={dispatchers.endCreateBoard}
+          />
+        </BoardUseCaseProvider>
       </BoardsDispatchProvider>
     </BoardsStateProvider>
   )

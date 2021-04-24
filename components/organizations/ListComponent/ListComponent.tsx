@@ -16,14 +16,14 @@ export interface Props extends BoxProps {
 // ===
 // @view
 export const ListComponent: React.VFC<Props> = ({ list, ...other }) => {
-  const { value, onSubmit, onChange } = useListComponent(list)
+  const { name, onSubmit, onChange } = useListComponent(list)
 
   return (
     <Box borderRadius={3} bg="gray.100" p={2} {...other}>
       <Flex alignItems="center">
         <Editable
           defaultValue={list.name}
-          value={value}
+          value={name}
           onSubmit={onSubmit}
           onChange={onChange}
           flex={1}

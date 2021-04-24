@@ -4,6 +4,10 @@ import {
   ListsStateProvider,
   ListsDispatchProvider,
 } from '../../lib/client/hooks/useLists'
+import {
+  createListUseCases,
+  ListUseCasesProvider,
+} from '../../lib/client/useCases/list'
 
 // ===
 // @modules
@@ -23,10 +27,13 @@ export const ListsProviderContainer: React.VFC<Props> = ({
   initialState,
 }) => {
   const { state, dispatchers } = useListsCore(initialState)
+  const useCaseFunctions = createListUseCases(dispatchers)
   return (
     <ListsStateProvider value={state}>
       <ListsDispatchProvider value={dispatchers}>
-        {children}
+        <ListUseCasesProvider value={useCaseFunctions}>
+          {children}
+        </ListUseCasesProvider>
       </ListsDispatchProvider>
     </ListsStateProvider>
   )

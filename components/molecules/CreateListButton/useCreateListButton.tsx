@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from 'react'
+import { useListUseCases } from '../../../lib/client/useCases/list'
 import { Props } from './CreateListButton'
 
 type State = {
@@ -14,6 +15,7 @@ const initialState = {
 export const useCreateListButton = (props: Props) => {
   const [state, setState] = useState<State>(initialState)
   const inputRef = useRef<HTMLInputElement>(null)
+  const { createList } = useListUseCases()
 
   const onChange: React.ChangeEventHandler<HTMLInputElement> = (e) =>
     setState((prevState) => ({ ...prevState, name: e.target.value }))
@@ -25,7 +27,7 @@ export const useCreateListButton = (props: Props) => {
 
   const onSubmit = async () => {
     if (!state.name) return
-    await props.onSubmit({ boardId: props.boardId, name: state.name })
+    await createList({ boardId: props.boardId, name: state.name })
     onFinishCreation()
   }
 

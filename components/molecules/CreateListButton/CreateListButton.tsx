@@ -3,7 +3,6 @@
 import { Button, Icon, Box, Collapse, BoxProps, Text } from '@chakra-ui/react'
 import { IoMdAdd } from 'react-icons/io'
 import { CgClose } from 'react-icons/cg'
-import { CreateList } from '../../../dto/list'
 import { Input } from '../../atoms/Input'
 import { RoundBoxButton } from '../../atoms/RoundBoxButton/RoundBoxButton'
 import { useCreateListButton } from './useCreateListButton'
@@ -13,16 +12,11 @@ import { useCreateListButton } from './useCreateListButton'
 
 export interface Props extends Omit<BoxProps, 'onSubmit'> {
   boardId: number
-  onSubmit: (data: CreateList) => Promise<void>
 }
 
 // ===
 // @view
-export const CreateListButton: React.VFC<Props> = ({
-  boardId,
-  onSubmit: propsOnSubmit,
-  ...other
-}) => {
+export const CreateListButton: React.VFC<Props> = ({ boardId, ...other }) => {
   const {
     state,
     inputRef,
@@ -30,7 +24,7 @@ export const CreateListButton: React.VFC<Props> = ({
     onFinishCreation,
     onStartCreation,
     onSubmit,
-  } = useCreateListButton({ boardId, onSubmit: propsOnSubmit })
+  } = useCreateListButton({ boardId })
 
   const { isCreating, name } = state
 

@@ -6,16 +6,6 @@ import {
   useCallback,
 } from 'react'
 import { Board } from '../../../model/client/Bard'
-import { CreateBoard, UpdateBoard } from '../../../dto/board'
-import {
-  createBoardRequest,
-  getBoardsRequest,
-  getBoardRequest,
-  addStarRequest,
-  removeStarRequest,
-  updateBoardRequest,
-} from '../requests/boardRequest'
-import { findBoard } from '../selectors/board'
 
 export type State = {
   boards: Board[]
@@ -81,82 +71,48 @@ export const useBoardsCore = (initialState?: Partial<State>) => {
     createInitialState(initialState),
   )
 
-  const createBoard = useCallback(
-    async (boardDto: CreateBoard): Promise<Board> => {
-      const board = await createBoardRequest(boardDto)
+  const addBoard = useCallback(
+    (board: Board) => {
       dispatch({ type: 'addBoard', payload: { board } })
-      return board
     },
     [dispatch],
   )
 
-  const initBoards = useCallback(async (): Promise<void> => {
-    const boards = await getBoardsRequest()
-    dispatch({ type: 'updateBoards', payload: { boards } })
-  }, [dispatch])
-
-  const startCreateBoard = useCallback(
-    () => dispatch({ type: 'startCreate' }),
-    [dispatch],
-  )
-
-  const endCreateBoard = useCallback(() => dispatch({ type: 'endCreate' }), [
-    dispatch,
-  ])
-
-  const addStar = useCallback(
-    async (boardId: number) => {
-      const board = await addStarRequest(boardId)
-      dispatch({ type: 'updateBoard', payload: { board } })
-    },
-    [dispatch],
-  )
-
-  const removeStar = useCallback(
-    async (boardId: number) => {
-      const board = await removeStarRequest(boardId)
-      dispatch({ type: 'updateBoard', payload: { board } })
+  const updateBoards = useCallback(
+    (boards: Board[]): void => {
+      dispatch({ type: 'updateBoards', payload: { boards } })
     },
     [dispatch],
   )
 
   const updateBoard = useCallback(
-    async (dto: UpdateBoard) => {
-      const board = await updateBoardRequest(dto)
+    (board: Board) => {
       dispatch({ type: 'updateBoard', payload: { board } })
     },
     [dispatch],
   )
 
-  const getBoard = useCallback(
-    async (boardId: number) => {
-      const board = await getBoardRequest(boardId)
-      findBoard(state.boards, board.id)
-        ? dispatch({
-            type: 'updateBoard',
-            payload: { board },
-          })
-        : dispatch({ type: 'addBoard', payload: { board } })
-    },
-    [dispatch],
-  )
+  const startCreate = useCallback(() => dispatch({ type: 'startCreate' }), [
+    dispatch,
+  ])
+
+  const endCreate = useCallback(() => dispatch({ type: 'endCreate' }), [
+    dispatch,
+  ])
 
   return {
     state,
     dispatchers: {
-      createBoard,
-      initBoards,
-      startCreateBoard,
-      endCreateBoard,
-      addStar,
-      removeStar,
-      getBoard,
+      addBoard,
+      updateBoards,
+      startCreate,
+      endCreate,
       updateBoard,
     },
   }
 }
 
-type Dispatchers = TypeUtil.Dispatchers<typeof useBoardsCore>
+export type Dispatchers = TypeUtil.Dispatchers<typeof useBoardsCore>
 
 const BoardsStateContext = createContext<State>({
   boards: [],
@@ -164,7 +120,3 @@ const BoardsStateContext = createContext<State>({
 })
 export const BoardsStateProvider = BoardsStateContext.Provider
 export const useBoardsState = (): State => useContext(BoardsStateContext)
-const BoardsDispatchContext = createContext<Dispatchers>({} as Dispatchers)
-export const BoardsDispatchProvider = BoardsDispatchContext.Provider
-export const useBoardsDispatch = (): Dispatchers =>
-  useContext(BoardsDispatchContext)

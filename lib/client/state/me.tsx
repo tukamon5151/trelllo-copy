@@ -8,7 +8,7 @@ import {
 import { User } from '../../../model/client/User'
 
 export type State = {
-  user: User
+  user?: User
 }
 
 type Action = {
@@ -26,7 +26,6 @@ const reducer: Reducer<State, Action> = (state, action) => {
 }
 
 const createInitialState = (initialState?: Partial<State>) => ({
-  user: {} as User,
   ...initialState,
 })
 
@@ -49,11 +48,8 @@ export const useMeCore = (initialState?: Partial<State>) => {
   }
 }
 
-type Dispatchers = TypeUtil.Dispatchers<typeof useMeCore>
+export type Dispatchers = TypeUtil.Dispatchers<typeof useMeCore>
 
 const MeStateContext = createContext<State>({} as State)
 export const MeStateProvider = MeStateContext.Provider
 export const useMeState = (): State => useContext(MeStateContext)
-const MeDispatchContext = createContext<Dispatchers>({} as Dispatchers)
-export const MeDispatchProvider = MeDispatchContext.Provider
-export const useMeDispatch = (): Dispatchers => useContext(MeDispatchContext)

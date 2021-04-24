@@ -18,6 +18,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(function Input(
   const [field, meta] = useField(name)
   return (
     <ChakraInput
+      name={name}
       {...field}
       {...other}
       isInvalid={!!meta.touched && !!meta.error}

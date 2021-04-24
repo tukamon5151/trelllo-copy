@@ -4,9 +4,12 @@ import {
   State,
   useBoardsCore,
   BoardsStateProvider,
-  BoardsDispatchProvider,
-} from '../../lib/client/hooks/useBoards'
+} from '../../lib/client/state/boards'
 import { CreateBoardModal } from '../organizations/CreateBoardModal'
+import {
+  createBoardUseCases,
+  BoardUseCaseProvider,
+} from '../../lib/client/useCases/board'
 
 // ===
 // @interface
@@ -23,16 +26,14 @@ export const BoardsProviderContainer: React.VFC<Props> = ({
   children,
 }) => {
   const { state, dispatchers } = useBoardsCore(initialState)
+  const useCases = createBoardUseCases(dispatchers)
+
   return (
     <BoardsStateProvider value={state}>
-      <BoardsDispatchProvider value={dispatchers}>
+      <BoardUseCaseProvider value={useCases}>
         {children}
-        <CreateBoardModal
-          isOpen={state.isCreating}
-          onClose={dispatchers.endCreateBoard}
-          onSubmit={dispatchers.createBoard}
-        />
-      </BoardsDispatchProvider>
+        <CreateBoardModal />
+      </BoardUseCaseProvider>
     </BoardsStateProvider>
   )
 }

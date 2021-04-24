@@ -1,22 +1,20 @@
 import { useState } from 'react'
 import { List } from '../../../model/client/List'
-import { updateTitle } from '../../../lib/client/usecases/list'
-import { useListsDispatch } from '../../../lib/client/hooks/useLists'
+import { useListUseCases } from '../../../lib/client/useCases/list'
 import { isNotEmptyString } from '../../../lib/isNotEmptyString'
 
 export const useListComponent = (list: List) => {
-  const [value, setValue] = useState<string>(list.name)
-  const { updateList } = useListsDispatch()
+  const [name, setName] = useState<string>(list.name)
+  const { updateListTitle } = useListUseCases()
 
-  const onSubmit = (submitValue: string) => {
-    if (isNotEmptyString(submitValue))
-      return updateTitle(list.id, submitValue, updateList)
-    setValue(list.name)
+  const onSubmit = (name: string) => {
+    if (isNotEmptyString(name)) return updateListTitle(list.id, name)
+    setName(list.name)
   }
 
   return {
-    value,
+    name,
     onSubmit,
-    onChange: setValue,
+    onChange: setName,
   }
 }

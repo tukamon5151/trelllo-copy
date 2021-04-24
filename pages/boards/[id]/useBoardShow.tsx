@@ -1,9 +1,7 @@
 import { useRouter } from 'next/router'
 import { useEffect } from 'react'
-import {
-  useBoardsDispatch,
-  useBoardsState,
-} from '../../../lib/client/state/boards'
+import { useBoardsState } from '../../../lib/client/state/boards'
+import { useBoardUseCases } from '../../../lib/client/useCases/board'
 import { useListsState } from '../../../lib/client/state/lists'
 import { useListUseCases } from '../../../lib/client/useCases/list'
 import { findBoard } from '../../../lib/client/selectors/board'
@@ -11,7 +9,7 @@ import { Board } from '../../../model/client/Bard'
 
 export const useBoardShow = () => {
   const { boards } = useBoardsState()
-  const { getBoard } = useBoardsDispatch()
+  const { getInitialBoard } = useBoardUseCases()
   const { lists } = useListsState()
   const { getInitialLists } = useListUseCases()
 
@@ -22,7 +20,7 @@ export const useBoardShow = () => {
   useEffect(() => {
     if (!boardId) return
     const getBoardPromise = !board
-      ? getBoard(boardId)
+      ? getInitialBoard(boardId)
       : new Promise(() => undefined)
     const getListsPromise = !lists.length
       ? getInitialLists(boardId)

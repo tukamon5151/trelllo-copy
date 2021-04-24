@@ -44,12 +44,18 @@ export const createBoardUseCases = (dispatchers: Dispatchers) => {
     dispatchers.updateBoard(board)
   }
 
+  const getInitialBoard = async (boardId: number) => {
+    const board = await getBoardRequest(boardId)
+    dispatchers.addBoard(board)
+  }
+
   return {
     createBoard,
     getInitialBoards,
     addBoardStar,
     removeBoardStar,
     updateBoardTitle,
+    getInitialBoard,
   }
 }
 

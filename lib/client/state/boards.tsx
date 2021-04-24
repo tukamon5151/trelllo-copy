@@ -6,8 +6,6 @@ import {
   useCallback,
 } from 'react'
 import { Board } from '../../../model/client/Bard'
-import { getBoardRequest } from '../requests/boardRequest'
-import { findBoard } from '../selectors/board'
 
 export type State = {
   boards: Board[]
@@ -103,19 +101,6 @@ export const useBoardsCore = (initialState?: Partial<State>) => {
     [dispatch],
   )
 
-  const getBoard = useCallback(
-    async (boardId: number) => {
-      const board = await getBoardRequest(boardId)
-      findBoard(state.boards, board.id)
-        ? dispatch({
-            type: 'updateBoard',
-            payload: { board },
-          })
-        : dispatch({ type: 'addBoard', payload: { board } })
-    },
-    [dispatch],
-  )
-
   return {
     state,
     dispatchers: {
@@ -123,7 +108,6 @@ export const useBoardsCore = (initialState?: Partial<State>) => {
       updateBoards,
       startCreateBoard,
       endCreateBoard,
-      getBoard,
       updateBoard,
     },
   }

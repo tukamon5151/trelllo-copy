@@ -26,6 +26,7 @@ const reducer: Reducer<State, Action> = (state, action) => {
 }
 
 const createInitialState = (initialState?: Partial<State>) => ({
+  user: undefined,
   ...initialState,
 })
 

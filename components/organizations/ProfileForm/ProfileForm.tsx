@@ -4,18 +4,20 @@ import { Formik, Form } from 'formik'
 import { Flex, useToast } from '@chakra-ui/react'
 import { IconChanger } from '../../molecules/IconChanger'
 import { ProfileTextForm } from '../../molecules/ProfileTextForm/ProfileTextForm'
-import { useMeState } from '../../../lib/client/state/me'
 import { useMeUseCases } from '../../../lib/client/useCases/me'
 import { Values } from './FormValues'
 import { validationSchema } from './validationSchema'
+import { User } from '../../../model/client/User'
 
 // ===
 // @interface
+type Props = {
+  user: User
+}
 
 // ===
 // @view
-export const ProfileForm: React.FC = () => {
-  const { user } = useMeState()
+export const ProfileForm: React.FC<Props> = ({ user }) => {
   const { updateMe, updateIcon } = useMeUseCases()
   const toast = useToast()
 

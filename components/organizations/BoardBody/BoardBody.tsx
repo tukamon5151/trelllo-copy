@@ -1,10 +1,7 @@
 // ===
 // @modules
 import { HStack, StackProps, Box } from '@chakra-ui/react'
-import {
-  useListsDispatch,
-  useListsState,
-} from '../../../lib/client/hooks/useLists'
+import { useListsState } from '../../../lib/client/hooks/useLists'
 import { filterByBoardId } from '../../../lib/client/selectors/list'
 import { ListComponent } from '../ListComponent'
 import { CreateListButton } from '../../molecules/CreateListButton'

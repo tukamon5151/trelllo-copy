@@ -16,18 +16,15 @@ export interface Props extends Omit<BoxProps, 'onSubmit'> {
 
 // ===
 // @view
-export const CreateListButton: React.VFC<Props> = ({
-  boardId,
-  ...other
-}) => {
+export const CreateListButton: React.VFC<Props> = ({ boardId, ...other }) => {
   const {
     state,
     inputRef,
     onChange,
     onFinishCreation,
     onStartCreation,
-    onSubmit
-  } = useCreateListButton({ boardId  })
+    onSubmit,
+  } = useCreateListButton({ boardId })
 
   const { isCreating, name } = state
 

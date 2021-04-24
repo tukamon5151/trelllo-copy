@@ -1,8 +1,12 @@
+import { useContext, createContext } from 'react'
 import { Dispatchers } from '../hooks/useLists'
-import { updateListRequest, createListRequest } from '../requests/listRequest'
+import {
+  updateListRequest,
+  createListRequest,
+  getListsRequest,
+} from '../requests/listRequest'
 import { CreateList, UpdateList } from '../../../dto/list'
 import { NotEmptyString } from '../../isNotEmptyString'
-import { useContext, createContext } from 'react'
 
 export const createListUseCases = (dispatchers: Dispatchers) => {
   const createList = async (dto: CreateList) => {
@@ -24,10 +28,16 @@ export const createListUseCases = (dispatchers: Dispatchers) => {
     dispatchers.deleteList(id)
   }
 
+  const getInitialLists = async (boardId: number) => {
+    const lists = await getListsRequest({ boardId, closed: false })
+    dispatchers.updateLists(lists, boardId)
+  }
+
   return {
     updateListTitle,
     createList,
     archiveList,
+    getInitialLists,
   }
 }
 

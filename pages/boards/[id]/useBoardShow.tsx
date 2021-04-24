@@ -4,10 +4,8 @@ import {
   useBoardsDispatch,
   useBoardsState,
 } from '../../../lib/client/hooks/useBoards'
-import {
-  useListsDispatch,
-  useListsState,
-} from '../../../lib/client/hooks/useLists'
+import { useListsState } from '../../../lib/client/hooks/useLists'
+import { useListUseCases } from '../../../lib/client/useCases/list'
 import { findBoard } from '../../../lib/client/selectors/board'
 import { Board } from '../../../model/client/Bard'
 
@@ -15,7 +13,8 @@ export const useBoardShow = () => {
   const { boards } = useBoardsState()
   const { getBoard } = useBoardsDispatch()
   const { lists } = useListsState()
-  const { getListsByBoardId: getLists } = useListsDispatch()
+  const { getInitialLists } = useListUseCases()
+
   const router = useRouter()
   const boardId = parseInt(router.query.id as string)
   const board: Board | undefined = findBoard(boards, boardId)
@@ -26,7 +25,7 @@ export const useBoardShow = () => {
       ? getBoard(boardId)
       : new Promise(() => undefined)
     const getListsPromise = !lists.length
-      ? getLists(boardId)
+      ? getInitialLists(boardId)
       : new Promise(() => undefined)
     Promise.all([getBoardPromise, getListsPromise])
   }, [boardId])

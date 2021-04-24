@@ -6,7 +6,6 @@ import {
   useCallback,
 } from 'react'
 import { List } from '../../../model/client/List'
-import { getListsRequest  } from '../requests/listRequest'
 import { refreshByBoardId } from '../selectors/list'
 
 export type State = {
@@ -19,8 +18,8 @@ type Action =
       payload: { list: List }
     }
   | {
-      type: 'updateListsByBoardId'
-      payload: { boardId: number; lists: List[] }
+      type: 'updateLists'
+      payload: { boardId?: number; lists: List[] }
     }
   | {
       type: 'updateList'
@@ -35,7 +34,8 @@ const reducer: Reducer<State, Action> = (state, action) => {
   switch (action.type) {
     case 'addList':
       return { lists: [...state.lists, action.payload.list] }
-    case 'updateListsByBoardId': {
+    case 'updateLists': {
+      if (!action.payload.boardId) return { lists: action.payload.lists }
       const lists = refreshByBoardId(
         state.lists,
         action.payload.lists,
@@ -76,13 +76,9 @@ export const useListsCore = (initialState?: Partial<State>) => {
     [dispatch],
   )
 
-  const getListsByBoardId = useCallback(
-    async (boardId: number) => {
-      const lists = await getListsRequest({
-        boardId,
-        closed: false,
-      })
-      dispatch({ type: 'updateListsByBoardId', payload: { boardId, lists } })
+  const updateLists = useCallback(
+    (lists: List[], boardId?: number) => {
+      dispatch({ type: 'updateLists', payload: { boardId, lists } })
     },
     [dispatch],
   )
@@ -103,7 +99,7 @@ export const useListsCore = (initialState?: Partial<State>) => {
     state,
     dispatchers: {
       addList,
-      getListsByBoardId,
+      updateLists,
       deleteList,
       updateList,
     },
@@ -115,7 +111,3 @@ export type Dispatchers = TypeUtil.Dispatchers<typeof useListsCore>
 const ListsStateContext = createContext<State>({ lists: [] })
 export const ListsStateProvider = ListsStateContext.Provider
 export const useListsState = () => useContext<State>(ListsStateContext)
-const ListsDispatchContext = createContext<Dispatchers>({} as Dispatchers)
-export const ListsDispatchProvider = ListsDispatchContext.Provider
-export const useListsDispatch = () =>
-  useContext<Dispatchers>(ListsDispatchContext)

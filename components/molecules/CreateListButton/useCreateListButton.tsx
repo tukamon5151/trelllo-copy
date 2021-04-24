@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
-import { Props } from './CreateListButton'
 import { useListUseCases } from '../../../lib/client/useCases/list'
+import { Props } from './CreateListButton'
 
 type State = {
   name: string

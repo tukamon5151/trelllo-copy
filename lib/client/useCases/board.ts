@@ -20,8 +20,14 @@ export const createBoardUseCases = (dispatchers: Dispatchers) => {
     return board
   }
 
+  const getInitialBoards = async (): Promise<void> => {
+    const boards = await getBoardsRequest()
+    dispatchers.updateBoards(boards)
+  }
+
   return {
     createBoard,
+    getInitialBoards
   }
 }
 

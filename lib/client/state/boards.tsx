@@ -8,7 +8,6 @@ import {
 import { Board } from '../../../model/client/Bard'
 import { UpdateBoard } from '../../../dto/board'
 import {
-  getBoardsRequest,
   getBoardRequest,
   addStarRequest,
   removeStarRequest,
@@ -87,10 +86,12 @@ export const useBoardsCore = (initialState?: Partial<State>) => {
     [dispatch],
   )
 
-  const initBoards = useCallback(async (): Promise<void> => {
-    const boards = await getBoardsRequest()
-    dispatch({ type: 'updateBoards', payload: { boards } })
-  }, [dispatch])
+  const updateBoards = useCallback(
+    (boards: Board[]): void => {
+      dispatch({ type: 'updateBoards', payload: { boards } })
+    },
+    [dispatch],
+  )
 
   const startCreateBoard = useCallback(
     () => dispatch({ type: 'startCreate' }),
@@ -142,7 +143,7 @@ export const useBoardsCore = (initialState?: Partial<State>) => {
     state,
     dispatchers: {
       addBoard,
-      initBoards,
+      updateBoards,
       startCreateBoard,
       endCreateBoard,
       addStar,

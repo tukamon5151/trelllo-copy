@@ -49,11 +49,8 @@ export const useMeCore = (initialState?: Partial<State>) => {
   }
 }
 
-type Dispatchers = TypeUtil.Dispatchers<typeof useMeCore>
+export type Dispatchers = TypeUtil.Dispatchers<typeof useMeCore>
 
 const MeStateContext = createContext<State>({} as State)
 export const MeStateProvider = MeStateContext.Provider
 export const useMeState = (): State => useContext(MeStateContext)
-const MeDispatchContext = createContext<Dispatchers>({} as Dispatchers)
-export const MeDispatchProvider = MeDispatchContext.Provider
-export const useMeDispatch = (): Dispatchers => useContext(MeDispatchContext)

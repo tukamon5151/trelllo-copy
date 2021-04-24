@@ -1,11 +1,10 @@
 // ===
 // @modules
+import { MeStateProvider, useMeCore, State } from '../../lib/client/state/me'
 import {
-  MeStateProvider,
-  MeDispatchProvider,
-  useMeCore,
-  State,
-} from '../../lib/client/state/me'
+  MeUseCaseProvider,
+  createMeUseCases,
+} from '../../lib/client/useCases/me'
 
 // ===
 // @interface
@@ -22,9 +21,10 @@ export const MeProviderContainer: React.VFC<Props> = ({
   children,
 }) => {
   const { state, dispatchers } = useMeCore(initialState)
+  const useCases = createMeUseCases(dispatchers)
   return (
     <MeStateProvider value={state}>
-      <MeDispatchProvider value={dispatchers}>{children}</MeDispatchProvider>
+      <MeUseCaseProvider value={useCases}>{children}</MeUseCaseProvider>
     </MeStateProvider>
   )
 }

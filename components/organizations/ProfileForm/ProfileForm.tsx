@@ -4,11 +4,8 @@ import { Formik, Form } from 'formik'
 import { Flex, useToast } from '@chakra-ui/react'
 import { IconChanger } from '../../molecules/IconChanger'
 import { ProfileTextForm } from '../../molecules/ProfileTextForm/ProfileTextForm'
-import {
-  patchMeRequest,
-  patchIconRequest,
-} from '../../../lib/client/requests/userRequest'
-import { useMeState, useMeDispatch } from '../../../lib/client/state/me'
+import { useMeState } from '../../../lib/client/state/me'
+import { useMeUseCases } from '../../../lib/client/useCases/me'
 import { Values } from './FormValues'
 import { validationSchema } from './validationSchema'
 
@@ -19,12 +16,11 @@ import { validationSchema } from './validationSchema'
 // @view
 export const ProfileForm: React.FC = () => {
   const { user } = useMeState()
-  const { updateMe } = useMeDispatch()
+  const { updateMe, updateIcon } = useMeUseCases()
   const toast = useToast()
 
   const onSubmit = async (data: Values) => {
-    const user = await patchMeRequest(data)
-    updateMe(user)
+    await updateMe(data)
     toast({
       title: '更新しました',
       status: 'success',
@@ -36,8 +32,7 @@ export const ProfileForm: React.FC = () => {
   const onFileChange = async (file: File) => {
     const formData = new FormData()
     formData.append('file', file)
-    const user = await patchIconRequest(formData)
-    updateMe(user)
+    await updateIcon(formData)
     toast({
       title: '更新しました',
       status: 'success',

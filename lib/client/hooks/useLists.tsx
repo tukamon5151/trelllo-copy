@@ -6,10 +6,7 @@ import {
   useCallback,
 } from 'react'
 import { List } from '../../../model/client/List'
-import {
-  getListsRequest,
-  updateListRequest,
-} from '../requests/listRequest'
+import { getListsRequest  } from '../requests/listRequest'
 import { refreshByBoardId } from '../selectors/list'
 
 export type State = {
@@ -91,13 +88,12 @@ export const useListsCore = (initialState?: Partial<State>) => {
   )
 
   const updateList = useCallback(
-    async (list: List) => dispatch({ type: 'updateList', payload: { list } }),
+    (list: List) => dispatch({ type: 'updateList', payload: { list } }),
     [dispatch],
   )
 
-  const archiveList = useCallback(
-    async (id: number) => {
-      await updateListRequest({ id, closed: true })
+  const deleteList = useCallback(
+    (id: number) => {
       dispatch({ type: 'deleteList', payload: { id } })
     },
     [dispatch],
@@ -108,7 +104,7 @@ export const useListsCore = (initialState?: Partial<State>) => {
     dispatchers: {
       addList,
       getListsByBoardId,
-      archiveList,
+      deleteList,
       updateList,
     },
   }

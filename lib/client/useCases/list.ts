@@ -19,9 +19,15 @@ export const createListUseCases = (dispatchers: Dispatchers) => {
     dispatchers.updateList(list)
   }
 
+  const archiveList = async (id: number) => {
+    await updateListRequest({ id, closed: true })
+    dispatchers.deleteList(id)
+  }
+
   return {
     updateListTitle,
-    createList
+    createList,
+    archiveList,
   }
 }
 

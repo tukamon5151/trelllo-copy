@@ -15,10 +15,8 @@ import {
 import { AiOutlineStar } from 'react-icons/ai'
 import { useMemo } from 'react'
 import { BoardCard } from '../../molecules/BoardCard'
-import {
-  useBoardsDispatch,
-  useBoardsState,
-} from '../../../lib/client/state/boards'
+import { useBoardsState } from '../../../lib/client/state/boards'
+import { useBoardUseCases } from '../../../lib/client/useCases/board'
 
 // ===
 // @interface
@@ -27,7 +25,7 @@ import {
 // @view
 export const BoardList: React.FC<StackProps> = (props) => {
   const { boards } = useBoardsState()
-  const { startCreateBoard } = useBoardsDispatch()
+  const { startCreateBoard } = useBoardUseCases()
   const staredBoards = useMemo(() => boards.filter((board) => board.star), [
     boards,
   ])

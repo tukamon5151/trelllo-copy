@@ -1,9 +1,12 @@
 import { useRouter } from 'next/router'
+import { useBoardsState } from '../../../lib/client/state/boards'
 import { useBoardUseCases } from '../../../lib/client/useCases/board'
 import { CreateBoard } from '../../../dto/board'
 
 export const useCreateBoardModal = () => {
   const router = useRouter()
+  const { isCreating } = useBoardsState()
+  const { endCreateBoard } = useBoardUseCases()
   const { createBoard } = useBoardUseCases()
 
   const onSubmit = async (values: CreateBoard) => {
@@ -13,5 +16,7 @@ export const useCreateBoardModal = () => {
 
   return {
     onSubmit,
+    isOpen: isCreating,
+    onClose: endCreateBoard,
   }
 }

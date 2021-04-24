@@ -14,15 +14,12 @@ import { BoardCoverGridSelector } from '../../molecules/BoardCoverGridSelector'
 import { validationSchema } from './validationSchema'
 import { useCreateBoardModal } from './useCreateBoardModal'
 
-export type Props = {
-  isOpen: boolean
-  onClose: () => void
-}
+export type Props = {}
 
 // ===
 // @view
-export const CreateBoardModal: React.VFC<Props> = ({ isOpen, onClose }) => {
-  const { onSubmit } = useCreateBoardModal()
+export const CreateBoardModal: React.VFC<Props> = () => {
+  const { onSubmit, isOpen, onClose } = useCreateBoardModal()
 
   return (
     <Formik<CreateBoard>

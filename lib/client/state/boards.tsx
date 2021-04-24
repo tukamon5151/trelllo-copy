@@ -85,15 +85,6 @@ export const useBoardsCore = (initialState?: Partial<State>) => {
     [dispatch],
   )
 
-  const startCreateBoard = useCallback(
-    () => dispatch({ type: 'startCreate' }),
-    [dispatch],
-  )
-
-  const endCreateBoard = useCallback(() => dispatch({ type: 'endCreate' }), [
-    dispatch,
-  ])
-
   const updateBoard = useCallback(
     (board: Board) => {
       dispatch({ type: 'updateBoard', payload: { board } })
@@ -101,13 +92,21 @@ export const useBoardsCore = (initialState?: Partial<State>) => {
     [dispatch],
   )
 
+  const startCreate = useCallback(() => dispatch({ type: 'startCreate' }), [
+    dispatch,
+  ])
+
+  const endCreate = useCallback(() => dispatch({ type: 'endCreate' }), [
+    dispatch,
+  ])
+
   return {
     state,
     dispatchers: {
       addBoard,
       updateBoards,
-      startCreateBoard,
-      endCreateBoard,
+      startCreate,
+      endCreate,
       updateBoard,
     },
   }
@@ -121,7 +120,3 @@ const BoardsStateContext = createContext<State>({
 })
 export const BoardsStateProvider = BoardsStateContext.Provider
 export const useBoardsState = (): State => useContext(BoardsStateContext)
-const BoardsDispatchContext = createContext<Dispatchers>({} as Dispatchers)
-export const BoardsDispatchProvider = BoardsDispatchContext.Provider
-export const useBoardsDispatch = (): Dispatchers =>
-  useContext(BoardsDispatchContext)

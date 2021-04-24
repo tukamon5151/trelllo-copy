@@ -26,12 +26,10 @@ export const ListsProviderContainer: React.VFC<Props> = ({
   initialState,
 }) => {
   const { state, dispatchers } = useListsCore(initialState)
-  const useCaseFunctions = createListUseCases(dispatchers)
+  const useCases = createListUseCases(dispatchers)
   return (
     <ListsStateProvider value={state}>
-      <ListUseCasesProvider value={useCaseFunctions}>
-        {children}
-      </ListUseCasesProvider>
+      <ListUseCasesProvider value={useCases}>{children}</ListUseCasesProvider>
     </ListsStateProvider>
   )
 }

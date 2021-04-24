@@ -41,10 +41,7 @@ export const createListUseCases = (dispatchers: Dispatchers) => {
   }
 }
 
-type UseCaseFunctions = ReturnType<typeof createListUseCases>
-const ListUseCasesContext = createContext<UseCaseFunctions>(
-  {} as UseCaseFunctions,
-)
+type UseCases = ReturnType<typeof createListUseCases>
+const ListUseCasesContext = createContext<UseCases>({} as UseCases)
 export const ListUseCasesProvider = ListUseCasesContext.Provider
-export const useListUseCases = () =>
-  useContext<UseCaseFunctions>(ListUseCasesContext)
+export const useListUseCases = () => useContext<UseCases>(ListUseCasesContext)

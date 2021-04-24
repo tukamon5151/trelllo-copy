@@ -49,6 +49,14 @@ export const createBoardUseCases = (dispatchers: Dispatchers) => {
     dispatchers.addBoard(board)
   }
 
+  const startCreateBoard = () => {
+    dispatchers.startCreate()
+  }
+
+  const endCreateBoard = () => {
+    dispatchers.endCreate()
+  }
+
   return {
     createBoard,
     getInitialBoards,
@@ -56,6 +64,8 @@ export const createBoardUseCases = (dispatchers: Dispatchers) => {
     removeBoardStar,
     updateBoardTitle,
     getInitialBoard,
+    startCreateBoard,
+    endCreateBoard,
   }
 }
 

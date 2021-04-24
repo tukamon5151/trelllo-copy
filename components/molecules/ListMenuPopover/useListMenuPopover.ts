@@ -11,6 +11,6 @@ export const useListMenuPopover = (listId: number) => {
     onOpen,
     onClose,
     isOpen,
-    archiveList
+    archiveList,
   }
 }

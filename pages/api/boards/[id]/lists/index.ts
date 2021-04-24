@@ -2,7 +2,7 @@ import { NextApiRequest, NextApiResponse } from 'next'
 import { plainToClass } from 'class-transformer'
 import { getCurrentUser } from '../../../../../lib/server/session'
 import { CreateList, GetLists } from '../../../../../dto/list'
-import { createList, getLists } from '../../../../../lib/server/useCase/list'
+import { createList, getLists } from '../../../../../lib/server/usecases/list'
 
 export default async function handle(
   req: NextApiRequest,

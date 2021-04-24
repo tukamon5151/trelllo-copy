@@ -2,7 +2,7 @@ import { NextApiRequest, NextApiResponse } from 'next'
 import { plainToClass } from 'class-transformer'
 import { getCurrentUser } from '../../../lib/server/session'
 import { UpdateUser } from '../../../dto/user'
-import { getUser, updateUser } from '../../../lib/server/useCase/user'
+import { getUser, updateUser } from '../../../lib/server/usecases/user'
 
 export default async function handler(
   req: NextApiRequest,

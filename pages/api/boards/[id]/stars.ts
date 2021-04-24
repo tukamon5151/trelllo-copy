@@ -3,7 +3,7 @@ import { getCurrentUser } from '../../../../lib/server/session'
 import {
   createBoardStar,
   deleteBoardStar,
-} from '../../../../lib/server/useCase/board'
+} from '../../../../lib/server/usecases/board'
 
 export default async function handler(
   req: NextApiRequest,

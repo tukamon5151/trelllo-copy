@@ -1,7 +1,7 @@
 import { NextApiRequest, NextApiResponse } from 'next'
 import { plainToClass } from 'class-transformer'
 import { getCurrentUser } from '../../../../lib/server/session'
-import { getBoard, updateBoard } from '../../../../lib/server/useCase/board'
+import { getBoard, updateBoard } from '../../../../lib/server/usecases/board'
 import { UpdateBoard } from '../../../../dto/board'
 
 export default async function handle(

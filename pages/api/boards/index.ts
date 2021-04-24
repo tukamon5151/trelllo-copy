@@ -2,7 +2,7 @@ import { NextApiRequest, NextApiResponse } from 'next'
 import { plainToClass } from 'class-transformer'
 import { getCurrentUser } from '../../../lib/server/session'
 import { CreateBoard } from '../../../dto/board'
-import { getBoards, createBoard } from '../../../lib/server/useCase/board'
+import { getBoards, createBoard } from '../../../lib/server/usecases/board'
 
 export default async function handler(
   req: NextApiRequest,

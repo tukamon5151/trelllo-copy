@@ -5,7 +5,7 @@ import { initMiddleware } from '../../../lib/server/middleware/initMiddleware'
 import { createUploader } from '../../../lib/server/multer'
 import { NextApiRequestsWithFormData } from '../../../lib/server/type/NextApiRequestsWithFormData'
 import { nextPublicUrl } from '../../../lib/server/nextPublicUrl'
-import { updateUser } from '../../../lib/server/useCase/user'
+import { updateUser } from '../../../lib/server/usecases/user'
 
 export const config = {
   api: {

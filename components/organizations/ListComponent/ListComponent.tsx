@@ -1,13 +1,10 @@
 // ===
 // @modules
-import {
-  Box,
-  Flex,
-  Heading,
-  BoxProps,
-} from '@chakra-ui/react'
+import { Box, Flex, BoxProps } from '@chakra-ui/react'
 import { List } from '../../../model/client/List'
 import { ListMenuPopover } from '../../molecules/ListMenuPopover/ListMenuPopover'
+import { Editable } from '../../atoms/Editable'
+import { useListComponent } from './useListComponent'
 
 // ===
 // @interface
@@ -19,12 +16,20 @@ export interface Props extends BoxProps {
 // ===
 // @view
 export const ListComponent: React.VFC<Props> = ({ list, ...other }) => {
+  const { value, onSubmit, onChange } = useListComponent(list)
+
   return (
     <Box borderRadius={3} bg="gray.100" p={2} {...other}>
       <Flex alignItems="center">
-        <Heading flex={1} size="sm">
-          {list.name}
-        </Heading>
+        <Editable
+          defaultValue={list.name}
+          value={value}
+          onSubmit={onSubmit}
+          onChange={onChange}
+          flex={1}
+          size="sm"
+          fontWeight="bold"
+        />
         <ListMenuPopover listId={list.id} />
       </Flex>
     </Box>

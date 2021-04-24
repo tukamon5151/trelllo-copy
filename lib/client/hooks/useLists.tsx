@@ -94,10 +94,7 @@ export const useListsCore = (initialState?: Partial<State>) => {
   )
 
   const updateList = useCallback(
-    async (dto: UpdateList) => {
-      const list = await updateListRequest(dto)
-      dispatch({ type: 'updateList', payload: { list } })
-    },
+    async (list: List) => dispatch({ type: 'updateList', payload: { list } }),
     [dispatch],
   )
 
@@ -114,12 +111,13 @@ export const useListsCore = (initialState?: Partial<State>) => {
     dispatchers: {
       createList,
       getListsByBoardId,
-      archiveList
+      archiveList,
+      updateList,
     },
   }
 }
 
-type Dispatchers = TypeUtil.Dispatchers<typeof useListsCore>
+export type Dispatchers = TypeUtil.Dispatchers<typeof useListsCore>
 
 const ListsStateContext = createContext<State>({ lists: [] })
 export const ListsStateProvider = ListsStateContext.Provider

@@ -1,5 +1,5 @@
 import { useContext, createContext } from 'react'
-import { Dispatchers } from '../hooks/useLists'
+import { Dispatchers } from '../state/lists'
 import {
   updateListRequest,
   createListRequest,

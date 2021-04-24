@@ -11,7 +11,7 @@ import {
   LinkOverlay,
 } from '@chakra-ui/react'
 import { Board } from '../../../model/client/Bard'
-import { useBoardsDispatch } from '../../../lib/client/hooks/useBoards'
+import { useBoardsDispatch } from '../../../lib/client/state/boards'
 import { BoardStar } from '../../atoms/BoardStar'
 
 // ===

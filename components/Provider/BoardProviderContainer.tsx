@@ -5,7 +5,7 @@ import {
   useBoardsCore,
   BoardsStateProvider,
   BoardsDispatchProvider,
-} from '../../lib/client/hooks/useBoards'
+} from '../../lib/client/state/boards'
 import { CreateBoardModal } from '../organizations/CreateBoardModal'
 
 // ===

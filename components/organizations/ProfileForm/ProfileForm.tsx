@@ -8,7 +8,7 @@ import {
   patchMeRequest,
   patchIconRequest,
 } from '../../../lib/client/requests/userRequest'
-import { useMeState, useMeDispatch } from '../../../lib/client/hooks/useMe'
+import { useMeState, useMeDispatch } from '../../../lib/client/state/me'
 import { Values } from './FormValues'
 import { validationSchema } from './validationSchema'
 

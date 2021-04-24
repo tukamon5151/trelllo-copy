@@ -18,7 +18,7 @@ import { BoardCard } from '../../molecules/BoardCard'
 import {
   useBoardsDispatch,
   useBoardsState,
-} from '../../../lib/client/hooks/useBoards'
+} from '../../../lib/client/state/boards'
 
 // ===
 // @interface

@@ -2,7 +2,7 @@ import {
   State,
   useListsCore,
   ListsStateProvider,
-} from '../../lib/client/hooks/useLists'
+} from '../../lib/client/state/lists'
 import {
   createListUseCases,
   ListUseCasesProvider,

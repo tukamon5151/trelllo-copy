@@ -3,8 +3,8 @@ import { useEffect } from 'react'
 import {
   useBoardsDispatch,
   useBoardsState,
-} from '../../../lib/client/hooks/useBoards'
-import { useListsState } from '../../../lib/client/hooks/useLists'
+} from '../../../lib/client/state/boards'
+import { useListsState } from '../../../lib/client/state/lists'
 import { useListUseCases } from '../../../lib/client/useCases/list'
 import { findBoard } from '../../../lib/client/selectors/board'
 import { Board } from '../../../model/client/Bard'

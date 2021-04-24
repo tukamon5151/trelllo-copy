@@ -7,7 +7,7 @@ import { useLogin } from '../../lib/client/hooks/useLogin'
 import {
   useBoardsDispatch,
   useBoardsState,
-} from '../../lib/client/hooks/useBoards'
+} from '../../lib/client/state/boards'
 import { LoginLayout } from '../../components/templates/LoginLayout/LoginLayout'
 import { Boards } from '../../components/templates/Boards/Boards'
 

@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { useBoardsDispatch } from '../../../lib/client/hooks/useBoards'
+import { useBoardsDispatch } from '../../../lib/client/state/boards'
 import { NotEmptyString } from '../../../lib/isNotEmptyString'
 import { Board } from '../../../model/client/Bard'
 

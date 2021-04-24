@@ -1,10 +1,15 @@
 import { Dispatchers } from '../hooks/useLists'
-import { updateListRequest } from '../requests/listRequest'
-import { UpdateList } from '../../../dto/list'
+import { updateListRequest, createListRequest } from '../requests/listRequest'
+import { CreateList, UpdateList } from '../../../dto/list'
 import { NotEmptyString } from '../../isNotEmptyString'
 import { useContext, createContext } from 'react'
 
 export const createListUseCases = (dispatchers: Dispatchers) => {
+  const createList = async (dto: CreateList) => {
+    const list = await createListRequest(dto)
+    dispatchers.addList(list)
+  }
+
   const updateListTitle = async <T extends string>(
     listId: number,
     name: NotEmptyString<T>,
@@ -16,6 +21,7 @@ export const createListUseCases = (dispatchers: Dispatchers) => {
 
   return {
     updateListTitle,
+    createList
   }
 }
 

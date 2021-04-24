@@ -6,9 +6,7 @@ import {
   useCallback,
 } from 'react'
 import { List } from '../../../model/client/List'
-import { CreateList } from '../../../dto/list'
 import {
-  createListRequest,
   getListsRequest,
   updateListRequest,
 } from '../requests/listRequest'
@@ -74,9 +72,8 @@ export const useListsCore = (initialState?: Partial<State>) => {
     createInitialState(initialState),
   )
 
-  const createList = useCallback(
-    async (listDto: CreateList) => {
-      const list = await createListRequest(listDto)
+  const addList = useCallback(
+    (list: List) => {
       dispatch({ type: 'addList', payload: { list } })
     },
     [dispatch],
@@ -109,7 +106,7 @@ export const useListsCore = (initialState?: Partial<State>) => {
   return {
     state,
     dispatchers: {
-      createList,
+      addList,
       getListsByBoardId,
       archiveList,
       updateList,

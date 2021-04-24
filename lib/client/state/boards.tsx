@@ -6,13 +6,7 @@ import {
   useCallback,
 } from 'react'
 import { Board } from '../../../model/client/Bard'
-import { UpdateBoard } from '../../../dto/board'
-import {
-  getBoardRequest,
-  addStarRequest,
-  removeStarRequest,
-  updateBoardRequest,
-} from '../requests/boardRequest'
+import { getBoardRequest } from '../requests/boardRequest'
 import { findBoard } from '../selectors/board'
 
 export type State = {
@@ -102,25 +96,8 @@ export const useBoardsCore = (initialState?: Partial<State>) => {
     dispatch,
   ])
 
-  const addStar = useCallback(
-    async (boardId: number) => {
-      const board = await addStarRequest(boardId)
-      dispatch({ type: 'updateBoard', payload: { board } })
-    },
-    [dispatch],
-  )
-
-  const removeStar = useCallback(
-    async (boardId: number) => {
-      const board = await removeStarRequest(boardId)
-      dispatch({ type: 'updateBoard', payload: { board } })
-    },
-    [dispatch],
-  )
-
   const updateBoard = useCallback(
-    async (dto: UpdateBoard) => {
-      const board = await updateBoardRequest(dto)
+    (board: Board) => {
       dispatch({ type: 'updateBoard', payload: { board } })
     },
     [dispatch],
@@ -146,8 +123,6 @@ export const useBoardsCore = (initialState?: Partial<State>) => {
       updateBoards,
       startCreateBoard,
       endCreateBoard,
-      addStar,
-      removeStar,
       getBoard,
       updateBoard,
     },

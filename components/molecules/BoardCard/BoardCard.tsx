@@ -11,7 +11,7 @@ import {
   LinkOverlay,
 } from '@chakra-ui/react'
 import { Board } from '../../../model/client/Bard'
-import { useBoardsDispatch } from '../../../lib/client/state/boards'
+import { useBoardUseCases } from '../../../lib/client/useCases/board'
 import { BoardStar } from '../../atoms/BoardStar'
 
 // ===
@@ -26,14 +26,14 @@ export type Props = {
 // @view
 export const BoardCard = forwardRef<HTMLAnchorElement, Props>(
   function BoardCard({ href, board, ...other }, ref) {
-    const { addStar, removeStar } = useBoardsDispatch()
+    const { addBoardStar, removeBoardStar } = useBoardUseCases()
     const onAddStar: React.MouseEventHandler = (e) => {
       e.preventDefault()
-      addStar(board.id)
+      addBoardStar(board.id)
     }
     const onRemoveStar: React.MouseEventHandler = (e) => {
       e.preventDefault()
-      removeStar(board.id)
+      removeBoardStar(board.id)
     }
 
     return (

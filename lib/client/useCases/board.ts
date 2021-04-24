@@ -12,6 +12,7 @@ import {
 
 import { CreateBoard, UpdateBoard } from '../../../dto/board'
 import { Board } from '../../../model/client/Bard'
+import { NotEmptyString } from '../../isNotEmptyString'
 
 export const createBoardUseCases = (dispatchers: Dispatchers) => {
   const createBoard = async (dto: CreateBoard): Promise<Board> => {
@@ -25,9 +26,30 @@ export const createBoardUseCases = (dispatchers: Dispatchers) => {
     dispatchers.updateBoards(boards)
   }
 
+  const addBoardStar = async (boardId: number) => {
+    const board = await addStarRequest(boardId)
+    dispatchers.updateBoard(board)
+  }
+
+  const removeBoardStar = async (boardId: number) => {
+    const board = await removeStarRequest(boardId)
+    dispatchers.updateBoard(board)
+  }
+
+  const updateBoardTitle = async <T extends string>(dto: {
+    id: number
+    title: NotEmptyString<T>
+  }) => {
+    const board = await updateBoardRequest(dto as UpdateBoard)
+    dispatchers.updateBoard(board)
+  }
+
   return {
     createBoard,
-    getInitialBoards
+    getInitialBoards,
+    addBoardStar,
+    removeBoardStar,
+    updateBoardTitle,
   }
 }
 

@@ -3,7 +3,7 @@
 import { Flex, Box } from '@chakra-ui/react'
 import { Dispatch, SetStateAction } from 'react'
 import { MenuType } from '../../organizations/ListMenuPopover/useListMenuPopover'
-import { useListMenuInitialBody } from './useListMenuInitialBody'
+import { useListMenuInitial } from './useListMenuInitial'
 
 // ===
 // @interface
@@ -15,13 +15,13 @@ export interface Props {
 
 // ===
 // @view
-export const ListMenuInitialBody: React.VFC<Props> = ({
+export const ListMenuInitial: React.VFC<Props> = ({
   listId,
   setMenuType,
 }) => {
-  const { archiveList } = useListMenuInitialBody(listId)
+  const { archiveList } = useListMenuInitial(listId)
   return (
-    <Flex direction="column">
+    <Flex direction="column" cursor="pointer">
       <Box
         onClick={archiveList}
         _hover={{

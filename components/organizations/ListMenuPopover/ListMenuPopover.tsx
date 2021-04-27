@@ -15,17 +15,22 @@ import {
 } from '@chakra-ui/react'
 import { GrFormPrevious } from 'react-icons/gr'
 import { ListMenuIcon } from '../../atoms/ListMenuIcon'
-import { ListMenuInitialBody } from '../../molecules/ListMenuInitialBody'
+import { ListMenuInitial } from '../../molecules/ListMenuInitial'
+import { ListMenuMoveList } from '../../molecules/ListMenuMoveList'
 import { useListMenuPopover } from './useListMenuPopover'
 
 // ===
 // @interface
 
-export type Props = { listId: number } & PopoverProps
+export type Props = { listId: number; currentIndex: number } & PopoverProps
 
 // ===
 // @view
-export const ListMenuPopover: React.VFC<Props> = ({ listId, ...other }) => {
+export const ListMenuPopover: React.VFC<Props> = ({
+  listId,
+  currentIndex,
+  ...other
+}) => {
   const {
     isOpen,
     onOpen,
@@ -38,9 +43,9 @@ export const ListMenuPopover: React.VFC<Props> = ({ listId, ...other }) => {
   const Body = () => {
     switch (menuType) {
       case 'initial':
-        return <ListMenuInitialBody listId={listId} setMenuType={setMenuType} />
+        return <ListMenuInitial listId={listId} setMenuType={setMenuType} />
       case 'moveList':
-        return <div>move list</div>
+        return <ListMenuMoveList listId={listId} currentIndex={currentIndex} />
     }
   }
 

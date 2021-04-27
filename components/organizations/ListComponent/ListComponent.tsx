@@ -11,11 +11,12 @@ import { useListComponent } from './useListComponent'
 
 export interface Props extends BoxProps {
   list: List
+  currentIndex: number
 }
 
 // ===
 // @view
-export const ListComponent: React.VFC<Props> = ({ list, ...other }) => {
+export const ListComponent: React.VFC<Props> = ({ list, currentIndex, ...other }) => {
   const { name, onSubmit, onChange } = useListComponent(list)
 
   return (
@@ -30,7 +31,7 @@ export const ListComponent: React.VFC<Props> = ({ list, ...other }) => {
           size="sm"
           fontWeight="bold"
         />
-        <ListMenuPopover listId={list.id} />
+        <ListMenuPopover listId={list.id} currentIndex={currentIndex} />
       </Flex>
     </Box>
   )

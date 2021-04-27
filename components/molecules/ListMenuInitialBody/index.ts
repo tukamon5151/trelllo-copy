@@ -1,1 +1,0 @@
-export { ListMenuInitialBody } from './ListMenuInitialBody'

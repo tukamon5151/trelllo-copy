@@ -8,7 +8,7 @@ const INITIAL_POSITION = PER_POSITION - 1
 
 export const useSortable = (sortables: Sortable[]) => {
   const isEmpty = () => sortables.length === 0
-  const isDisabled = () => sortables.length > 1
+  const isDisabled = () => sortables.length <= 1
   const getPrev = (order: number): Sortable | undefined => {
     if (isDisabled()) return
     return sortables.find((_, index) => index - 1 === order)

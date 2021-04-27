@@ -8,9 +8,14 @@ type Props = {
 }
 
 export const useListMenuCore = ({ listId, currentIndex }: Props) => {
-  const { onOpen, onClose, isOpen } = useDisclosure()
+  const { onOpen, onClose: onModalClose, isOpen } = useDisclosure()
   const [menuType, setMenuType] = useState<MenuType>('initial')
   const isInitial = () => menuType === 'initial'
+  const initMenu = () => setMenuType('initial')
+  const onClose = () => {
+    onModalClose()
+    initMenu()
+  }
 
   return {
     listId,

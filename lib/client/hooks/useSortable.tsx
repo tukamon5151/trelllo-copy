@@ -3,8 +3,8 @@ type Sortable = {
 }
 
 const MIN_POSITION = 0
-const PER_POSITION = 6356
-const INITIAL_POSITION = PER_POSITION + 1
+const PER_POSITION = 65536
+const INITIAL_POSITION = PER_POSITION - 1
 
 export const useSortable = (sortables: Sortable[]) => {
   const isEmpty = () => sortables.length === 0

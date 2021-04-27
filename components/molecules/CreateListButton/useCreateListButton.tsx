@@ -1,8 +1,8 @@
 import { useEffect, useRef, useState } from 'react'
 import { useListUseCases } from '../../../lib/client/useCases/list'
 import { useListsState } from '../../../lib/client/state/lists'
-import { Props } from './CreateListButton'
 import { useSortable } from '../../../lib/client/hooks/useSortable'
+import { Props } from './CreateListButton'
 
 type State = {
   name: string

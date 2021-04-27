@@ -2,7 +2,7 @@
 // @modules
 import { Box, Flex, BoxProps } from '@chakra-ui/react'
 import { List } from '../../../model/client/List'
-import { ListMenuPopover } from '../../molecules/ListMenuPopover'
+import { ListMenuPopover } from '../ListMenuPopover'
 import { Editable } from '../../atoms/Editable'
 import { useListComponent } from './useListComponent'
 

@@ -5,9 +5,9 @@ import { Flex, useToast } from '@chakra-ui/react'
 import { IconChanger } from '../../molecules/IconChanger'
 import { ProfileTextForm } from '../../molecules/ProfileTextForm/ProfileTextForm'
 import { useMeUseCases } from '../../../lib/client/useCases/me'
+import { User } from '../../../model/client/User'
 import { Values } from './FormValues'
 import { validationSchema } from './validationSchema'
-import { User } from '../../../model/client/User'
 
 // ===
 // @interface

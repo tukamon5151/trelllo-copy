@@ -1,8 +1,8 @@
+import { Base as ListComponent } from '../ListComponent/ListComponent.stories'
 import { ListMenuPopover, Props } from './ListMenuPopover'
-import { Base as ListComponent } from '../../organizations/ListComponent/ListComponent.stories'
 
 export default {
-  title: 'molecules/ListMenuPopover',
+  title: 'organizations/ListMenuPopover',
   component: ListMenuPopover,
 }
 

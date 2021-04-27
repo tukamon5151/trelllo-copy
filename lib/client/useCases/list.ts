@@ -33,11 +33,17 @@ export const createListUseCases = (dispatchers: Dispatchers) => {
     dispatchers.updateLists(lists, boardId)
   }
 
+  const sortList = async (id: number, position: number) => {
+    const list = await updateListRequest({ id, position })
+    dispatchers.updateList(list)
+  }
+
   return {
     updateListTitle,
     createList,
     archiveList,
     getInitialLists,
+    sortList,
   }
 }
 

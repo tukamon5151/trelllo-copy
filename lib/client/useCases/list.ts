@@ -7,6 +7,7 @@ import {
 } from '../requests/listRequest'
 import { CreateList, UpdateList } from '../../../dto/list'
 import { NotEmptyString } from '../../isNotEmptyString'
+import { List } from '../../../model/client/List'
 
 export const createListUseCases = (dispatchers: Dispatchers) => {
   const createList = async (dto: CreateList) => {
@@ -33,9 +34,13 @@ export const createListUseCases = (dispatchers: Dispatchers) => {
     dispatchers.updateLists(lists, boardId)
   }
 
-  const moveList = async (id: number, position: number) => {
+  const updateListPosition = async (id: number, position: number) => {
     const list = await updateListRequest({ id, position })
     dispatchers.updateList(list)
+  }
+
+  const moveList = (list: List, position: number) => {
+    dispatchers.updateList({ ...list, position })
   }
 
   return {
@@ -44,6 +49,7 @@ export const createListUseCases = (dispatchers: Dispatchers) => {
     archiveList,
     getInitialLists,
     moveList,
+    updateListPosition,
   }
 }
 

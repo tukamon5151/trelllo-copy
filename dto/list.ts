@@ -8,6 +8,7 @@ export class GetLists {
 export class CreateList {
   @Expose() name: string
   @Expose() boardId: number
+  @Expose() position: number
 }
 
 export class UpdateList {
@@ -15,6 +16,7 @@ export class UpdateList {
   @Expose() name?: string
   @Expose() boardId?: number
   @Expose() closed?: boolean
+  @Expose() position?: number
 }
 
 export class ResponseList {
@@ -22,4 +24,5 @@ export class ResponseList {
   @Expose() name: string
   @Expose() boardId: number
   @Expose() closed: boolean
+  @Expose() position: number
 }

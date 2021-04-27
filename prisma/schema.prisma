@@ -57,6 +57,7 @@ model List {
   createdAt DateTime @default(now()) @map(name: "created_at")
   updatedAt DateTime @default(now()) @map(name: "updated_at")
   closed    Boolean  @default(false)
+  position  Float  @default(65536)
 
   @@map(name: "lists")
 }

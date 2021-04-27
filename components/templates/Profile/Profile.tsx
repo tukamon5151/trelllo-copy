@@ -7,7 +7,7 @@ import { User } from '../../../model/client/User'
 // ===
 // @interface
 export interface Props {
-  user: User
+  user?: User
 }
 
 // ===
@@ -21,7 +21,7 @@ export const Profile: React.FC<Props> = ({ user }) => {
       <Box mb={10} bg="blue.200" p={5}>
         なんかタブがあって、いつか実装される
       </Box>
-      <ProfileForm />
+      <ProfileForm user={user} />
     </Box>
   )
 }

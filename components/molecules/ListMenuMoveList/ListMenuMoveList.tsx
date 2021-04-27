@@ -6,21 +6,12 @@ import { useListMenuMoveList } from './useListMenuMoveList'
 // ===
 // @interface
 
-interface Props extends BoxProps {
-  listId: number
-  currentIndex: number
-}
+type Props = BoxProps
 
 // ===
 // @view
-export const ListMenuMoveList: React.VFC<Props> = ({
-  listId,
-  currentIndex,
-}) => {
-  const { onSubmit, index, onChange, range } = useListMenuMoveList(
-    listId,
-    currentIndex,
-  )
+export const ListMenuMoveList: React.VFC<Props> = () => {
+  const { onSubmit, index, onChange, range } = useListMenuMoveList()
 
   return (
     <Box>

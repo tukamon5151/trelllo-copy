@@ -7,10 +7,17 @@ export const useListMenuMoveList = (listId: number, currentIndex: number) => {
   const [index, setIndex] = useState<number>(currentIndex)
   const { lists } = useListsState()
   const { moveList } = useListUseCases()
-  const { getPosition } = useSortable(lists)
+  const { getPosition, isDisabled } = useSortable(lists)
 
   const onSubmit = async () => {
-    const position = getPosition(index)
+    await onMoveList()
+    // TODO: あとでメニュー閉じる処理書く
+  }
+
+  const onMoveList = async () => {
+    if (isDisabled()) return
+    if (index === currentIndex) return
+    const position = getPosition(index, currentIndex)
     if (!position) return
     await moveList(listId, position)
   }

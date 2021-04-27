@@ -32,7 +32,9 @@ export const ListMenuMoveList: React.VFC<Props> = ({
         mb={2}
       >
         {range().map((i) => (
-          <option value={String(i)} key={i}>{i + 1}</option>
+          <option value={String(i)} key={i}>
+            {i + 1}
+          </option>
         ))}
       </Select>
       <Button onClick={onSubmit} colorScheme="green">

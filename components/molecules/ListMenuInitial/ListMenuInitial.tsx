@@ -15,10 +15,7 @@ export interface Props {
 
 // ===
 // @view
-export const ListMenuInitial: React.VFC<Props> = ({
-  listId,
-  setMenuType,
-}) => {
+export const ListMenuInitial: React.VFC<Props> = ({ listId, setMenuType }) => {
   const { archiveList } = useListMenuInitial(listId)
   return (
     <Flex direction="column" cursor="pointer">

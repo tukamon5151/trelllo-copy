@@ -16,7 +16,11 @@ export interface Props extends BoxProps {
 
 // ===
 // @view
-export const ListComponent: React.VFC<Props> = ({ list, currentIndex, ...other }) => {
+export const ListComponent: React.VFC<Props> = ({
+  list,
+  currentIndex,
+  ...other
+}) => {
   const { name, onSubmit, onChange } = useListComponent(list)
 
   return (

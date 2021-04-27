@@ -6,7 +6,7 @@ const MIN_POSITION = 0
 const PER_POSITION = 65536
 const INITIAL_POSITION = PER_POSITION - 1
 
-const sortByPosition = (list: Sortable[]) =>
+export const sortByPosition = <T extends Sortable>(list: T[]) =>
   list.sort((a, b) => a.position - b.position)
 
 export const useSortable = <T extends Sortable>(list: T[]) => {

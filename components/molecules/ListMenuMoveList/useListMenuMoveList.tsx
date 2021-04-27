@@ -8,7 +8,7 @@ export const useListMenuMoveList = () => {
   const { listId, onClose, currentIndex } = useListMenu()
   const [index, setIndex] = useState<number>(currentIndex)
   const { lists } = useListsState()
-  const { moveList } = useListUseCases()
+  const { updateListPosition } = useListUseCases()
   const { getPosition, isDisabled } = useSortable(lists)
 
   const onSubmit = async () => {
@@ -21,7 +21,7 @@ export const useListMenuMoveList = () => {
     if (index === currentIndex) return
     const position = getPosition(index, currentIndex)
     if (!position) return
-    await moveList(listId, position)
+    await updateListPosition(listId, position)
   }
 
   const onChange: ChangeEventHandler<HTMLSelectElement> = (e) => {

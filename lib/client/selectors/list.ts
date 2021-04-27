@@ -11,8 +11,5 @@ export const refreshByBoardId = (
   return [...excludeByBoardId(lists, boardId), ...mergeLists]
 }
 
-export const sortByPosition = (lists: List[]) =>
-  lists.sort((a, b) => a.position - b.position)
-
 const excludeByBoardId = (lists: List[], boardId: number): List[] =>
   lists.filter((list) => list.boardId !== boardId)

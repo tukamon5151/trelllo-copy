@@ -3,6 +3,10 @@ import {
   useCardsCore,
   State,
 } from '../../lib/client/state/card'
+import {
+  createCardUseCase,
+  CardUseCasesProvider,
+} from '../../lib/client/useCases/card'
 
 // ===
 // @modules
@@ -21,6 +25,11 @@ export const CardProviderContainer: React.VFC<Props> = ({
   children,
   initialState,
 }) => {
-  const { state } = useCardsCore(initialState)
-  return <CardsStateProvider value={state}>{children}</CardsStateProvider>
+  const { state, dispatchers } = useCardsCore(initialState)
+  const useCases = createCardUseCase(dispatchers)
+  return (
+    <CardsStateProvider value={state}>
+      <CardUseCasesProvider value={useCases}>{children}</CardUseCasesProvider>
+    </CardsStateProvider>
+  )
 }

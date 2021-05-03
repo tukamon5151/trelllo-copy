@@ -3,6 +3,7 @@
 import { BoardsProviderContainer } from './BoardProviderContainer'
 import { MeProviderContainer } from './MeProviderContainer'
 import { ListsProviderContainer } from './ListsProviderContainer'
+import { CardProviderContainer } from './CardProviderContainer'
 
 // ===
 // @interface
@@ -14,10 +15,12 @@ type Props = {
 // @view
 export const BaseProvider: React.VFC<Props> = ({ children }) => {
   return (
-    <ListsProviderContainer>
-      <BoardsProviderContainer>
-        <MeProviderContainer>{children}</MeProviderContainer>
-      </BoardsProviderContainer>
-    </ListsProviderContainer>
+    <CardProviderContainer>
+      <ListsProviderContainer>
+        <BoardsProviderContainer>
+          <MeProviderContainer>{children}</MeProviderContainer>
+        </BoardsProviderContainer>
+      </ListsProviderContainer>
+    </CardProviderContainer>
   )
 }

@@ -14,7 +14,7 @@ export const createCardUseCase = (dispatchers: Dispatchers) => {
   }
 
   return {
-    createCard
+    createCard,
   }
 }
 
@@ -22,4 +22,3 @@ type UseCase = ReturnType<typeof createCardUseCase>
 const CardUseCasesContext = createContext<UseCase>({} as UseCase)
 export const CardUseCasesProvider = CardUseCasesContext.Provider
 export const useCardUseCases = () => useContext<UseCase>(CardUseCasesContext)
-

@@ -26,7 +26,7 @@ export const BoardBody: React.VFC<Props> = ({ boardId, ...other }) => {
             list={list}
             currentIndex={index}
             key={list.id}
-            minW={60}
+            minW={80}
           />
         ))}
         <Box pr={2}>

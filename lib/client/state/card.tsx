@@ -46,7 +46,7 @@ export const useCardsCore = (initialState?: Partial<State>) => {
   return {
     state,
     dispatchers: {
-      addCard
+      addCard,
     },
   }
 }

@@ -8,11 +8,10 @@ type CreateCardResponse = {
 }
 
 export const createCardRequest = async (
-  listId: number,
   card: CreateCard,
 ): Promise<Card> => {
   const response = (await postRequest(
-    `/api/lists/${listId}/cards`,
+    `/api/lists/${card.listId}/cards`,
     JSON.stringify({ card }),
   )) as CreateCardResponse
   return transformClass(response.card) as Card

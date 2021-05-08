@@ -1,5 +1,6 @@
 import { useContext, createContext } from 'react'
 import { Dispatchers } from '../state/card'
+import { createCardRequest } from '../requests/cardRequest'
 
 export const createCardUseCase = (dispatchers: Dispatchers) => {
   const createCard = async ({
@@ -9,7 +10,7 @@ export const createCardUseCase = (dispatchers: Dispatchers) => {
     title: string
     listId: number
   }) => {
-    const card = { id: 1, title, listId }
+    const card = await createCardRequest({ title, listId })
     dispatchers.addCard(card)
   }
 

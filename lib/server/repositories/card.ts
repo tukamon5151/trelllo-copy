@@ -10,7 +10,8 @@ export const createCardRequest = async (dto: CreateCard): Promise<Card> => {
 }
 
 export const getCardsRequest = async (dto: GetCards): Promise<Card[]> => {
+  const where = dto.listIds?.length ? { listId: { in: dto.listIds } } : {}
   return await prisma.card.findMany({
-    where: selectExistsProps(dto)
+    where: selectExistsProps(where),
   })
 }

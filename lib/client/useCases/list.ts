@@ -29,11 +29,6 @@ export const createListUseCases = (dispatchers: Dispatchers) => {
     dispatchers.deleteList(id)
   }
 
-  const getInitialLists = async (boardId: number) => {
-    const lists = await getListsRequest({ boardId, closed: false })
-    dispatchers.updateLists(lists, boardId)
-  }
-
   const updateListPosition = async (id: number, position: number) => {
     const list = await updateListRequest({ id, position })
     dispatchers.updateList(list)
@@ -47,7 +42,6 @@ export const createListUseCases = (dispatchers: Dispatchers) => {
     updateListTitle,
     createList,
     archiveList,
-    getInitialLists,
     moveList,
     updateListPosition,
   }

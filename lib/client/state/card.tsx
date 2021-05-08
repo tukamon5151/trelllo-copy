@@ -11,15 +11,22 @@ export type State = {
   cards: Card[]
 }
 
-type Action = {
-  type: 'addCard'
-  payload: { card: Card }
-}
+type Action =
+  | {
+      type: 'addCard'
+      payload: { card: Card }
+    }
+  | {
+      type: 'updateCards'
+      payload: { cards: Card[] }
+    }
 
 const reducer: Reducer<State, Action> = (state, action) => {
   switch (action.type) {
     case 'addCard':
       return { cards: [...state.cards, action.payload.card] }
+    case 'updateCards':
+      return { cards: action.payload.cards }
     default:
       throw new Error()
   }
@@ -43,10 +50,15 @@ export const useCardsCore = (initialState?: Partial<State>) => {
     [dispatch],
   )
 
+  const updateCards = useCallback((cards: Card[]) => {
+    dispatch({ type: 'updateCards', payload: { cards } })
+  }, [])
+
   return {
     state,
     dispatchers: {
       addCard,
+      updateCards
     },
   }
 }

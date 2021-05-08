@@ -1,6 +1,6 @@
 import { useContext, createContext } from 'react'
 import { Dispatchers } from '../state/card'
-import { createCardRequest } from '../requests/cardRequest'
+import { createCardRequest, getCardsRequest } from '../requests/cardRequest'
 
 export const createCardUseCase = (dispatchers: Dispatchers) => {
   const createCard = async ({

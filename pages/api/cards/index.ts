@@ -1,12 +1,12 @@
 import { NextApiRequest, NextApiResponse } from 'next'
-import { useCurrentUser } from '../../../lib/client/hooks/useCurrentUser'
+import { getCurrentUser } from '../../../lib/server/session'
 import { getCards } from '../../../lib/server/usecases/card'
 
 export default async function handle(
   req: NextApiRequest,
   res: NextApiResponse,
 ) {
-  const currentUser = useCurrentUser()
+  const currentUser = getCurrentUser(req)
 
   if (!currentUser) {
     return res.status(404).end()

@@ -24,7 +24,7 @@ export const getCardsRequest = async (listIds: number[]): Promise<Card[]> => {
     listIds.map((listId) => ['listIds', String(listId)]),
   )
   const response = (await getRequest(
-    `/api/cards/?listIds=?${query}`,
+    `/api/cards/?${query}`,
   )) as GetCardsResponse
   return transformClass(response.cards) as Card[]
 }

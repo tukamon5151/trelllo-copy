@@ -1,11 +1,16 @@
 import { plainToClass } from 'class-transformer'
 import { Card } from '@prisma/client'
-import { CreateCard, ResponseCard } from '../../../dto/card'
-import { createCardRequest } from '../repositories/card'
+import { CreateCard, GetCards, ResponseCard } from '../../../dto/card'
+import { createCardRequest, getCardsRequest } from '../repositories/card'
 
 export const createCard = async (dto: CreateCard): Promise<ResponseCard> => {
   const data = await createCardRequest(dto)
   return transformClass(data) as ResponseCard
+}
+
+export const getCards = async (dto: GetCards): Promise<ResponseCard[]> => {
+  const data = await getCardsRequest(dto)
+  return transformClass(data) as ResponseCard[]
 }
 
 const transformClass = (data: Card | Card[]): ResponseCard | ResponseCard[] => {

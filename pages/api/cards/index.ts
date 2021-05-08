@@ -1,5 +1,6 @@
 import { NextApiRequest, NextApiResponse } from 'next'
 import { useCurrentUser } from '../../../lib/client/hooks/useCurrentUser'
+import { getCards } from '../../../lib/server/usecases/card'
 
 export default async function handle(
   req: NextApiRequest,
@@ -19,8 +20,8 @@ export default async function handle(
           ? listIds.map((listId) => Number(listId))
           : undefined,
       }
-      // const cards = await getCards(dto)
-      // return res.status(200).json({ cards })
+      const cards = await getCards(dto)
+      return res.status(200).json({ cards })
     }
   }
 

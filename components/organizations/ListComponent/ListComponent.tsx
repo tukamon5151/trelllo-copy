@@ -5,6 +5,7 @@ import { Box, Flex, BoxProps } from '@chakra-ui/react'
 import { List } from '../../../model/client/List'
 import { ListMenuPopover } from '../ListMenuPopover'
 import { Editable } from '../../atoms/Editable'
+import { CreateCardButton } from '../../molecules/CreateCardButton/CreateCardButton'
 import { useListComponent } from './useListComponent'
 import { useListDrag } from './useListDrag'
 
@@ -24,7 +25,7 @@ export const ListComponent: React.VFC<Props> = ({
   currentIndex,
   ...other
 }) => {
-  const { name, onSubmit, onChange } = useListComponent(list)
+  const { name, onSubmit, onChange, cards } = useListComponent(list)
   const { onDragStart, onDragEnd, onViewportBoxUpdate, ref } = useListDrag({
     currentIndex,
     list,
@@ -39,13 +40,13 @@ export const ListComponent: React.VFC<Props> = ({
       onDragStart={onDragStart}
       onDragEnd={onDragEnd}
       onViewportBoxUpdate={onViewportBoxUpdate}
-      whileTap={{ scale: 1.1, zIndex: 1 }}
+      whileTap={{ zIndex: 1 }}
       layout
       ref={ref}
       {...other}
     >
       <Box borderRadius={3} bg="gray.100" p={2}>
-        <Flex alignItems="center">
+        <Flex alignItems="center" mb={2}>
           <Editable
             defaultValue={list.name}
             value={name}
@@ -57,6 +58,12 @@ export const ListComponent: React.VFC<Props> = ({
           />
           <ListMenuPopover listId={list.id} currentIndex={currentIndex} />
         </Flex>
+        {cards.map((card) => (
+          <Box key={card.id} mb={2}>
+            {card.title}
+          </Box>
+        ))}
+        <CreateCardButton listId={list.id} />
       </Box>
     </MotionBox>
   )

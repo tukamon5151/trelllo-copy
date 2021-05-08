@@ -1,5 +1,7 @@
 import { useContext, createContext } from 'react'
-import { Dispatchers } from '../state/boards'
+import { Dispatchers as BoardsDispatchers } from '../state/boards'
+import { Dispatchers as ListsDispatchers } from '../state/lists'
+import { Dispatchers as CardsDispatchers } from '../state/card'
 
 import {
   createBoardRequest,
@@ -13,6 +15,13 @@ import {
 import { CreateBoard, UpdateBoard } from '../../../dto/board'
 import { Board } from '../../../model/client/Bard'
 import { NotEmptyString } from '../../isNotEmptyString'
+import { getListsRequest } from '../requests/listRequest'
+import { getCardsRequest } from '../requests/cardRequest'
+
+type Dispatchers = BoardsDispatchers & {
+  updateLists: ListsDispatchers['updateLists']
+  updateCards: CardsDispatchers['updateCards']
+}
 
 export const createBoardUseCases = (dispatchers: Dispatchers) => {
   const createBoard = async (dto: CreateBoard): Promise<Board> => {
@@ -44,9 +53,15 @@ export const createBoardUseCases = (dispatchers: Dispatchers) => {
     dispatchers.updateBoard(board)
   }
 
-  const getInitialBoard = async (boardId: number) => {
-    const board = await getBoardRequest(boardId)
+  const initializeBoard = async (boardId: number) => {
+    const [board, lists] = await Promise.all([
+      getBoardRequest(boardId),
+      getListsRequest({ boardId, closed: false }),
+    ])
+    const cards = await getCardsRequest(lists.map((list) => list.id))
     dispatchers.addBoard(board)
+    dispatchers.updateLists(lists)
+    dispatchers.updateCards(cards)
   }
 
   const startCreateBoard = () => {
@@ -63,7 +78,7 @@ export const createBoardUseCases = (dispatchers: Dispatchers) => {
     addBoardStar,
     removeBoardStar,
     updateBoardTitle,
-    getInitialBoard,
+    initializeBoard,
     startCreateBoard,
     endCreateBoard,
   }

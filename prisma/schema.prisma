@@ -57,9 +57,21 @@ model List {
   createdAt DateTime @default(now()) @map(name: "created_at")
   updatedAt DateTime @default(now()) @map(name: "updated_at")
   closed    Boolean  @default(false)
-  position  Float  @default(65536)
+  position  Float    @default(65536)
+  cards     Card[]
 
   @@map(name: "lists")
+}
+
+model Card {
+  id        Int      @id @default(autoincrement())
+  listId    Int      @map(name: "list_id")
+  list      List     @relation(fields: [listId], references: [id])
+  title     String
+  createdAt DateTime @default(now()) @map(name: "created_at")
+  updatedAt DateTime @default(now()) @map(name: "updated_at")
+
+  @@map(name: "card")
 }
 
 model Account {

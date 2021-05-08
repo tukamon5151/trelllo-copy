@@ -19,7 +19,7 @@ type Action =
     }
   | {
       type: 'updateLists'
-      payload: { boardId?: number; lists: List[] }
+      payload: { lists: List[] }
     }
   | {
       type: 'updateList'
@@ -35,13 +35,7 @@ const reducer: Reducer<State, Action> = (state, action) => {
     case 'addList':
       return { lists: [...state.lists, action.payload.list] }
     case 'updateLists': {
-      if (!action.payload.boardId) return { lists: action.payload.lists }
-      const lists = refreshByBoardId(
-        state.lists,
-        action.payload.lists,
-        action.payload.boardId,
-      )
-      return { lists }
+      return { lists: action.payload.lists }
     }
     case 'updateList': {
       const lists = state.lists.map((list) =>
@@ -77,8 +71,8 @@ export const useListsCore = (initialState?: Partial<State>) => {
   )
 
   const updateLists = useCallback(
-    (lists: List[], boardId?: number) => {
-      dispatch({ type: 'updateLists', payload: { boardId, lists } })
+    (lists: List[]) => {
+      dispatch({ type: 'updateLists', payload: { lists } })
     },
     [dispatch],
   )

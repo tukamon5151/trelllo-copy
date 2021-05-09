@@ -1,7 +1,7 @@
 import { Story } from '@storybook/react'
 import { StackProps as Props } from '@chakra-ui/react'
 import { Base as Boards } from '../../templates/Boards/Boards.stories'
-import { BoardsProviderContainer } from '../../Provider/BoardProviderContainer'
+import { BaseProvider } from '../../Provider/BaseProvider'
 import { BoardList } from './BoardList'
 
 export default {
@@ -9,9 +9,11 @@ export default {
   component: BoardList,
   decorators: [
     (Story: Story): React.ReactElement => (
-      <BoardsProviderContainer initialState={{ boards: Boards.args.boards }}>
+      <BaseProvider
+        initialState={{ boardsState: { boards: Boards.args.boards } }}
+      >
         <Story />
-      </BoardsProviderContainer>
+      </BaseProvider>
     ),
   ],
 }

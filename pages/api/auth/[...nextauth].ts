@@ -1,7 +1,6 @@
 import NextAuth, { Session } from 'next-auth'
 import Providers from 'next-auth/providers'
 import Adapters from 'next-auth/adapters'
-import { WithAdditionalParams } from 'next-auth/_utils'
 import { User } from '@prisma/client'
 import { prisma } from '../../../lib/server/prisma'
 
@@ -13,9 +12,9 @@ export default NextAuth({
     }),
   ],
   callbacks: {
-    async session(session, user: User) {
+    async session(session: Session & { user: { id: number } }, user: User) {
       session.user.id = user.id
-      return session as WithAdditionalParams<Session>
+      return session
     },
   },
   adapter: Adapters.Prisma.Adapter({
